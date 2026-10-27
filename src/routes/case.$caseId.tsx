@@ -10,7 +10,6 @@ import { chancePercent, pickWeighted, rarityOf, sellCredit } from "@/lib/cases";
 import { GiftArt } from "@/components/GiftArt";
 import { CurrencyIcon } from "@/components/CurrencyIcon";
 import { Button } from "@/components/ui/button";
-import { BoxArt } from "@/components/BoxArt";
 import { commentPayload } from "@/lib/ton";
 import { useStore } from "@/lib/store";
 import { getWebApp, haptic } from "@/lib/telegram";
@@ -33,8 +32,8 @@ export const Route = createFileRoute("/case/$caseId")({
 const ITEM = 104; // card width + gap
 const WIN_INDEX = 28;
 const SPIN_MS = 5200;
-const rarityRing: Record<string, string> = {
-  common: "border-rarity-common/40", rare: "border-rarity-rare", epic: "border-rarity-epic", legend: "border-rarity-legend",
+const rarityTone: Record<string, string> = {
+  common: "var(--box-blue)", rare: "var(--game-sky)", epic: "var(--rarity-epic)", legend: "var(--box-red)",
 };
 
 function CaseView() {
@@ -126,61 +125,71 @@ function CaseView() {
   const sorted = [...c.items].sort((a: any, b: any) => b.value_stars - a.value_stars);
 
   return (
-    <div className="space-y-5 pt-2">
-      <BoxArt caseId={c.id} items={c.items} big className={`aspect-[16/10] w-full rounded-2xl ${spinning && !rolling ? "box-shake" : ""}`} />
+    <div className="space-y-6 pt-4">
+      <div className="text-center">
+        <h1 className="text-xl font-semibold">{c.name}</h1>
+        <p className="mt-0.5 text-xs text-muted-foreground">{c.items.length} gifts inside</p>
+      </div>
 
-      <div ref={viewport} className="relative -mx-5 overflow-hidden py-3">
+      <div ref={viewport} className="relative -mx-5 overflow-hidden py-2">
         <div className="spin-marker absolute inset-y-0 left-1/2 z-10 w-0.5 -translate-x-1/2 rounded-full bg-primary" />
         <div className={`flex gap-2 px-5 ${strip.length ? "spin-strip" : ""} ${rolling ? "spinning" : ""}`} style={{ transform: `translateX(${offset}px)` }}>
           {shown.map((g, i) => (
-            <div key={i} className={`flex h-28 w-24 shrink-0 flex-col items-center justify-center rounded-2xl border-2 bg-card p-2 ${rarityRing[rarityOf(g.value_stars)]}`}>
-              <GiftArt gift={g} className="size-16" />
+            <div key={i} className="spin-gift flex shrink-0 flex-col items-center justify-center">
+              <GiftArt gift={g} className="size-20" play={!rolling} />
               <span className="mt-1 flex items-center gap-0.5 text-xs text-muted-foreground"><CurrencyIcon currency="stars" className="size-3" />{g.value_stars}</span>
             </div>
           ))}
         </div>
-        <div className="pointer-events-none absolute inset-y-0 left-0 w-12 bg-gradient-to-r from-background to-transparent" />
-        <div className="pointer-events-none absolute inset-y-0 right-0 w-12 bg-gradient-to-l from-background to-transparent" />
+        <div className="pointer-events-none absolute inset-y-0 left-0 w-16 bg-gradient-to-r from-background to-transparent" />
+        <div className="pointer-events-none absolute inset-y-0 right-0 w-16 bg-gradient-to-l from-background to-transparent" />
       </div>
 
       {won ? (
-        <div className="win-pop flex flex-col items-center rounded-2xl border border-primary/40 bg-card p-5 text-center">
-          <GiftArt gift={won} className="size-36" />
-          <p className="mt-2 text-xl">{won.name}</p>
-          <p className="mt-1 text-sm text-muted-foreground">Worth {won.value_stars} ⭐ · sell for {sellCredit(won.value_stars)} ⭐</p>
+        <div className="win-pop flex flex-col items-center rounded-3xl bg-card p-5 text-center">
+          <GiftArt gift={won} className="size-32" />
+          <p className="mt-2 text-xl font-semibold">{won.name}</p>
+          <p className="mt-1 flex items-center gap-1 text-sm text-muted-foreground"><CurrencyIcon currency="stars" className="size-4" />{won.value_stars} · sell for {sellCredit(won.value_stars)}</p>
           <div className="mt-4 grid w-full grid-cols-2 gap-2">
-            <Link to="/inventory" className="rounded-xl bg-primary py-3 text-sm text-primary-foreground">My Gifts</Link>
-            <Button onClick={() => { setWon(null); setStrip([]); setOffset(0); setRolling(false); }} className="rounded-xl bg-muted py-3 text-sm">Spin again</Button>
+            <Button asChild className="h-12 rounded-2xl"><Link to="/inventory">My gifts</Link></Button>
+            <Button variant="secondary" onClick={() => { setWon(null); setStrip([]); setOffset(0); setRolling(false); }} className="h-12 rounded-2xl">Spin again</Button>
           </div>
         </div>
       ) : (
         <div className="space-y-2">
           <div className="grid grid-cols-2 gap-2">
-            <Button disabled={spinning} onClick={payStars} className="flex h-14 items-center justify-center gap-1.5 rounded-2xl bg-primary text-base text-primary-foreground transition active:scale-[0.98] disabled:opacity-50">
-              <CurrencyIcon currency="stars" className="size-5" />{c.price_stars}
+            <Button disabled={spinning} onClick={payStars} className="on-primary h-14 rounded-2xl text-base font-semibold">
+              Spin<CurrencyIcon currency="stars" className="size-5" />{c.price_stars}
             </Button>
-            <Button disabled={spinning || !(Number(c.price_gram) > 0)} onClick={payGram} className="flex h-14 items-center justify-center gap-1.5 rounded-2xl border border-primary/50 bg-card text-base text-primary transition active:scale-[0.98] disabled:opacity-50">
-              <CurrencyIcon currency="gram" className="size-5" />{Number(c.price_gram)} GRAM
+            <Button variant="secondary" disabled={spinning || !(Number(c.price_gram) > 0)} onClick={payGram} className="h-14 rounded-2xl text-base font-semibold">
+              Spin<CurrencyIcon currency="gram" className="size-5" />{Number(c.price_gram)}
             </Button>
           </div>
           {status && <p className="text-center text-xs text-muted-foreground">{status}</p>}
           {!demo && balance >= c.price_stars && (
-            <Button disabled={spinning} onClick={payBalance} className="flex h-12 w-full items-center justify-center gap-2 rounded-2xl bg-muted text-sm disabled:opacity-50">
-              <Wallet className="size-4" />Use balance ({balance} ⭐)
+            <Button variant="ghost" disabled={spinning} onClick={payBalance} className="h-11 w-full rounded-2xl text-sm">
+              <Wallet className="size-4" />Use balance · {balance}<CurrencyIcon currency="stars" className="size-4" />
             </Button>
           )}
         </div>
       )}
 
-      <div className="grid grid-cols-3 gap-2">
-        {sorted.map((g: any) => (
-          <div key={g.id} className={`flex flex-col items-center rounded-2xl border bg-card p-2 ${rarityRing[rarityOf(g.value_stars)]}`}>
-            <GiftArt gift={g} className="size-14" />
-            <p className="mt-1 w-full truncate text-center text-xs">{g.name}</p>
-            <p className="text-[10px] text-muted-foreground">{chancePercent(g.weight, c.items) < 0.01 ? "<0.01" : chancePercent(g.weight, c.items).toFixed(2)}%</p>
-          </div>
-        ))}
-      </div>
+      <section className="space-y-2">
+        <h2 className="text-sm font-medium text-muted-foreground">Gifts in this box</h2>
+        {sorted.map((g: any) => {
+          const pct = chancePercent(g.weight, c.items);
+          return (
+            <div key={g.id} style={{ ["--tone" as any]: rarityTone[rarityOf(g.value_stars)] }} className="prize-row flex items-center gap-3 rounded-2xl p-2.5 pr-4">
+              <GiftArt gift={g} className="size-12 shrink-0" />
+              <div className="min-w-0 flex-1">
+                <p className="truncate text-sm font-medium">{g.name}</p>
+                <p className="mt-0.5 flex items-center gap-1 text-xs text-muted-foreground"><CurrencyIcon currency="stars" className="size-3.5" />{g.value_stars}</p>
+              </div>
+              <span className="text-sm font-semibold tabular-nums">{pct < 0.01 ? "<0.01" : pct.toFixed(2)}%</span>
+            </div>
+          );
+        })}
+      </section>
     </div>
   );
 }

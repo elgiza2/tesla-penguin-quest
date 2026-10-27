@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import NFT_TRANSPARENT from "@/lib/nft-transparent.json";
 
 type Gift = { kind: string; telegram_gift_id?: string | null; image_url?: string | null; animation_url?: string | null; name: string };
 
@@ -16,7 +17,16 @@ function loadLottie() {
   return lottieLoader;
 }
 
+/** NFT slug from a Fragment media URL, e.g. ".../gift/lolpop-1.webp" → "lolpop". */
+function nftSlug(g: Gift) {
+  const m = (g.animation_url || g.image_url || "").match(/fragment\.com\/gift\/([a-z0-9]+)-\d+/i);
+  return m ? m[1]!.toLowerCase() : null;
+}
+
 export function giftAnimationUrl(g: Gift) {
+  const slug = g.kind === "nft" ? nftSlug(g) : null;
+  const clean = slug ? (NFT_TRANSPARENT as Record<string, string>)[slug] : undefined;
+  if (clean) return clean; // NFT animation with its backdrop layers removed
   if (g.animation_url) return g.animation_url;
   if (g.telegram_gift_id) return `/api/public/gift-sticker/${g.telegram_gift_id}`;
   return null;
