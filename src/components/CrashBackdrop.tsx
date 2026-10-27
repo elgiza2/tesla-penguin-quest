@@ -31,7 +31,7 @@ export function CrashBackdrop() {
       for (let i = 0; i < 3; i++) {
         const shift = Math.sin(t * 1.2 + i * 1.9) * w * 0.22, y = h * (0.18 + i * 0.26);
         const grad = ctx.createLinearGradient(0, y, w, y + h * 0.3);
-        grad.addColorStop(0, colors[i]); grad.addColorStop(0.5, colors[(i + 3) % colors.length]); grad.addColorStop(1, colors[(i + 1) % colors.length]);
+        grad.addColorStop(0, colors[i]!); grad.addColorStop(0.5, colors[(i + 3) % colors.length]!); grad.addColorStop(1, colors[(i + 1) % colors.length]!);
         ctx.globalAlpha = 0.7; ctx.fillStyle = grad;
         ctx.beginPath(); ctx.moveTo(-w * 0.2, y);
         ctx.bezierCurveTo(w * 0.25 + shift, y - h * 0.3, w * 0.55 - shift, y + h * 0.4, w * 1.2, y - h * 0.1);
