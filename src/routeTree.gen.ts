@@ -13,6 +13,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as R101RouteImport } from './routes/101'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as AdminRouteImport } from './routes/admin'
+import { Route as CrashRouteImport } from './routes/crash'
 import { Route as EarnRouteImport } from './routes/earn'
 import { Route as EventsRouteImport } from './routes/events'
 import { Route as GamesRouteImport } from './routes/games'
@@ -56,6 +57,11 @@ const AboutRoute = AboutRouteImport.update({
 const AdminRoute = AdminRouteImport.update({
   id: '/admin',
   path: '/admin',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CrashRoute = CrashRouteImport.update({
+  id: '/crash',
+  path: '/crash',
   getParentRoute: () => rootRouteImport,
 } as any)
 const EarnRoute = EarnRouteImport.update({
@@ -186,6 +192,7 @@ export interface FileRoutesByFullPath {
   '/101': typeof R101Route
   '/about': typeof AboutRoute
   '/admin': typeof AdminRoute
+  '/crash': typeof CrashRoute
   '/earn': typeof EarnRoute
   '/events': typeof EventsRoute
   '/games': typeof GamesRoute
@@ -216,6 +223,7 @@ export interface FileRoutesByTo {
   '/101': typeof R101Route
   '/about': typeof AboutRoute
   '/admin': typeof AdminRoute
+  '/crash': typeof CrashRoute
   '/earn': typeof EarnRoute
   '/events': typeof EventsRoute
   '/games': typeof GamesRoute
@@ -247,6 +255,7 @@ export interface FileRoutesById {
   '/101': typeof R101Route
   '/about': typeof AboutRoute
   '/admin': typeof AdminRoute
+  '/crash': typeof CrashRoute
   '/earn': typeof EarnRoute
   '/events': typeof EventsRoute
   '/games': typeof GamesRoute
@@ -279,6 +288,7 @@ export interface FileRouteTypes {
     | '/101'
     | '/about'
     | '/admin'
+    | '/crash'
     | '/earn'
     | '/events'
     | '/games'
@@ -309,6 +319,7 @@ export interface FileRouteTypes {
     | '/101'
     | '/about'
     | '/admin'
+    | '/crash'
     | '/earn'
     | '/events'
     | '/games'
@@ -339,6 +350,7 @@ export interface FileRouteTypes {
     | '/101'
     | '/about'
     | '/admin'
+    | '/crash'
     | '/earn'
     | '/events'
     | '/games'
@@ -370,6 +382,7 @@ export interface RootRouteChildren {
   R101Route: typeof R101Route
   AboutRoute: typeof AboutRoute
   AdminRoute: typeof AdminRoute
+  CrashRoute: typeof CrashRoute
   EarnRoute: typeof EarnRoute
   EventsRoute: typeof EventsRoute
   GamesRoute: typeof GamesRoute
@@ -424,6 +437,13 @@ declare module '@tanstack/react-router' {
       path: '/admin'
       fullPath: '/admin'
       preLoaderRoute: typeof AdminRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/crash': {
+      id: '/crash'
+      path: '/crash'
+      fullPath: '/crash'
+      preLoaderRoute: typeof CrashRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/earn': {
@@ -602,6 +622,7 @@ const rootRouteChildren: RootRouteChildren = {
   R101Route: R101Route,
   AboutRoute: AboutRoute,
   AdminRoute: AdminRoute,
+  CrashRoute: CrashRoute,
   EarnRoute: EarnRoute,
   EventsRoute: EventsRoute,
   GamesRoute: GamesRoute,
