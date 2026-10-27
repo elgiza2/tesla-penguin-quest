@@ -10,6 +10,7 @@
 <!-- LOVABLE:END -->
 
 ## Tesla gift-box rules
+- Use the supported src/client.tsx StartClient hydration entry so preview startup loads project source rather than a timestamped dependency entry that can remain failed in browser caches.
 - Presentation fixtures live in a browser-safe demo module and only replace data outside Telegram; real balances and financial actions never use fixtures, to keep previews separate from money.
 - Currency images use official Gram media and Telegram client assets through CDN pointers; shared balance controls live outside route files to avoid route-to-route dependencies.
 - The gift catalogue separates live Telegram sale prices from dated Getgems NFT listing snapshots; snapshots are partial asking-price evidence, never acquisition costs or collection floors.
