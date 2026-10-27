@@ -124,6 +124,231 @@ export type Database = {
         }
         Relationships: []
       }
+      tsla_case_items: {
+        Row: {
+          animation_url: string | null
+          case_id: string
+          created_at: string
+          id: string
+          image_url: string | null
+          kind: string
+          name: string
+          telegram_gift_id: string | null
+          value_stars: number
+          weight: number
+        }
+        Insert: {
+          animation_url?: string | null
+          case_id: string
+          created_at?: string
+          id?: string
+          image_url?: string | null
+          kind: string
+          name: string
+          telegram_gift_id?: string | null
+          value_stars: number
+          weight: number
+        }
+        Update: {
+          animation_url?: string | null
+          case_id?: string
+          created_at?: string
+          id?: string
+          image_url?: string | null
+          kind?: string
+          name?: string
+          telegram_gift_id?: string | null
+          value_stars?: number
+          weight?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "tsla_case_items_case_id_fkey"
+            columns: ["case_id"]
+            isOneToOne: false
+            referencedRelation: "tsla_cases"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      tsla_case_openings: {
+        Row: {
+          case_id: string
+          charge_id: string | null
+          created_at: string
+          gift_id: string | null
+          id: string
+          opened_at: string | null
+          pay_method: string
+          price_stars: number
+          status: string
+          user_id: number
+        }
+        Insert: {
+          case_id: string
+          charge_id?: string | null
+          created_at?: string
+          gift_id?: string | null
+          id?: string
+          opened_at?: string | null
+          pay_method: string
+          price_stars: number
+          status?: string
+          user_id: number
+        }
+        Update: {
+          case_id?: string
+          charge_id?: string | null
+          created_at?: string
+          gift_id?: string | null
+          id?: string
+          opened_at?: string | null
+          pay_method?: string
+          price_stars?: number
+          status?: string
+          user_id?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "tsla_case_openings_case_id_fkey"
+            columns: ["case_id"]
+            isOneToOne: false
+            referencedRelation: "tsla_cases"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "tsla_case_openings_gift_id_fkey"
+            columns: ["gift_id"]
+            isOneToOne: false
+            referencedRelation: "tsla_user_gifts"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "tsla_case_openings_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "tsla_tg_users"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      tsla_cases: {
+        Row: {
+          active: boolean
+          created_at: string
+          id: string
+          image_url: string | null
+          name: string
+          price_stars: number
+          sort: number
+        }
+        Insert: {
+          active?: boolean
+          created_at?: string
+          id: string
+          image_url?: string | null
+          name: string
+          price_stars: number
+          sort?: number
+        }
+        Update: {
+          active?: boolean
+          created_at?: string
+          id?: string
+          image_url?: string | null
+          name?: string
+          price_stars?: number
+          sort?: number
+        }
+        Relationships: []
+      }
+      tsla_event_entries: {
+        Row: {
+          created_at: string
+          event_id: string
+          status: string
+          tx_hash: string | null
+          user_id: number
+        }
+        Insert: {
+          created_at?: string
+          event_id: string
+          status?: string
+          tx_hash?: string | null
+          user_id: number
+        }
+        Update: {
+          created_at?: string
+          event_id?: string
+          status?: string
+          tx_hash?: string | null
+          user_id?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "tsla_event_entries_event_id_fkey"
+            columns: ["event_id"]
+            isOneToOne: false
+            referencedRelation: "tsla_events"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "tsla_event_entries_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "tsla_tg_users"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      tsla_events: {
+        Row: {
+          active: boolean
+          chat_id: string | null
+          created_at: string
+          description: string
+          ends_at: string
+          entry_gram: number
+          id: string
+          image_url: string | null
+          kind: string
+          link: string | null
+          prize: string
+          title: string
+          winner_user_id: number | null
+        }
+        Insert: {
+          active?: boolean
+          chat_id?: string | null
+          created_at?: string
+          description?: string
+          ends_at: string
+          entry_gram?: number
+          id?: string
+          image_url?: string | null
+          kind: string
+          link?: string | null
+          prize: string
+          title: string
+          winner_user_id?: number | null
+        }
+        Update: {
+          active?: boolean
+          chat_id?: string | null
+          created_at?: string
+          description?: string
+          ends_at?: string
+          entry_gram?: number
+          id?: string
+          image_url?: string | null
+          kind?: string
+          link?: string | null
+          prize?: string
+          title?: string
+          winner_user_id?: number | null
+        }
+        Relationships: []
+      }
       tsla_game_spins: {
         Row: {
           created_at: string
@@ -381,6 +606,7 @@ export type Database = {
           referral_signup_paid: boolean
           referral_wallet_paid: boolean
           referred_by: number | null
+          stars_balance: number
           starter_credit_applied: boolean
           subscribed_until: string | null
           tickets: number
@@ -409,6 +635,7 @@ export type Database = {
           referral_signup_paid?: boolean
           referral_wallet_paid?: boolean
           referred_by?: number | null
+          stars_balance?: number
           starter_credit_applied?: boolean
           subscribed_until?: string | null
           tickets?: number
@@ -437,6 +664,7 @@ export type Database = {
           referral_signup_paid?: boolean
           referral_wallet_paid?: boolean
           referred_by?: number | null
+          stars_balance?: number
           starter_credit_applied?: boolean
           subscribed_until?: string | null
           tickets?: number
@@ -476,6 +704,69 @@ export type Database = {
         Relationships: [
           {
             foreignKeyName: "tsla_ticket_events_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "tsla_tg_users"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      tsla_user_gifts: {
+        Row: {
+          animation_url: string | null
+          created_at: string
+          error: string | null
+          id: string
+          image_url: string | null
+          item_id: string | null
+          kind: string
+          name: string
+          status: string
+          telegram_gift_id: string | null
+          updated_at: string
+          user_id: number
+          value_stars: number
+        }
+        Insert: {
+          animation_url?: string | null
+          created_at?: string
+          error?: string | null
+          id?: string
+          image_url?: string | null
+          item_id?: string | null
+          kind: string
+          name: string
+          status?: string
+          telegram_gift_id?: string | null
+          updated_at?: string
+          user_id: number
+          value_stars: number
+        }
+        Update: {
+          animation_url?: string | null
+          created_at?: string
+          error?: string | null
+          id?: string
+          image_url?: string | null
+          item_id?: string | null
+          kind?: string
+          name?: string
+          status?: string
+          telegram_gift_id?: string | null
+          updated_at?: string
+          user_id?: number
+          value_stars?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "tsla_user_gifts_item_id_fkey"
+            columns: ["item_id"]
+            isOneToOne: false
+            referencedRelation: "tsla_case_items"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "tsla_user_gifts_user_id_fkey"
             columns: ["user_id"]
             isOneToOne: false
             referencedRelation: "tsla_tg_users"
@@ -613,6 +904,7 @@ export type Database = {
           isSetofReturn: false
         }
       }
+      tsla_award_opening: { Args: { p_opening: string }; Returns: string }
       tsla_claim_referral_goal: {
         Args: { p_goal: number; p_user_id: number }
         Returns: number
@@ -626,6 +918,47 @@ export type Database = {
           p_user: number
         }
         Returns: undefined
+      }
+      tsla_open_with_balance: {
+        Args: { p_case: string; p_user: number }
+        Returns: string
+      }
+      tsla_reserve_gift_send: {
+        Args: { p_gift: string; p_user: number }
+        Returns: {
+          animation_url: string | null
+          created_at: string
+          error: string | null
+          id: string
+          image_url: string | null
+          item_id: string | null
+          kind: string
+          name: string
+          status: string
+          telegram_gift_id: string | null
+          updated_at: string
+          user_id: number
+          value_stars: number
+        }
+        SetofOptions: {
+          from: "*"
+          to: "tsla_user_gifts"
+          isOneToOne: true
+          isSetofReturn: false
+        }
+      }
+      tsla_sell_gift: {
+        Args: { p_gift: string; p_percent: number; p_user: number }
+        Returns: number
+      }
+      tsla_settle_stars_opening: {
+        Args: {
+          p_amount: number
+          p_charge: string
+          p_opening: string
+          p_user: number
+        }
+        Returns: string
       }
     }
     Enums: {
