@@ -88,6 +88,8 @@ export function TasksPanel() {
             label={busyGoal === g.goal ? "…" : ready ? "Claim" : "Go"} disabled={busyGoal === g.goal}
             onClick={() => ready ? void claimGoal(g.goal) : toast(`Invite ${g.goal - refCount} more friends from the Friends page`)} />;
         })}
+        {cat === "ours" && <TaskRow image={team} title={`Invite friends · ${refCount} joined`} reward={25} tickets={6} label="Invite"
+          onClick={() => { const link = `https://t.me/Noveaibot?start=ref_${data.me.id}`; openLink(`https://t.me/share/url?url=${encodeURIComponent(link)}&text=${encodeURIComponent("Open gift boxes and win Telegram gifts with me on Tesla 🎁")}`); }} />}
         {pinned.map((task: any) => <TaskRow key={task.id} image={task.image_url} title={title(task)} reward={Number(task.reward)}
           label={opened[task.id] ? t("claim") : "Go"} onClick={() => onTask(task)} />)}
         {[...apps.values()].map((a) => (
