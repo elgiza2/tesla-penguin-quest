@@ -54,7 +54,7 @@ function CaseView() {
     setWon(null); setOffset(0); setStrip(items);
     const w = viewport.current?.clientWidth ?? 360;
     const jitter = Math.floor(Math.random() * 60) - 30;
-    requestAnimationFrame(() => requestAnimationFrame(() => setOffset(-(WIN_INDEX * ITEM) + w / 2 - 48 + jitter)));
+    requestAnimationFrame(() => requestAnimationFrame(() => setOffset(-(WIN_INDEX * ITEM) + w / 2 - 68 + jitter)));
     setTimeout(() => { setWon(gift); setSpinning(false); haptic("success"); refresh(); }, 5400);
   };
 
