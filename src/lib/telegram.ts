@@ -16,9 +16,11 @@ export function initTelegram() {
       wa.requestFullscreen?.();
       wa.disableVerticalSwipes?.();
     }
-    const background = getComputedStyle(document.documentElement).backgroundColor;
-    wa.setHeaderColor?.("bg_color");
+    // Telegram only accepts hex here; matches the light app background.
+    const background = "#F7F9FD";
+    wa.setHeaderColor?.(background);
     wa.setBackgroundColor?.(background);
+    wa.setBottomBarColor?.(background);
   } catch {}
   const applyInsets = () => {
     const s = wa.safeAreaInset ?? {};

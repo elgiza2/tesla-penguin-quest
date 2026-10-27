@@ -76,7 +76,6 @@ export function TasksPanel() {
   const empty = pending.length === 0 && !(cat === "others" && goals.length);
   return (
     <div>
-      {demo && <p className="mb-4 text-xs text-muted-foreground">Sample tasks · no rewards credited</p>}
       <div className="mb-3"><Segmented value={cat} onChange={(v) => { setCat(v); setApp(null); }} options={[
         { key: "ours", label: "Our tasks" },
         { key: "partners", label: "Partners" },

@@ -4,15 +4,12 @@ import { Gift, Minus, Plus, Check } from "lucide-react";
 import { useStore } from "@/lib/store";
 import { WalletBalance } from "@/components/WalletBalance";
 import { CurrencyIcon } from "@/components/CurrencyIcon";
-import { CrashBackdrop } from "@/components/CrashBackdrop";
+import { LottieArt, nftAnimation, telegramGiftAnimation } from "@/components/GiftArt";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { Switch } from "@/components/ui/switch";
 import { SAMPLE_GIFTS } from "@/components/SampleGifts";
 import { canSubmitDemoBet, displayBalances, DEMO_BETTORS } from "@/lib/presentation-demo";
-import ready from "@/assets/mascot-ready.png";
-import flight from "@/assets/mascot-flight.png";
-import crashed from "@/assets/mascot-crashed.png";
 import { toast } from "sonner";
 
 export const Route = createFileRoute("/crash")({ ssr: false, head: () => ({ meta: [
@@ -23,8 +20,14 @@ export const Route = createFileRoute("/crash")({ ssr: false, head: () => ({ meta
 
 type Phase = "wait" | "fly" | "crash";
 type Sheet = null | "gifts" | "coins";
-const ART: Record<Phase, string> = { wait: ready, fly: flight, crash: crashed };
-const chipColor = (m: number) => m >= 10 ? "var(--game-yellow)" : m >= 3 ? "var(--game-mint)" : m >= 2 ? "var(--game-sky)" : m >= 1.5 ? "var(--game-violet)" : "var(--game-coral)";
+const ROCKET = telegramGiftAnimation("5170564780938756245");
+/** Real animated Telegram gifts for each round state: ready, flying, crashed. */
+const STAGE: { phase: Phase; src: string; label: string }[] = [
+  { phase: "wait", src: nftAnimation("toybear") ?? ROCKET, label: "Toy Bear getting ready" },
+  { phase: "fly", src: ROCKET, label: "Rocket in flight" },
+  { phase: "crash", src: nftAnimation("scaredcat") ?? ROCKET, label: "Scared Cat after the crash" },
+];
+const chipColor = (m: number) => m >= 10 ? "var(--brand-red)" : m >= 3 ? "var(--game-violet)" : m >= 2 ? "var(--game-blue)" : m >= 1.5 ? "var(--game-sky)" : "var(--game-pink)";
 
 function Crash() {
   const { data, demo } = useStore();
@@ -53,7 +56,7 @@ function Crash() {
       raf.current = requestAnimationFrame(step);
       return () => cancelAnimationFrame(raf.current);
     }
-    const t = setTimeout(() => { setMult(1); setPhase("wait"); setBet(null); }, 2800);
+    const t = setTimeout(() => { setMult(1); setPhase("wait"); setBet(null); }, 3000);
     return () => clearTimeout(t);
   }, [phase]);
 
@@ -68,34 +71,36 @@ function Crash() {
   const coinsOk = sheet !== "coins" || canSubmitDemoBet(demo, Number(amount), balances[coin]);
 
   return <div className="crash-experience">
-    <CrashBackdrop />
-    <header className="relative z-10 flex justify-end px-5 pt-5"><WalletBalance /></header>
+    <header className="safe-top relative z-10 flex justify-end px-5 !pt-5"><WalletBalance /></header>
 
     <div className="relative z-10 flex flex-1 flex-col items-center justify-center">
-      <p className="text-xs font-medium uppercase tracking-wider text-foreground/70">{phase === "wait" ? "Launch in" : phase === "crash" ? "Crashed at" : "Flying"}</p>
-      <p className={`crash-number tabular-nums ${phase === "crash" ? "text-destructive" : "text-foreground"}`}>{phase === "wait" ? `${Math.max(0, count)}s` : `${mult.toFixed(2)}×`}</p>
-      <div key={phase} className={`crash-mascot mascot-${phase === "wait" ? "ready" : phase === "fly" ? "flight" : "crashed"}`}>
-        <img src={ART[phase]} alt={phase === "crash" ? "Rocket exploded, pilot parachuting" : "Pilot on a rocket"} width={816} height={816} />
+      <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">{phase === "wait" ? "Launch in" : phase === "crash" ? "Crashed at" : "Flying"}</p>
+      <p className={`crash-number tabular-nums ${phase === "crash" ? "text-destructive" : "brand-text"}`}>{phase === "wait" ? `${Math.max(0, count)}s` : `${mult.toFixed(2)}×`}</p>
+      <div className="crash-stage mt-2">
+        <span className="crash-halo" />
+        {STAGE.map(s => <div key={s.phase} data-on={s.phase === phase} className={s.phase === "fly" && phase === "fly" ? "crash-rise" : ""}>
+          <LottieArt src={s.src} label={s.label} play={s.phase === phase} className="size-full" />
+        </div>)}
       </div>
-      {bet && <div role="status" className="mt-2 rounded-full bg-background/60 px-4 py-1.5 text-xs backdrop-blur">{auto && phase === "fly" && mult >= target ? `Cashed out · ${target.toFixed(1)}×` : `Your bet · ${bet}`}</div>}
+      {bet && <div role="status" className="glass mt-3 rounded-full px-4 py-1.5 text-xs font-medium">{auto && phase === "fly" && mult >= target ? `Cashed out · ${target.toFixed(1)}×` : `Your bet · ${bet}`}</div>}
     </div>
 
-    <div className="crash-panel relative z-10 space-y-3 px-5 pb-3 pt-3">
+    <div className="crash-panel relative z-10 space-y-3 rounded-t-[28px] px-5 pb-3 pt-4">
       <div className="-mx-5 flex gap-1.5 overflow-x-auto px-5 [scrollbar-width:none]" aria-label="Recent rounds">
         {history.map((m, i) => <span key={i} className="mult-chip" style={{ ["--chip" as any]: chipColor(m) }}>{m.toFixed(2)}×</span>)}
       </div>
       <div className="grid grid-cols-2 gap-2.5">
-        <Button onClick={() => open("gifts")} className="h-13 rounded-2xl text-base font-semibold"><Gift />Bet gifts</Button>
-        <Button onClick={() => open("coins")} variant="secondary" className="h-13 rounded-2xl text-base font-semibold"><span className="flex -space-x-1.5"><CurrencyIcon currency="gram" className="size-5" /><CurrencyIcon currency="stars" className="size-5" /></span>Bet GRAM</Button>
+        <Button onClick={() => open("gifts")} className="h-13 rounded-2xl text-[15px] font-semibold"><Gift />Bet gifts</Button>
+        <Button onClick={() => open("coins")} variant="secondary" className="h-13 rounded-2xl text-[15px] font-semibold"><span className="flex -space-x-1.5"><CurrencyIcon currency="gram" className="size-5" /><CurrencyIcon currency="stars" className="size-5" /></span>Bet GRAM</Button>
       </div>
-      <div className="max-h-[22dvh] overflow-y-auto rounded-2xl bg-card/70" aria-label="Players in this round">
-        <div className="flex items-center justify-between px-4 pb-1 pt-3 text-[11px] font-medium uppercase tracking-wider text-muted-foreground"><span>Players</span><span>Bet</span></div>
+      <div className="surface max-h-[22dvh] overflow-y-auto rounded-2xl" aria-label="Players in this round">
+        <div className="flex items-center justify-between px-4 pb-1 pt-3 text-[11px] font-semibold uppercase tracking-wider text-muted-foreground"><span>Players</span><span>Bet</span></div>
         {bettors.length === 0 && <p className="px-4 pb-4 pt-2 text-sm text-muted-foreground">No bets in this round yet.</p>}
         {bettors.map(b => <div key={b.id} className="bettor-row flex items-center gap-3 px-4 py-2.5">
-          <span className="grid size-8 place-items-center rounded-full bg-muted text-xs font-semibold">{b.name[0]}</span>
-          <span className="min-w-0 flex-1 truncate text-sm">{b.name}</span>
+          <span className="brand-fill grid size-8 place-items-center rounded-full text-xs font-semibold">{b.name[0]}</span>
+          <span className="min-w-0 flex-1 truncate text-sm font-medium">{b.name}</span>
           {phase !== "wait" && b.cashout <= mult ? <span className="text-xs font-semibold text-success">{b.cashout.toFixed(2)}×</span> : null}
-          <span className="flex items-center gap-1 text-sm tabular-nums"><CurrencyIcon currency={b.currency} className="size-4" />{b.amount}</span>
+          <span className="flex items-center gap-1 text-sm font-medium tabular-nums"><CurrencyIcon currency={b.currency} className="size-4" />{b.amount}</span>
         </div>)}
       </div>
     </div>
@@ -104,10 +109,10 @@ function Crash() {
       <DialogTitle className="text-center text-xl">{sheet === "gifts" ? "Bet a gift" : "Bet coins"}</DialogTitle>
       <DialogDescription className="sr-only">Choose your stake and auto cashout.</DialogDescription>
       {sheet === "gifts" ? (
-        demo ? <div className="grid grid-cols-2 gap-3">{SAMPLE_GIFTS.map(g => <Button key={g.id} onClick={() => setSelected(g.id)} variant="ghost" className={`relative h-36 flex-col rounded-2xl border bg-background/40 ${selected === g.id ? "border-primary" : "border-border"}`}><img src={g.image} alt="" width={1024} height={1024} className="size-20 object-contain" /><span className="text-xs">{g.name}</span>{selected === g.id && <Check className="absolute right-2 top-2 text-primary" />}</Button>)}</div>
+        demo ? <div className="grid grid-cols-2 gap-3">{SAMPLE_GIFTS.map(g => <Button key={g.id} onClick={() => setSelected(g.id)} variant="ghost" className={`surface relative h-36 flex-col rounded-2xl ${selected === g.id ? "ring-2 ring-primary" : ""}`}><img src={g.image} alt="" width={1024} height={1024} className="size-20 object-contain" /><span className="text-xs">{g.name}</span>{selected === g.id && <Check className="absolute right-2 top-2 text-primary" />}</Button>)}</div>
           : <p className="py-6 text-center text-sm text-muted-foreground">Your gifts will appear here.</p>
       ) : <div className="space-y-3">
-        <div className="grid grid-cols-2 gap-1 rounded-2xl bg-muted p-1">{(["gram", "stars"] as const).map(m => <Button key={m} variant="ghost" onClick={() => { setCoin(m); setAmount(m === "stars" ? "25" : "1"); }} className={`h-11 rounded-xl ${coin === m ? "bg-card text-foreground" : "text-muted-foreground"}`}><CurrencyIcon currency={m} />{m === "gram" ? "GRAM" : "Stars"}</Button>)}</div>
+        <div className="grid grid-cols-2 gap-1 rounded-2xl bg-muted p-1">{(["gram", "stars"] as const).map(m => <Button key={m} variant="ghost" onClick={() => { setCoin(m); setAmount(m === "stars" ? "25" : "1"); }} className={`h-11 rounded-xl ${coin === m ? "bg-background text-foreground shadow-sm" : "text-muted-foreground"}`}><CurrencyIcon currency={m} />{m === "gram" ? "GRAM" : "Stars"}</Button>)}</div>
         <div className="flex h-16 items-center gap-3 rounded-2xl bg-muted px-4"><CurrencyIcon currency={coin} className="size-8" /><input aria-label="Bet amount" type="number" min="0" inputMode="decimal" value={amount} onChange={e => setAmount(e.target.value)} className="w-full min-w-0 bg-transparent text-2xl font-semibold outline-none" /><span className="text-xs text-muted-foreground">/ {balances[coin].toLocaleString()}</span></div>
         <div className="grid grid-cols-4 gap-2">{(coin === "gram" ? [0.5, 1, 2, 5] : [25, 50, 100, 250]).map(n => <Button key={n} variant="ghost" className="rounded-xl bg-muted" onClick={() => setAmount(String(n))}>{n}</Button>)}</div>
       </div>}
