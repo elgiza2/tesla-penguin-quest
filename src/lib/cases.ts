@@ -28,3 +28,19 @@ export function chancePercent(weight: number, items: CaseItemOdds[]) {
 export function sellCredit(value: number) {
   return Math.floor((value * SELL_PERCENT) / 100);
 }
+
+export type Rarity = "common" | "rare" | "epic" | "legend";
+export function rarityOf(value: number): Rarity {
+  if (value >= 500) return "legend";
+  if (value >= 100) return "epic";
+  if (value >= 30) return "rare";
+  return "common";
+}
+
+/** Weighted random pick used for decorative spin strips (the real result always comes from the server). */
+export function pickWeighted<T extends { weight: number }>(items: T[], r = Math.random()): T {
+  const total = items.reduce((s, i) => s + i.weight, 0);
+  let x = r * total;
+  for (const i of items) { x -= i.weight; if (x < 0) return i; }
+  return items[items.length - 1]!;
+}
