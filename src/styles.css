@@ -187,8 +187,8 @@
 .crash-sky { background: radial-gradient(1px 1px at 20% 30%, var(--foreground), transparent), radial-gradient(1px 1px at 70% 60%, var(--foreground), transparent), radial-gradient(1px 1px at 40% 80%, var(--muted-foreground), transparent), radial-gradient(1px 1px at 85% 20%, var(--muted-foreground), transparent), linear-gradient(var(--background), color-mix(in oklab, var(--background) 60%, black)); }
 .rocket-fly { animation: rocket-fly 600ms ease-in-out infinite alternate; }
 .rocket-boom { animation: rocket-boom 700ms ease-out forwards; }
-@keyframes rocket-fly { from { transform: translate(-50%, -50%) rotate(-2deg); } to { transform: translate(-48%, -53%) rotate(2deg); } }
-@keyframes rocket-boom { to { transform: translate(60%, -160%) scale(0.4); opacity: 0; } }
+@keyframes rocket-fly { from { transform: translate(0,4px) rotate(-4deg); } to { transform: translate(6px,-8px) rotate(4deg); } }
+@keyframes rocket-boom { to { transform: translate(120%, -120%) scale(0.4); opacity: 0; } }
 .ios-wall { background: linear-gradient(160deg, color-mix(in oklab, var(--primary) 35%, var(--background)), var(--background) 70%); isolation: isolate; }
 .ios-blob { position: absolute; z-index: -1; width: 70%; aspect-ratio: 1; border-radius: 9999px; filter: blur(48px); opacity: .7; animation: ios-drift 14s ease-in-out infinite alternate; }
 .ios-blob-a { background: var(--primary); left: -20%; top: -20%; }

@@ -8,4 +8,4 @@
 - [ ] Rename bot from "Orange Ai" in @BotFather; replace start banner image
 - [ ] Remaining penguin artwork (games/NFT tiers) — on hold after pivot
 - [ ] Live Stars payment test inside Telegram
-- [ ] Crash: animated gift (no background) as flyer + animated iOS-style wallpaper
+- [x] Crash: animated gift (no background) as flyer + animated iOS-style wallpaper

@@ -79,10 +79,10 @@ function Crash() {
           </div>
         ) : (
           <>
-            <div className={`absolute left-1/2 top-1/2 size-40 -translate-x-1/2 -translate-y-1/2 ${phase === "fly" ? "rocket-fly" : "rocket-boom"}`}>
+            <div className={`absolute inset-0 m-auto mt-20 size-40 ${phase === "fly" ? "rocket-fly" : "rocket-boom"}`}>
               {flyer && <GiftArt gift={flyer} className="size-full" />}
             </div>
-            <p className={`absolute inset-x-0 top-4 text-center text-5xl font-black tabular-nums ${phase === "crash" ? "text-destructive" : ""}`}>x{mult.toFixed(2)}</p>
+            <p className={`absolute inset-x-0 top-3 text-center text-4xl font-black tabular-nums ${phase === "crash" ? "text-destructive" : ""}`}>x{mult.toFixed(2)}</p>
           </>
         )}
       </div>
