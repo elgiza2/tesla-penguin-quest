@@ -37,7 +37,7 @@ function Cases() {
         {cases?.map((c: any) => (
           <Link key={c.id} to="/case/$caseId" params={{ caseId: c.id }}
             className="flex flex-col overflow-hidden rounded-2xl border border-border bg-card transition active:scale-[0.98]">
-            <BoxArt items={c.items} className="aspect-square w-full" />
+            <BoxArt caseId={c.id} items={c.items} className="aspect-square w-full" />
             <div className="space-y-2 p-3 pt-1">
               <p className="truncate text-sm">{c.name}</p>
               <div className="flex items-center justify-center gap-1 rounded-xl bg-primary py-2 text-sm text-primary-foreground">
