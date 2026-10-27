@@ -65,9 +65,10 @@ function Cases() {
         </div>
       )}
 
-      <div className="flex gap-4 pt-1 text-[28px] font-bold">
+      <div className="flex items-center gap-4 pt-1 text-[28px] font-bold">
         <Button variant="ghost" onClick={() => setTab("paid")} className={`text-xl ${tab === "paid" ? "" : "text-muted-foreground"}`}>Paid</Button>
         <Button variant="ghost" onClick={() => setTab("free")} className={`text-xl ${tab === "free" ? "" : "text-muted-foreground"}`}>Free</Button>
+        <Button asChild variant="link" className="ml-auto px-0 text-xs"><Link to="/gift-catalog">Gift prices</Link></Button>
       </div>
 
       {tab === "free" ? (

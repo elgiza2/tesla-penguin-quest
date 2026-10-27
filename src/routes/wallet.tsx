@@ -13,6 +13,9 @@ import { MIN_WITHDRAW, RECEIVE_WALLET, WITHDRAW_FEE_TSLA, REQUIRED_AD_VIEWS, wit
 import { commentPayload, fmt, tslaTransferMessage } from "@/lib/ton";
 import { CoinIcon, GhostButton, GRAM_ICON, TSLA_ICON, PrimaryButton } from "@/components/ui-kit";
 import { Dialog, DialogContent, DialogTitle, DialogDescription } from "@/components/ui/dialog";
+import { CurrencyIcon } from "@/components/CurrencyIcon";
+import { DEMO_BALANCES } from "@/lib/presentation-demo";
+import { Button } from "@/components/ui/button";
 export const Route = createFileRoute("/wallet")({ ssr: false, head: () => ({ meta: [
  { title: "Tesla — Wallet" }, { name: "description", content: "Your TSLA balance, TON wallet, deposits and withdrawals." }, { property: "og:title", content: "Tesla Wallet" }, { property: "og:description", content: "Your TSLA balance, TON wallet, deposits and withdrawals." }, { property: "og:type", content: "website" }, { name: "twitter:card", content: "summary_large_image" }
 ]}), component: WalletPage });
@@ -69,6 +72,7 @@ function WalletPage() {
  const linked = !!address;
  const usd = market?.tsla.priceUsd ? Number(me.balance) * market.tsla.priceUsd : null;
  const assets = [{ s: "TSLA", name: market?.tsla.name || "Tesla", icon: TSLA_ICON, price: market?.tsla.priceUsd, balance: Number(me.balance) }];
+ if (demo) return <div className="space-y-5 pt-2"><h1 className="text-xl font-semibold">Your balance</h1><div className="border-y border-border py-5">{(["gram", "stars"] as const).map(c => <div key={c} className="flex items-center gap-3 py-4"><CurrencyIcon currency={c} className="size-10" /><span className="flex-1 text-base">{c === "gram" ? "GRAM" : "Telegram Stars"}</span><span className="text-xl font-semibold tabular-nums">{DEMO_BALANCES[c].toLocaleString()}</span></div>)}</div><Button className="h-13 w-full rounded-xl" onClick={() => toast("Sample balance — open in Telegram for real deposits")}>Deposit</Button><h2 className="text-lg font-medium">Recent activity</h2><div className="flex justify-between border-b border-border py-3 text-sm"><span>Sample deposit</span><span className="text-success">+1,000 Stars</span></div><div className="flex justify-between py-3 text-sm"><span>Sample gift won</span><span>Precious diamond</span></div></div>;
  return <div className="space-y-5">
      <div className="relative overflow-hidden rounded-3xl bg-card text-wallet-art-foreground">
      <img src={banner} alt="" width={1376} height={768} className="absolute inset-0 h-full w-full object-cover object-right" />
