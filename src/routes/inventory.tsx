@@ -26,7 +26,7 @@ export const Route = createFileRoute("/inventory")({
 
 const statusLabel: Record<string, string> = { sending: "Sending…", sent: "Sent to Telegram", pending_manual: "Delivery queued", failed: "Delivery failed" };
 
-function Inventory() {
+export function Inventory() {
   const { initData, demo, refresh } = useStore();
   const qc = useQueryClient();
   const invFn = useServerFn(myInventory), sellFn = useServerFn(sellGift), claimFn = useServerFn(claimGift);
