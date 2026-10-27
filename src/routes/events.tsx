@@ -55,7 +55,6 @@ function Events() {
   if (demo) return <p className="py-16 text-center text-muted-foreground">Open Tesla inside Telegram to join events.</p>;
   return (
     <div className="space-y-5 pt-2">
-      <h1 className="text-2xl">Daily Events</h1>
       {isLoading && <div className="h-40 animate-pulse rounded-2xl bg-card" />}
       {data && data.events.length === 0 && <div className="rounded-2xl bg-card p-8 text-center text-muted-foreground">New contests are coming soon. Check back daily.</div>}
       {data?.events.map((e: any) => (

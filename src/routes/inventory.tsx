@@ -44,8 +44,7 @@ function Inventory() {
   if (demo) return <p className="py-16 text-center text-muted-foreground">Open Tesla inside Telegram to see your gifts.</p>;
   return (
     <div className="space-y-5 pt-2">
-      <header className="flex items-center justify-between">
-        <h1 className="text-2xl">My Gifts</h1>
+      <header className="flex items-center justify-end">
         <span className="flex items-center gap-1.5 rounded-full bg-card px-3 py-2 text-sm"><Star className="size-4 fill-primary text-primary" />{data?.starsBalance ?? 0}</span>
       </header>
       {isLoading && <div className="h-40 animate-pulse rounded-2xl bg-card" />}
