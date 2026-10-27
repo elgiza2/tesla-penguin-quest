@@ -17,6 +17,7 @@ import { Route as CrashRouteImport } from './routes/crash'
 import { Route as EarnRouteImport } from './routes/earn'
 import { Route as EventsRouteImport } from './routes/events'
 import { Route as GamesRouteImport } from './routes/games'
+import { Route as GiftCatalogRouteImport } from './routes/gift-catalog'
 import { Route as GuideRouteImport } from './routes/guide'
 import { Route as InventoryRouteImport } from './routes/inventory'
 import { Route as NftRouteImport } from './routes/nft'
@@ -77,6 +78,11 @@ const EventsRoute = EventsRouteImport.update({
 const GamesRoute = GamesRouteImport.update({
   id: '/games',
   path: '/games',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const GiftCatalogRoute = GiftCatalogRouteImport.update({
+  id: '/gift-catalog',
+  path: '/gift-catalog',
   getParentRoute: () => rootRouteImport,
 } as any)
 const GuideRoute = GuideRouteImport.update({
@@ -196,6 +202,7 @@ export interface FileRoutesByFullPath {
   '/earn': typeof EarnRoute
   '/events': typeof EventsRoute
   '/games': typeof GamesRoute
+  '/gift-catalog': typeof GiftCatalogRoute
   '/guide': typeof GuideRoute
   '/inventory': typeof InventoryRoute
   '/nft': typeof NftRoute
@@ -227,6 +234,7 @@ export interface FileRoutesByTo {
   '/earn': typeof EarnRoute
   '/events': typeof EventsRoute
   '/games': typeof GamesRoute
+  '/gift-catalog': typeof GiftCatalogRoute
   '/guide': typeof GuideRoute
   '/inventory': typeof InventoryRoute
   '/nft': typeof NftRoute
@@ -259,6 +267,7 @@ export interface FileRoutesById {
   '/earn': typeof EarnRoute
   '/events': typeof EventsRoute
   '/games': typeof GamesRoute
+  '/gift-catalog': typeof GiftCatalogRoute
   '/guide': typeof GuideRoute
   '/inventory': typeof InventoryRoute
   '/nft': typeof NftRoute
@@ -292,6 +301,7 @@ export interface FileRouteTypes {
     | '/earn'
     | '/events'
     | '/games'
+    | '/gift-catalog'
     | '/guide'
     | '/inventory'
     | '/nft'
@@ -323,6 +333,7 @@ export interface FileRouteTypes {
     | '/earn'
     | '/events'
     | '/games'
+    | '/gift-catalog'
     | '/guide'
     | '/inventory'
     | '/nft'
@@ -354,6 +365,7 @@ export interface FileRouteTypes {
     | '/earn'
     | '/events'
     | '/games'
+    | '/gift-catalog'
     | '/guide'
     | '/inventory'
     | '/nft'
@@ -386,6 +398,7 @@ export interface RootRouteChildren {
   EarnRoute: typeof EarnRoute
   EventsRoute: typeof EventsRoute
   GamesRoute: typeof GamesRoute
+  GiftCatalogRoute: typeof GiftCatalogRoute
   GuideRoute: typeof GuideRoute
   InventoryRoute: typeof InventoryRoute
   NftRoute: typeof NftRoute
@@ -465,6 +478,13 @@ declare module '@tanstack/react-router' {
       path: '/games'
       fullPath: '/games'
       preLoaderRoute: typeof GamesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/gift-catalog': {
+      id: '/gift-catalog'
+      path: '/gift-catalog'
+      fullPath: '/gift-catalog'
+      preLoaderRoute: typeof GiftCatalogRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/guide': {
@@ -626,6 +646,7 @@ const rootRouteChildren: RootRouteChildren = {
   EarnRoute: EarnRoute,
   EventsRoute: EventsRoute,
   GamesRoute: GamesRoute,
+  GiftCatalogRoute: GiftCatalogRoute,
   GuideRoute: GuideRoute,
   InventoryRoute: InventoryRoute,
   NftRoute: NftRoute,
