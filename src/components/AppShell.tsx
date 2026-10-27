@@ -1,16 +1,17 @@
 import { useEffect } from "react";
 import { Link, Outlet, useLocation, useRouter } from "@tanstack/react-router";
 import { TonConnectUIProvider } from "@tonconnect/ui-react";
-import { Gift, Rocket, Trophy, UserRound } from "lucide-react";
+import { Gift, ListChecks, Rocket, Trophy, UserRound } from "lucide-react";
 import { StoreProvider, useStore } from "@/lib/store";
 import { getWebApp } from "@/lib/telegram";
 import { Toaster } from "@/components/ui/sonner";
 import logo from "@/assets/tesla-icon.png";
-import { Button } from "@/components/ui/button";
+import { AmbientBackdrop } from "@/components/AmbientBackdrop";
 
 const tabs = [
   { to: "/crash", icon: Rocket, label: "Crash" },
   { to: "/", icon: Gift, label: "Cases" },
+  { to: "/earn", icon: ListChecks, label: "Tasks" },
   { to: "/events", icon: Trophy, label: "Season" },
   { to: "/profile", icon: UserRound, label: "Profile" },
 ] as const;
@@ -44,25 +45,29 @@ function Frame() {
       </div>
     );
   }
+  const isActive = (to: string) => to === "/" ? pathname === "/" || pathname.startsWith("/case/") : pathname === to;
+  const current = Math.max(0, tabs.findIndex(tab => isActive(tab.to)));
   return (
-    <div className={`app-frame mx-auto flex min-h-dvh max-w-md flex-col px-5 pb-28 ${pathname === "/crash" ? "crash-frame" : "safe-top"}`}>
-      <div key={pathname} className={pathname === "/crash" ? "" : "page-motion"}><Outlet /></div>
-      <nav aria-label="Main navigation" className="bottom-navigation safe-bottom fixed inset-x-0 bottom-0 z-40 mx-auto max-w-md px-4">
-        <div className="nav-surface flex items-center justify-between gap-1 rounded-2xl p-1.5">
-          {tabs.map(({ to, icon: Icon, label }) => {
-            const active = to === "/" ? pathname === "/" || pathname.startsWith("/case/") : pathname === to;
-            return (
-              <Button key={to} asChild variant="ghost" className="h-auto flex-1 p-0 hover:bg-transparent"><Link to={to} preload="render"
-                aria-label={label} aria-current={active ? "page" : undefined} data-active={active}
-                className={`nav-item flex h-14 min-w-0 flex-col items-center justify-center gap-1 rounded-xl ${active ? "" : "text-muted-foreground"}`}>
-                <Icon className="nav-icon size-5 shrink-0" strokeWidth={active ? 2.2 : 1.7} />
-                <span className="text-[11px] font-medium">{label}</span>
-              </Link></Button>
-            );
-          })}
-        </div>
-      </nav>
-    </div>
+    <>
+      <AmbientBackdrop vivid={pathname === "/crash"} />
+      <div className={`app-frame relative z-10 mx-auto flex min-h-dvh max-w-md flex-col px-5 pb-28 ${pathname === "/crash" ? "crash-frame" : "safe-top"}`}>
+        <div key={pathname} className={pathname === "/crash" ? "" : "page-motion"}><Outlet /></div>
+        <nav aria-label="Main navigation" className="safe-bottom fixed inset-x-0 bottom-0 z-40 mx-auto max-w-md px-4">
+          <div className="tabbar" style={{ ["--tab" as any]: current }}>
+            <span className="tabbar-indicator" aria-hidden="true" />
+            {tabs.map(({ to, icon: Icon, label }) => {
+              const active = isActive(to);
+              return (
+                <Link key={to} to={to} preload="render" aria-label={label} aria-current={active ? "page" : undefined} data-active={active} className="tab-item">
+                  <Icon className="size-[22px]" strokeWidth={active ? 2.2 : 1.8} />
+                  <span className="tab-label">{label}</span>
+                </Link>
+              );
+            })}
+          </div>
+        </nav>
+      </div>
+    </>
   );
 }
 
