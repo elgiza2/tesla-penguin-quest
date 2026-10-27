@@ -83,7 +83,7 @@ function Cases() {
               <Link key={c.id} to="/case/$caseId" params={{ caseId: c.id }}
                 style={{ ["--glow" as any]: GLOWS[i % GLOWS.length] }}
                 className="box-card relative aspect-square overflow-hidden rounded-3xl transition active:scale-[0.97]">
-                <BoxArt caseId={c.id} items={c.items} bare className="absolute inset-0" />
+                <div className="absolute inset-0"><BoxArt caseId={c.id} items={c.items} bare className="size-full" /></div>
                 <div className="absolute left-2.5 top-2.5 flex gap-1.5">
                   <span className="flex items-center gap-1 rounded-full bg-background/70 px-2 py-1 text-xs font-semibold backdrop-blur">
                     <Star className="size-3.5 fill-primary text-primary" />{c.price_stars}
