@@ -8,6 +8,8 @@ import { useTonConnectUI, useTonAddress } from "@tonconnect/ui-react";
 import { listCases, createStarsInvoice, openWithBalance, getOpening, createGramOpening, verifyGramOpening } from "@/lib/cases.functions";
 import { chancePercent, pickWeighted, rarityOf, sellCredit } from "@/lib/cases";
 import { GiftArt } from "@/components/GiftArt";
+import { CurrencyIcon } from "@/components/CurrencyIcon";
+import { Button } from "@/components/ui/button";
 import { BoxArt } from "@/components/BoxArt";
 import { commentPayload } from "@/lib/ton";
 import { useStore } from "@/lib/store";
@@ -133,7 +135,7 @@ function CaseView() {
           {shown.map((g, i) => (
             <div key={i} className={`flex h-28 w-24 shrink-0 flex-col items-center justify-center rounded-2xl border-2 bg-card p-2 ${rarityRing[rarityOf(g.value_stars)]}`}>
               <GiftArt gift={g} className="size-16" />
-              <span className="mt-1 flex items-center gap-0.5 text-xs text-muted-foreground"><Star className="size-3 fill-primary text-primary" />{g.value_stars}</span>
+              <span className="mt-1 flex items-center gap-0.5 text-xs text-muted-foreground"><CurrencyIcon currency="stars" className="size-3" />{g.value_stars}</span>
             </div>
           ))}
         </div>
@@ -148,24 +150,24 @@ function CaseView() {
           <p className="mt-1 text-sm text-muted-foreground">Worth {won.value_stars} ⭐ · sell for {sellCredit(won.value_stars)} ⭐</p>
           <div className="mt-4 grid w-full grid-cols-2 gap-2">
             <Link to="/inventory" className="rounded-xl bg-primary py-3 text-sm text-primary-foreground">My Gifts</Link>
-            <button onClick={() => { setWon(null); setStrip([]); setOffset(0); setRolling(false); }} className="rounded-xl bg-muted py-3 text-sm">Spin again</button>
+            <Button onClick={() => { setWon(null); setStrip([]); setOffset(0); setRolling(false); }} className="rounded-xl bg-muted py-3 text-sm">Spin again</Button>
           </div>
         </div>
       ) : (
         <div className="space-y-2">
           <div className="grid grid-cols-2 gap-2">
-            <button disabled={spinning} onClick={payStars} className="flex h-14 items-center justify-center gap-1.5 rounded-2xl bg-primary text-base text-primary-foreground transition active:scale-[0.98] disabled:opacity-50">
-              <Star className="size-5 fill-current" />{c.price_stars}
-            </button>
-            <button disabled={spinning || !(Number(c.price_gram) > 0)} onClick={payGram} className="flex h-14 items-center justify-center gap-1.5 rounded-2xl border border-primary/50 bg-card text-base text-primary transition active:scale-[0.98] disabled:opacity-50">
-              <Gem className="size-5" />{Number(c.price_gram)} GRAM
-            </button>
+            <Button disabled={spinning} onClick={payStars} className="flex h-14 items-center justify-center gap-1.5 rounded-2xl bg-primary text-base text-primary-foreground transition active:scale-[0.98] disabled:opacity-50">
+              <CurrencyIcon currency="stars" className="size-5" />{c.price_stars}
+            </Button>
+            <Button disabled={spinning || !(Number(c.price_gram) > 0)} onClick={payGram} className="flex h-14 items-center justify-center gap-1.5 rounded-2xl border border-primary/50 bg-card text-base text-primary transition active:scale-[0.98] disabled:opacity-50">
+              <CurrencyIcon currency="gram" className="size-5" />{Number(c.price_gram)} GRAM
+            </Button>
           </div>
           {status && <p className="text-center text-xs text-muted-foreground">{status}</p>}
           {!demo && balance >= c.price_stars && (
-            <button disabled={spinning} onClick={payBalance} className="flex h-12 w-full items-center justify-center gap-2 rounded-2xl bg-muted text-sm disabled:opacity-50">
+            <Button disabled={spinning} onClick={payBalance} className="flex h-12 w-full items-center justify-center gap-2 rounded-2xl bg-muted text-sm disabled:opacity-50">
               <Wallet className="size-4" />Use balance ({balance} ⭐)
-            </button>
+            </Button>
           )}
         </div>
       )}

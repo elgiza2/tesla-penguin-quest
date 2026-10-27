@@ -57,30 +57,30 @@
   --game-mint: oklch(0.8 0.15 160);
   --game-ink: oklch(0.18 0.02 260);
   --radius: 1rem;
-  --background: oklch(0.2 0.012 260);
-  --foreground: oklch(0.97 0 0);
-  --card: oklch(0.245 0.014 260);
+  --background: oklch(0.12 0 0);
+  --foreground: oklch(0.96 0 0);
+  --card: oklch(0.18 0 0);
   --card-foreground: var(--foreground);
-  --popover: oklch(0.245 0.014 260);
+  --popover: oklch(0.18 0 0);
   --popover-foreground: var(--foreground);
-  --primary: oklch(0.62 0.2 255);
-  --primary-foreground: oklch(0.99 0 0);
-  --secondary: oklch(0.58 0.19 258);
+  --primary: oklch(0.94 0.21 109);
+  --primary-foreground: oklch(0.12 0 0);
+  --secondary: oklch(0.24 0 0);
   --secondary-foreground: oklch(0.99 0 0);
-  --muted: oklch(0.28 0.014 260);
-  --muted-foreground: oklch(0.66 0.01 260);
-  --accent: oklch(0.3 0.04 255);
+  --muted: oklch(0.23 0 0);
+  --muted-foreground: oklch(0.66 0 0);
+  --accent: oklch(0.26 0 0);
   --accent-foreground: var(--foreground);
   --destructive: oklch(0.65 0.2 25);
   --destructive-foreground: var(--foreground);
   --success: oklch(0.72 0.19 150);
   --border: oklch(1 0 0 / 0.09);
-  --input: oklch(0.27 0.014 260);
+  --input: oklch(0.23 0 0);
   --ring: var(--primary);
-  --glass: oklch(0.25 0.014 260 / 0.75);
-  --glass-strong: oklch(0.23 0.014 260 / 0.88);
+  --glass: oklch(0.18 0 0 / 0.75);
+  --glass-strong: oklch(0.18 0 0 / 0.92);
   --glass-edge: oklch(1 0 0 / 0.08);
-  --gradient-tesla: linear-gradient(140deg, var(--primary), var(--secondary));
+  --gradient-tesla: linear-gradient(140deg, var(--primary), var(--primary));
   --shadow-glass: 0 8px 28px oklch(0 0 0 / 0.45);
   --shadow-tesla: 0 6px 20px oklch(0.62 0.2 255 / 0.35);
   --rarity-common: oklch(0.6 0 0);
@@ -202,7 +202,7 @@
 /* Gift-game presentation */
 :root {
   --shadow-product: 0 10px 18px oklch(0 0 0 / .25);
-  --glass-nav: oklch(.22 .012 260 / .94);
+  --glass-nav: oklch(.17 0 0 / .96);
   --crash-shade: linear-gradient(to bottom, oklch(.12 .01 250 / .15), transparent 45%, oklch(.12 .01 250 / .7));
 }
 .nav-surface { background: var(--glass-nav); border: 1px solid var(--border); backdrop-filter: blur(24px); box-shadow: var(--shadow-glass); }
