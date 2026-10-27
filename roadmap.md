@@ -1,7 +1,7 @@
 # Roadmap — Tesla Telegram gift boxes
-- [ ] Current request: animated multicolour Crash, three rocket states, two bet actions, history above actions, central deposit and bettors, refined balance.
-- [ ] Original Tesla fluffy mascot inspired by (not copied from) the uploaded references; regenerate Crash/Profile art with it.
-- [ ] Current request: remove page-wide demo/counters, Paid/Free and price link; blue/red boxes, transparent NFT art, simplified spin/Season and mascot Profile.
+- [x] Animated multicolour Crash, three mascot rocket states, two bet actions, coloured history above actions, bettors list, refined balance.
+- [x] Original Tesla fluffy mascot (not copied); Crash/Profile/Season/community art uses it.
+- [x] Removed demo/practice text, counters, Paid/Free and price link; blue/red boxes, backdrop-free NFT animations, simplified spin/Season, mascot Profile tiles.
 - [x] Free NFT animation source: Fragment public animations with background/pattern layers removed (49 collections).
 - [x] Refresh: full-screen Crash and three-currency practice bets, official icons, navigation, active Season 1, nine new case images, sample profile/earn/inventory/wallet.
 - [x] Profile: removed language/vibration and dead referral controls; Inventory opens gifts; shared black background and bright yellow controls.
