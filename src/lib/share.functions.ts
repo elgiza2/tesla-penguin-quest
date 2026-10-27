@@ -19,6 +19,6 @@ export const prepareShareMessage = createServerFn({ method: "POST" })
       },
       allow_user_chats: true, allow_group_chats: true,
     });
-    if (!r.ok || !r.result?.id) throw new Error(r.description || "Unable to prepare message");
-    return { id: r.result.id as string, link };
+    if (!r.ok || !(r.result as any)?.id) throw new Error(r.description || "Unable to prepare message");
+    return { id: (r.result as any).id as string, link };
   });
