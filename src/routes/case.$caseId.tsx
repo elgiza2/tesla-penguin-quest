@@ -125,7 +125,7 @@ function CaseView() {
 
   return (
     <div className="space-y-5 pt-2">
-      <BoxArt items={c.items} big className={`aspect-[16/10] w-full rounded-2xl ${spinning && !rolling ? "box-shake" : ""}`} />
+      <BoxArt caseId={c.id} items={c.items} big className={`aspect-[16/10] w-full rounded-2xl ${spinning && !rolling ? "box-shake" : ""}`} />
 
       <div ref={viewport} className="relative -mx-5 overflow-hidden py-3">
         <div className="spin-marker absolute inset-y-0 left-1/2 z-10 w-0.5 -translate-x-1/2 rounded-full bg-primary" />
