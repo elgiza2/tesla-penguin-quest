@@ -1,2 +1,0 @@
-ALTER TABLE public.tsla_task_apps ADD COLUMN category text NOT NULL DEFAULT 'ours' CHECK (category IN ('ours','partners','others'));
-ALTER TABLE public.tsla_tasks ADD COLUMN app_category text NOT NULL DEFAULT 'ours' CHECK (app_category IN ('ours','partners','others'));

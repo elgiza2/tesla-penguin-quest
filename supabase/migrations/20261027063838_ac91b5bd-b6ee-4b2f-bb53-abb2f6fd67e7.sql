@@ -1,3 +1,0 @@
-DELETE FROM public.tsla_task_completions WHERE task_id IN ('f35f4c89-5811-4434-8305-fcc66daf262c','475aa321-db54-4fab-8bc6-91408d3b8c36');
-DELETE FROM public.tsla_tasks WHERE id IN ('f35f4c89-5811-4434-8305-fcc66daf262c','475aa321-db54-4fab-8bc6-91408d3b8c36');
-UPDATE public.tsla_tasks t SET app_id=a.id, app_name=a.name, app_image=a.image, image_url=a.image FROM public.tsla_task_apps a WHERE a.id='2bfb525f-58b9-40c0-985a-97feec791f0c' AND t.kind IN ('story','share');
