@@ -1,5 +1,6 @@
 # Roadmap — Tesla Telegram gift boxes
 - [ ] Current request: animated multicolour Crash, three rocket states, two bet actions, history above actions, central deposit and bettors, refined balance.
+- [ ] Apply newest two uploaded visual references to the ongoing refresh.
 - [ ] Current request: remove page-wide demo/counters, Paid/Free and price link; blue/red boxes, transparent NFT art, simplified spin/Season and mascot Profile.
 - [ ] Research a genuinely free NFT data/animation source without a Getgems paid key.
 - [x] Refresh: full-screen Crash and three-currency practice bets, official icons, navigation, active Season 1, nine new case images, sample profile/earn/inventory/wallet.
