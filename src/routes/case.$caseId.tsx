@@ -35,7 +35,7 @@ function CaseView() {
   const { caseId } = Route.useParams();
   const { initData, demo, refresh, data } = useStore();
   const { data: cases } = useQuery({ queryKey: ["cases"], queryFn: () => listCases(), staleTime: 60_000 });
-  const c = cases?.find((x) => x.id === caseId);
+  const c = cases?.find((x: any) => x.id === caseId);
   const invoiceFn = useServerFn(createStarsInvoice), balanceFn = useServerFn(openWithBalance), openingFn = useServerFn(getOpening);
   const [strip, setStrip] = useState<any[]>([]);
   const [offset, setOffset] = useState(0);

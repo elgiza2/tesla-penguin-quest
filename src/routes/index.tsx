@@ -41,7 +41,7 @@ function Cases() {
       {isLoading && <div className="grid grid-cols-2 gap-3">{[0, 1, 2, 3].map((i) => <div key={i} className="aspect-[3/4] animate-pulse rounded-2xl bg-card" />)}</div>}
       {error && <p className="text-sm text-destructive">Couldn't load boxes. Pull to refresh.</p>}
       <div className="grid grid-cols-2 gap-3">
-        {cases?.map((c) => {
+        {cases?.map((c: any) => {
           const top = [...c.items].sort((a: any, b: any) => b.value_stars - a.value_stars).slice(0, 3);
           return (
             <Link key={c.id} to="/case/$caseId" params={{ caseId: c.id }}
