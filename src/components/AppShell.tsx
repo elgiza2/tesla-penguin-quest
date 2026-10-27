@@ -53,9 +53,9 @@ function Frame() {
             return (
               <Link key={to} to={to} preload="render"
                 aria-label={label} aria-current={active ? "page" : undefined} data-active={active}
-                className={`nav-item flex h-11 min-w-0 items-center justify-center gap-2 rounded-full transition ${active ? "bg-primary text-primary-foreground shadow-sm" : "text-muted-foreground"}`}>
+                className={`nav-item flex h-14 min-w-0 flex-col items-center justify-center gap-0.5 rounded-full ${active ? "" : "text-muted-foreground"}`}>
                 <Icon className="size-5 shrink-0" strokeWidth={2.2} />
-                <span className="nav-label text-xs font-semibold">{label}</span>
+                <span className="text-[11px] font-semibold">{label}</span>
               </Link>
             );
           })}
