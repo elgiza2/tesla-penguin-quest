@@ -115,7 +115,7 @@ export const completeTask = createServerFn({ method: "POST" })
     if (chat) {
       const { telegramApi } = await import("./telegram-api.server");
       const j = await telegramApi("getChatMember", { chat_id: chat, user_id: user.id });
-      if (!j.ok || ["left", "kicked"].includes(j.result?.status)) throw new Error("TASK_NOT_VERIFIED");
+      if (!j.ok || ["left", "kicked"].includes((j.result as any)?.status)) throw new Error("TASK_NOT_VERIFIED");
     }
     if (task.kind === "ston") {
       const meNow = await loadUser(db, user.id);

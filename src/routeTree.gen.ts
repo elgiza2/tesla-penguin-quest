@@ -13,8 +13,11 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as R101RouteImport } from './routes/101'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as AdminRouteImport } from './routes/admin'
+import { Route as EarnRouteImport } from './routes/earn'
+import { Route as EventsRouteImport } from './routes/events'
 import { Route as GamesRouteImport } from './routes/games'
 import { Route as GuideRouteImport } from './routes/guide'
+import { Route as InventoryRouteImport } from './routes/inventory'
 import { Route as NftRouteImport } from './routes/nft'
 import { Route as PowerRouteImport } from './routes/power'
 import { Route as PremiumRouteImport } from './routes/premium'
@@ -26,7 +29,9 @@ import { Route as SwapRouteImport } from './routes/swap'
 import { Route as TasksRouteImport } from './routes/tasks'
 import { Route as WalletRouteImport } from './routes/wallet'
 import { Route as WhitepaperRouteImport } from './routes/whitepaper'
+import { Route as CaseCaseIdRouteImport } from './routes/case.$caseId'
 import { Route as ApiPublicAdsMonetagRouteImport } from './routes/api/public/ads/monetag'
+import { Route as ApiPublicGiftStickerGiftIdRouteImport } from './routes/api/public/gift-sticker.$giftId'
 import { Route as ApiPublicJobsBotRouteImport } from './routes/api/public/jobs/bot'
 import { Route as ApiPublicJobsCampaignRouteImport } from './routes/api/public/jobs/campaign'
 import { Route as ApiPublicJobsMarketRouteImport } from './routes/api/public/jobs/market'
@@ -53,6 +58,16 @@ const AdminRoute = AdminRouteImport.update({
   path: '/admin',
   getParentRoute: () => rootRouteImport,
 } as any)
+const EarnRoute = EarnRouteImport.update({
+  id: '/earn',
+  path: '/earn',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EventsRoute = EventsRouteImport.update({
+  id: '/events',
+  path: '/events',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const GamesRoute = GamesRouteImport.update({
   id: '/games',
   path: '/games',
@@ -61,6 +76,11 @@ const GamesRoute = GamesRouteImport.update({
 const GuideRoute = GuideRouteImport.update({
   id: '/guide',
   path: '/guide',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const InventoryRoute = InventoryRouteImport.update({
+  id: '/inventory',
+  path: '/inventory',
   getParentRoute: () => rootRouteImport,
 } as any)
 const NftRoute = NftRouteImport.update({
@@ -118,11 +138,22 @@ const WhitepaperRoute = WhitepaperRouteImport.update({
   path: '/whitepaper',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CaseCaseIdRoute = CaseCaseIdRouteImport.update({
+  id: '/case/$caseId',
+  path: '/case/$caseId',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ApiPublicAdsMonetagRoute = ApiPublicAdsMonetagRouteImport.update({
   id: '/api/public/ads/monetag',
   path: '/api/public/ads/monetag',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiPublicGiftStickerGiftIdRoute =
+  ApiPublicGiftStickerGiftIdRouteImport.update({
+    id: '/api/public/gift-sticker/$giftId',
+    path: '/api/public/gift-sticker/$giftId',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const ApiPublicJobsBotRoute = ApiPublicJobsBotRouteImport.update({
   id: '/api/public/jobs/bot',
   path: '/api/public/jobs/bot',
@@ -155,8 +186,11 @@ export interface FileRoutesByFullPath {
   '/101': typeof R101Route
   '/about': typeof AboutRoute
   '/admin': typeof AdminRoute
+  '/earn': typeof EarnRoute
+  '/events': typeof EventsRoute
   '/games': typeof GamesRoute
   '/guide': typeof GuideRoute
+  '/inventory': typeof InventoryRoute
   '/nft': typeof NftRoute
   '/power': typeof PowerRoute
   '/premium': typeof PremiumRoute
@@ -168,7 +202,9 @@ export interface FileRoutesByFullPath {
   '/tasks': typeof TasksRoute
   '/wallet': typeof WalletRoute
   '/whitepaper': typeof WhitepaperRoute
+  '/case/$caseId': typeof CaseCaseIdRoute
   '/api/public/ads/monetag': typeof ApiPublicAdsMonetagRoute
+  '/api/public/gift-sticker/$giftId': typeof ApiPublicGiftStickerGiftIdRoute
   '/api/public/jobs/bot': typeof ApiPublicJobsBotRoute
   '/api/public/jobs/campaign': typeof ApiPublicJobsCampaignRoute
   '/api/public/jobs/market': typeof ApiPublicJobsMarketRoute
@@ -180,8 +216,11 @@ export interface FileRoutesByTo {
   '/101': typeof R101Route
   '/about': typeof AboutRoute
   '/admin': typeof AdminRoute
+  '/earn': typeof EarnRoute
+  '/events': typeof EventsRoute
   '/games': typeof GamesRoute
   '/guide': typeof GuideRoute
+  '/inventory': typeof InventoryRoute
   '/nft': typeof NftRoute
   '/power': typeof PowerRoute
   '/premium': typeof PremiumRoute
@@ -193,7 +232,9 @@ export interface FileRoutesByTo {
   '/tasks': typeof TasksRoute
   '/wallet': typeof WalletRoute
   '/whitepaper': typeof WhitepaperRoute
+  '/case/$caseId': typeof CaseCaseIdRoute
   '/api/public/ads/monetag': typeof ApiPublicAdsMonetagRoute
+  '/api/public/gift-sticker/$giftId': typeof ApiPublicGiftStickerGiftIdRoute
   '/api/public/jobs/bot': typeof ApiPublicJobsBotRoute
   '/api/public/jobs/campaign': typeof ApiPublicJobsCampaignRoute
   '/api/public/jobs/market': typeof ApiPublicJobsMarketRoute
@@ -206,8 +247,11 @@ export interface FileRoutesById {
   '/101': typeof R101Route
   '/about': typeof AboutRoute
   '/admin': typeof AdminRoute
+  '/earn': typeof EarnRoute
+  '/events': typeof EventsRoute
   '/games': typeof GamesRoute
   '/guide': typeof GuideRoute
+  '/inventory': typeof InventoryRoute
   '/nft': typeof NftRoute
   '/power': typeof PowerRoute
   '/premium': typeof PremiumRoute
@@ -219,7 +263,9 @@ export interface FileRoutesById {
   '/tasks': typeof TasksRoute
   '/wallet': typeof WalletRoute
   '/whitepaper': typeof WhitepaperRoute
+  '/case/$caseId': typeof CaseCaseIdRoute
   '/api/public/ads/monetag': typeof ApiPublicAdsMonetagRoute
+  '/api/public/gift-sticker/$giftId': typeof ApiPublicGiftStickerGiftIdRoute
   '/api/public/jobs/bot': typeof ApiPublicJobsBotRoute
   '/api/public/jobs/campaign': typeof ApiPublicJobsCampaignRoute
   '/api/public/jobs/market': typeof ApiPublicJobsMarketRoute
@@ -233,8 +279,11 @@ export interface FileRouteTypes {
     | '/101'
     | '/about'
     | '/admin'
+    | '/earn'
+    | '/events'
     | '/games'
     | '/guide'
+    | '/inventory'
     | '/nft'
     | '/power'
     | '/premium'
@@ -246,7 +295,9 @@ export interface FileRouteTypes {
     | '/tasks'
     | '/wallet'
     | '/whitepaper'
+    | '/case/$caseId'
     | '/api/public/ads/monetag'
+    | '/api/public/gift-sticker/$giftId'
     | '/api/public/jobs/bot'
     | '/api/public/jobs/campaign'
     | '/api/public/jobs/market'
@@ -258,8 +309,11 @@ export interface FileRouteTypes {
     | '/101'
     | '/about'
     | '/admin'
+    | '/earn'
+    | '/events'
     | '/games'
     | '/guide'
+    | '/inventory'
     | '/nft'
     | '/power'
     | '/premium'
@@ -271,7 +325,9 @@ export interface FileRouteTypes {
     | '/tasks'
     | '/wallet'
     | '/whitepaper'
+    | '/case/$caseId'
     | '/api/public/ads/monetag'
+    | '/api/public/gift-sticker/$giftId'
     | '/api/public/jobs/bot'
     | '/api/public/jobs/campaign'
     | '/api/public/jobs/market'
@@ -283,8 +339,11 @@ export interface FileRouteTypes {
     | '/101'
     | '/about'
     | '/admin'
+    | '/earn'
+    | '/events'
     | '/games'
     | '/guide'
+    | '/inventory'
     | '/nft'
     | '/power'
     | '/premium'
@@ -296,7 +355,9 @@ export interface FileRouteTypes {
     | '/tasks'
     | '/wallet'
     | '/whitepaper'
+    | '/case/$caseId'
     | '/api/public/ads/monetag'
+    | '/api/public/gift-sticker/$giftId'
     | '/api/public/jobs/bot'
     | '/api/public/jobs/campaign'
     | '/api/public/jobs/market'
@@ -309,8 +370,11 @@ export interface RootRouteChildren {
   R101Route: typeof R101Route
   AboutRoute: typeof AboutRoute
   AdminRoute: typeof AdminRoute
+  EarnRoute: typeof EarnRoute
+  EventsRoute: typeof EventsRoute
   GamesRoute: typeof GamesRoute
   GuideRoute: typeof GuideRoute
+  InventoryRoute: typeof InventoryRoute
   NftRoute: typeof NftRoute
   PowerRoute: typeof PowerRoute
   PremiumRoute: typeof PremiumRoute
@@ -322,7 +386,9 @@ export interface RootRouteChildren {
   TasksRoute: typeof TasksRoute
   WalletRoute: typeof WalletRoute
   WhitepaperRoute: typeof WhitepaperRoute
+  CaseCaseIdRoute: typeof CaseCaseIdRoute
   ApiPublicAdsMonetagRoute: typeof ApiPublicAdsMonetagRoute
+  ApiPublicGiftStickerGiftIdRoute: typeof ApiPublicGiftStickerGiftIdRoute
   ApiPublicJobsBotRoute: typeof ApiPublicJobsBotRoute
   ApiPublicJobsCampaignRoute: typeof ApiPublicJobsCampaignRoute
   ApiPublicJobsMarketRoute: typeof ApiPublicJobsMarketRoute
@@ -360,6 +426,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/earn': {
+      id: '/earn'
+      path: '/earn'
+      fullPath: '/earn'
+      preLoaderRoute: typeof EarnRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/events': {
+      id: '/events'
+      path: '/events'
+      fullPath: '/events'
+      preLoaderRoute: typeof EventsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/games': {
       id: '/games'
       path: '/games'
@@ -372,6 +452,13 @@ declare module '@tanstack/react-router' {
       path: '/guide'
       fullPath: '/guide'
       preLoaderRoute: typeof GuideRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/inventory': {
+      id: '/inventory'
+      path: '/inventory'
+      fullPath: '/inventory'
+      preLoaderRoute: typeof InventoryRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/nft': {
@@ -451,11 +538,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof WhitepaperRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/case/$caseId': {
+      id: '/case/$caseId'
+      path: '/case/$caseId'
+      fullPath: '/case/$caseId'
+      preLoaderRoute: typeof CaseCaseIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/public/ads/monetag': {
       id: '/api/public/ads/monetag'
       path: '/api/public/ads/monetag'
       fullPath: '/api/public/ads/monetag'
       preLoaderRoute: typeof ApiPublicAdsMonetagRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/public/gift-sticker/$giftId': {
+      id: '/api/public/gift-sticker/$giftId'
+      path: '/api/public/gift-sticker/$giftId'
+      fullPath: '/api/public/gift-sticker/$giftId'
+      preLoaderRoute: typeof ApiPublicGiftStickerGiftIdRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/api/public/jobs/bot': {
@@ -501,8 +602,11 @@ const rootRouteChildren: RootRouteChildren = {
   R101Route: R101Route,
   AboutRoute: AboutRoute,
   AdminRoute: AdminRoute,
+  EarnRoute: EarnRoute,
+  EventsRoute: EventsRoute,
   GamesRoute: GamesRoute,
   GuideRoute: GuideRoute,
+  InventoryRoute: InventoryRoute,
   NftRoute: NftRoute,
   PowerRoute: PowerRoute,
   PremiumRoute: PremiumRoute,
@@ -514,7 +618,9 @@ const rootRouteChildren: RootRouteChildren = {
   TasksRoute: TasksRoute,
   WalletRoute: WalletRoute,
   WhitepaperRoute: WhitepaperRoute,
+  CaseCaseIdRoute: CaseCaseIdRoute,
   ApiPublicAdsMonetagRoute: ApiPublicAdsMonetagRoute,
+  ApiPublicGiftStickerGiftIdRoute: ApiPublicGiftStickerGiftIdRoute,
   ApiPublicJobsBotRoute: ApiPublicJobsBotRoute,
   ApiPublicJobsCampaignRoute: ApiPublicJobsCampaignRoute,
   ApiPublicJobsMarketRoute: ApiPublicJobsMarketRoute,

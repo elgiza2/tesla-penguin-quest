@@ -1,18 +1,17 @@
 import { useEffect } from "react";
 import { Link, Outlet, useLocation, useRouter } from "@tanstack/react-router";
 import { TonConnectUIProvider } from "@tonconnect/ui-react";
-import { House, Gift, Users, Wallet, Gamepad2 } from "lucide-react";
+import { Package, ListChecks, Trophy, Gift } from "lucide-react";
 import { StoreProvider, useStore } from "@/lib/store";
 import { getWebApp } from "@/lib/telegram";
 import { Toaster } from "@/components/ui/sonner";
 import logo from "@/assets/tesla-icon.png";
 
 const tabs = [
-  { to: "/", icon: House, key: "home" },
-  { to: "/tasks", icon: Gift, key: "tasks" },
-  { to: "/referrals", icon: Users, key: "referralsTab" },
-  { to: "/games", icon: Gamepad2, key: "games" },
-  { to: "/wallet", icon: Wallet, key: "wallet" },
+  { to: "/", icon: Package, label: "Boxes" },
+  { to: "/earn", icon: ListChecks, label: "Earn" },
+  { to: "/events", icon: Trophy, label: "Events" },
+  { to: "/inventory", icon: Gift, label: "Gifts" },
 ] as const;
 
 function BackButtonSync() {
@@ -49,14 +48,14 @@ function Frame() {
       <div key={pathname} className="page-motion"><Outlet /></div>
       <nav className="safe-bottom fixed inset-x-0 bottom-0 z-40 mx-auto max-w-md px-5">
         <div className="glass-strong flex items-center justify-between gap-1 rounded-full p-1.5">
-          {tabs.map(({ to, icon: Icon, key }) => {
-            const active = pathname === to;
+          {tabs.map(({ to, icon: Icon, label }) => {
+            const active = to === "/" ? pathname === "/" || pathname.startsWith("/case/") : pathname === to;
             return (
               <Link key={to} to={to} preload="render"
-                aria-label={key === "games" ? "Games" : t(key)} aria-current={active ? "page" : undefined} data-active={active}
+                aria-label={label} aria-current={active ? "page" : undefined} data-active={active}
                 className={`nav-item flex h-11 min-w-0 items-center justify-center gap-2 rounded-full transition ${active ? "bg-primary text-primary-foreground shadow-sm" : "text-muted-foreground"}`}>
                 <Icon className="size-5 shrink-0" strokeWidth={2.2} />
-                <span className="nav-label text-xs font-semibold">{key === "games" ? "Games" : t(key)}</span>
+                <span className="nav-label text-xs font-semibold">{label}</span>
               </Link>
             );
           })}
