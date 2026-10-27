@@ -1,4 +1,7 @@
 # Roadmap — Tesla Telegram gift boxes
+- [ ] Current request: animated multicolour Crash, three rocket states, two bet actions, history above actions, central deposit and bettors, refined balance.
+- [ ] Current request: remove page-wide demo/counters, Paid/Free and price link; blue/red boxes, transparent NFT art, simplified spin/Season and mascot Profile.
+- [ ] Research a genuinely free NFT data/animation source without a Getgems paid key.
 - [x] Refresh: full-screen Crash and three-currency practice bets, official icons, navigation, active Season 1, nine new case images, sample profile/earn/inventory/wallet.
 - [x] Profile: removed language/vibration and dead referral controls; Inventory opens gifts; shared black background and bright yellow controls.
 - [x] Live Telegram regular gift price catalogue descending: 11 currently available gifts, 15–100 Stars; separate from unverified NFT resale prices.
