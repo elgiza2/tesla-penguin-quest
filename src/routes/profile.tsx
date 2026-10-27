@@ -41,7 +41,7 @@ function Profile() {
       <div className="min-w-0 flex-1">
         <h1 className="truncate text-2xl font-semibold">{me.username || me.first_name}</h1>
         <p className="mt-0.5 text-sm text-muted-foreground">Level {level}</p>
-        <div className="mt-2 h-1.5 overflow-hidden rounded-full bg-muted"><div className="h-full w-1/3 rounded-full bg-primary" /></div>
+        <div className="mt-2 h-1.5 overflow-hidden rounded-full bg-muted"><div className="brand-fill h-full w-1/3 rounded-full" /></div>
       </div>
     </section>
 

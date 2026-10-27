@@ -23,12 +23,20 @@ function nftSlug(g: Gift) {
   return m ? m[1]!.toLowerCase() : null;
 }
 
+/** Backdrop-free NFT animation for a collection slug, when available. */
+export function nftAnimation(slug: string) {
+  return (NFT_TRANSPARENT as Record<string, string>)[slug] ?? null;
+}
+
+/** Animated sticker of a regular Telegram gift. */
+export const telegramGiftAnimation = (giftId: string) => `/api/public/gift-sticker/${giftId}`;
+
 export function giftAnimationUrl(g: Gift) {
   const slug = g.kind === "nft" ? nftSlug(g) : null;
-  const clean = slug ? (NFT_TRANSPARENT as Record<string, string>)[slug] : undefined;
+  const clean = slug ? nftAnimation(slug) : null;
   if (clean) return clean; // NFT animation with its backdrop layers removed
   if (g.animation_url) return g.animation_url;
-  if (g.telegram_gift_id) return `/api/public/gift-sticker/${g.telegram_gift_id}`;
+  if (g.telegram_gift_id) return telegramGiftAnimation(g.telegram_gift_id);
   return null;
 }
 
@@ -44,21 +52,29 @@ export function GiftThumb({ gift, className = "" }: { gift: Gift; className?: st
   return src ? <img src={src} alt={gift.name} className={`object-contain ${className}`} loading="lazy" draggable={false} /> : <div className={className}>🎁</div>;
 }
 
-/** Animated Telegram gift (Lottie) with a static image fallback. */
-export function GiftArt({ gift, className = "", play = true }: { gift: Gift; className?: string; play?: boolean }) {
+/** Plays a Telegram Lottie animation; play/pause never reloads the file. */
+export function LottieArt({ src, label, className = "", play = true, onFail }: { src: string; label: string; className?: string; play?: boolean; onFail?: () => void }) {
   const ref = useRef<HTMLDivElement>(null);
-  const [failed, setFailed] = useState(false);
-  const url = giftAnimationUrl(gift);
+  const anim = useRef<any>(null);
+  const playing = useRef(play);
+  playing.current = play;
   useEffect(() => {
-    if (!url || !ref.current) return;
-    let anim: any; let cancelled = false;
+    let cancelled = false;
     loadLottie().then((lottie) => {
       if (cancelled || !ref.current) return;
-      anim = lottie.loadAnimation({ container: ref.current, renderer: "svg", loop: true, autoplay: play, path: url });
-      anim.addEventListener("data_failed", () => setFailed(true));
-    }).catch(() => setFailed(true));
-    return () => { cancelled = true; anim?.destroy(); };
-  }, [url, play]);
+      anim.current = lottie.loadAnimation({ container: ref.current, renderer: "svg", loop: true, autoplay: playing.current, path: src });
+      anim.current.addEventListener("data_failed", () => onFail?.());
+    }).catch(() => onFail?.());
+    return () => { cancelled = true; anim.current?.destroy(); anim.current = null; };
+  }, [src]);
+  useEffect(() => { if (play) anim.current?.play(); else anim.current?.pause(); }, [play]);
+  return <div ref={ref} aria-label={label} role="img" className={className} />;
+}
+
+/** Animated Telegram gift (Lottie) with a static image fallback. */
+export function GiftArt({ gift, className = "", play = true }: { gift: Gift; className?: string; play?: boolean }) {
+  const [failed, setFailed] = useState(false);
+  const url = giftAnimationUrl(gift);
   if (!url || failed) return <GiftThumb gift={gift} className={className} />;
-  return <div ref={ref} aria-label={gift.name} role="img" className={className} />;
+  return <LottieArt src={url} label={gift.name} className={className} play={play} onFail={() => setFailed(true)} />;
 }
