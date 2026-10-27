@@ -10,33 +10,324 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as R101RouteImport } from './routes/101'
+import { Route as AboutRouteImport } from './routes/about'
+import { Route as AdminRouteImport } from './routes/admin'
+import { Route as GamesRouteImport } from './routes/games'
+import { Route as GuideRouteImport } from './routes/guide'
+import { Route as NftRouteImport } from './routes/nft'
+import { Route as PowerRouteImport } from './routes/power'
+import { Route as PremiumRouteImport } from './routes/premium'
+import { Route as ProfileRouteImport } from './routes/profile'
+import { Route as ReferralsRouteImport } from './routes/referrals'
+import { Route as RoadmapRouteImport } from './routes/roadmap'
+import { Route as SupporterRouteImport } from './routes/supporter'
+import { Route as SwapRouteImport } from './routes/swap'
+import { Route as TasksRouteImport } from './routes/tasks'
+import { Route as WalletRouteImport } from './routes/wallet'
+import { Route as WhitepaperRouteImport } from './routes/whitepaper'
+import { Route as ApiPublicAdsMonetagRouteImport } from './routes/api/public/ads/monetag'
+import { Route as ApiPublicJobsBotRouteImport } from './routes/api/public/jobs/bot'
+import { Route as ApiPublicJobsCampaignRouteImport } from './routes/api/public/jobs/campaign'
+import { Route as ApiPublicJobsMarketRouteImport } from './routes/api/public/jobs/market'
+import { Route as ApiPublicJobsPayoutsRouteImport } from './routes/api/public/jobs/payouts'
+import { Route as ApiPublicTelegramWebhookRouteImport } from './routes/api/public/telegram/webhook'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const R101Route = R101RouteImport.update({
+  id: '/101',
+  path: '/101',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AboutRoute = AboutRouteImport.update({
+  id: '/about',
+  path: '/about',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminRoute = AdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const GamesRoute = GamesRouteImport.update({
+  id: '/games',
+  path: '/games',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const GuideRoute = GuideRouteImport.update({
+  id: '/guide',
+  path: '/guide',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const NftRoute = NftRouteImport.update({
+  id: '/nft',
+  path: '/nft',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PowerRoute = PowerRouteImport.update({
+  id: '/power',
+  path: '/power',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PremiumRoute = PremiumRouteImport.update({
+  id: '/premium',
+  path: '/premium',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProfileRoute = ProfileRouteImport.update({
+  id: '/profile',
+  path: '/profile',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ReferralsRoute = ReferralsRouteImport.update({
+  id: '/referrals',
+  path: '/referrals',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RoadmapRoute = RoadmapRouteImport.update({
+  id: '/roadmap',
+  path: '/roadmap',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SupporterRoute = SupporterRouteImport.update({
+  id: '/supporter',
+  path: '/supporter',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SwapRoute = SwapRouteImport.update({
+  id: '/swap',
+  path: '/swap',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TasksRoute = TasksRouteImport.update({
+  id: '/tasks',
+  path: '/tasks',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const WalletRoute = WalletRouteImport.update({
+  id: '/wallet',
+  path: '/wallet',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const WhitepaperRoute = WhitepaperRouteImport.update({
+  id: '/whitepaper',
+  path: '/whitepaper',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiPublicAdsMonetagRoute = ApiPublicAdsMonetagRouteImport.update({
+  id: '/api/public/ads/monetag',
+  path: '/api/public/ads/monetag',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiPublicJobsBotRoute = ApiPublicJobsBotRouteImport.update({
+  id: '/api/public/jobs/bot',
+  path: '/api/public/jobs/bot',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiPublicJobsCampaignRoute = ApiPublicJobsCampaignRouteImport.update({
+  id: '/api/public/jobs/campaign',
+  path: '/api/public/jobs/campaign',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiPublicJobsMarketRoute = ApiPublicJobsMarketRouteImport.update({
+  id: '/api/public/jobs/market',
+  path: '/api/public/jobs/market',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiPublicJobsPayoutsRoute = ApiPublicJobsPayoutsRouteImport.update({
+  id: '/api/public/jobs/payouts',
+  path: '/api/public/jobs/payouts',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiPublicTelegramWebhookRoute =
+  ApiPublicTelegramWebhookRouteImport.update({
+    id: '/api/public/telegram/webhook',
+    path: '/api/public/telegram/webhook',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/101': typeof R101Route
+  '/about': typeof AboutRoute
+  '/admin': typeof AdminRoute
+  '/games': typeof GamesRoute
+  '/guide': typeof GuideRoute
+  '/nft': typeof NftRoute
+  '/power': typeof PowerRoute
+  '/premium': typeof PremiumRoute
+  '/profile': typeof ProfileRoute
+  '/referrals': typeof ReferralsRoute
+  '/roadmap': typeof RoadmapRoute
+  '/supporter': typeof SupporterRoute
+  '/swap': typeof SwapRoute
+  '/tasks': typeof TasksRoute
+  '/wallet': typeof WalletRoute
+  '/whitepaper': typeof WhitepaperRoute
+  '/api/public/ads/monetag': typeof ApiPublicAdsMonetagRoute
+  '/api/public/jobs/bot': typeof ApiPublicJobsBotRoute
+  '/api/public/jobs/campaign': typeof ApiPublicJobsCampaignRoute
+  '/api/public/jobs/market': typeof ApiPublicJobsMarketRoute
+  '/api/public/jobs/payouts': typeof ApiPublicJobsPayoutsRoute
+  '/api/public/telegram/webhook': typeof ApiPublicTelegramWebhookRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/101': typeof R101Route
+  '/about': typeof AboutRoute
+  '/admin': typeof AdminRoute
+  '/games': typeof GamesRoute
+  '/guide': typeof GuideRoute
+  '/nft': typeof NftRoute
+  '/power': typeof PowerRoute
+  '/premium': typeof PremiumRoute
+  '/profile': typeof ProfileRoute
+  '/referrals': typeof ReferralsRoute
+  '/roadmap': typeof RoadmapRoute
+  '/supporter': typeof SupporterRoute
+  '/swap': typeof SwapRoute
+  '/tasks': typeof TasksRoute
+  '/wallet': typeof WalletRoute
+  '/whitepaper': typeof WhitepaperRoute
+  '/api/public/ads/monetag': typeof ApiPublicAdsMonetagRoute
+  '/api/public/jobs/bot': typeof ApiPublicJobsBotRoute
+  '/api/public/jobs/campaign': typeof ApiPublicJobsCampaignRoute
+  '/api/public/jobs/market': typeof ApiPublicJobsMarketRoute
+  '/api/public/jobs/payouts': typeof ApiPublicJobsPayoutsRoute
+  '/api/public/telegram/webhook': typeof ApiPublicTelegramWebhookRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/101': typeof R101Route
+  '/about': typeof AboutRoute
+  '/admin': typeof AdminRoute
+  '/games': typeof GamesRoute
+  '/guide': typeof GuideRoute
+  '/nft': typeof NftRoute
+  '/power': typeof PowerRoute
+  '/premium': typeof PremiumRoute
+  '/profile': typeof ProfileRoute
+  '/referrals': typeof ReferralsRoute
+  '/roadmap': typeof RoadmapRoute
+  '/supporter': typeof SupporterRoute
+  '/swap': typeof SwapRoute
+  '/tasks': typeof TasksRoute
+  '/wallet': typeof WalletRoute
+  '/whitepaper': typeof WhitepaperRoute
+  '/api/public/ads/monetag': typeof ApiPublicAdsMonetagRoute
+  '/api/public/jobs/bot': typeof ApiPublicJobsBotRoute
+  '/api/public/jobs/campaign': typeof ApiPublicJobsCampaignRoute
+  '/api/public/jobs/market': typeof ApiPublicJobsMarketRoute
+  '/api/public/jobs/payouts': typeof ApiPublicJobsPayoutsRoute
+  '/api/public/telegram/webhook': typeof ApiPublicTelegramWebhookRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/101'
+    | '/about'
+    | '/admin'
+    | '/games'
+    | '/guide'
+    | '/nft'
+    | '/power'
+    | '/premium'
+    | '/profile'
+    | '/referrals'
+    | '/roadmap'
+    | '/supporter'
+    | '/swap'
+    | '/tasks'
+    | '/wallet'
+    | '/whitepaper'
+    | '/api/public/ads/monetag'
+    | '/api/public/jobs/bot'
+    | '/api/public/jobs/campaign'
+    | '/api/public/jobs/market'
+    | '/api/public/jobs/payouts'
+    | '/api/public/telegram/webhook'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/101'
+    | '/about'
+    | '/admin'
+    | '/games'
+    | '/guide'
+    | '/nft'
+    | '/power'
+    | '/premium'
+    | '/profile'
+    | '/referrals'
+    | '/roadmap'
+    | '/supporter'
+    | '/swap'
+    | '/tasks'
+    | '/wallet'
+    | '/whitepaper'
+    | '/api/public/ads/monetag'
+    | '/api/public/jobs/bot'
+    | '/api/public/jobs/campaign'
+    | '/api/public/jobs/market'
+    | '/api/public/jobs/payouts'
+    | '/api/public/telegram/webhook'
+  id:
+    | '__root__'
+    | '/'
+    | '/101'
+    | '/about'
+    | '/admin'
+    | '/games'
+    | '/guide'
+    | '/nft'
+    | '/power'
+    | '/premium'
+    | '/profile'
+    | '/referrals'
+    | '/roadmap'
+    | '/supporter'
+    | '/swap'
+    | '/tasks'
+    | '/wallet'
+    | '/whitepaper'
+    | '/api/public/ads/monetag'
+    | '/api/public/jobs/bot'
+    | '/api/public/jobs/campaign'
+    | '/api/public/jobs/market'
+    | '/api/public/jobs/payouts'
+    | '/api/public/telegram/webhook'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  R101Route: typeof R101Route
+  AboutRoute: typeof AboutRoute
+  AdminRoute: typeof AdminRoute
+  GamesRoute: typeof GamesRoute
+  GuideRoute: typeof GuideRoute
+  NftRoute: typeof NftRoute
+  PowerRoute: typeof PowerRoute
+  PremiumRoute: typeof PremiumRoute
+  ProfileRoute: typeof ProfileRoute
+  ReferralsRoute: typeof ReferralsRoute
+  RoadmapRoute: typeof RoadmapRoute
+  SupporterRoute: typeof SupporterRoute
+  SwapRoute: typeof SwapRoute
+  TasksRoute: typeof TasksRoute
+  WalletRoute: typeof WalletRoute
+  WhitepaperRoute: typeof WhitepaperRoute
+  ApiPublicAdsMonetagRoute: typeof ApiPublicAdsMonetagRoute
+  ApiPublicJobsBotRoute: typeof ApiPublicJobsBotRoute
+  ApiPublicJobsCampaignRoute: typeof ApiPublicJobsCampaignRoute
+  ApiPublicJobsMarketRoute: typeof ApiPublicJobsMarketRoute
+  ApiPublicJobsPayoutsRoute: typeof ApiPublicJobsPayoutsRoute
+  ApiPublicTelegramWebhookRoute: typeof ApiPublicTelegramWebhookRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +339,187 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/101': {
+      id: '/101'
+      path: '/101'
+      fullPath: '/101'
+      preLoaderRoute: typeof R101RouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/about': {
+      id: '/about'
+      path: '/about'
+      fullPath: '/about'
+      preLoaderRoute: typeof AboutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin': {
+      id: '/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AdminRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/games': {
+      id: '/games'
+      path: '/games'
+      fullPath: '/games'
+      preLoaderRoute: typeof GamesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/guide': {
+      id: '/guide'
+      path: '/guide'
+      fullPath: '/guide'
+      preLoaderRoute: typeof GuideRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/nft': {
+      id: '/nft'
+      path: '/nft'
+      fullPath: '/nft'
+      preLoaderRoute: typeof NftRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/power': {
+      id: '/power'
+      path: '/power'
+      fullPath: '/power'
+      preLoaderRoute: typeof PowerRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/premium': {
+      id: '/premium'
+      path: '/premium'
+      fullPath: '/premium'
+      preLoaderRoute: typeof PremiumRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/profile': {
+      id: '/profile'
+      path: '/profile'
+      fullPath: '/profile'
+      preLoaderRoute: typeof ProfileRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/referrals': {
+      id: '/referrals'
+      path: '/referrals'
+      fullPath: '/referrals'
+      preLoaderRoute: typeof ReferralsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/roadmap': {
+      id: '/roadmap'
+      path: '/roadmap'
+      fullPath: '/roadmap'
+      preLoaderRoute: typeof RoadmapRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/supporter': {
+      id: '/supporter'
+      path: '/supporter'
+      fullPath: '/supporter'
+      preLoaderRoute: typeof SupporterRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/swap': {
+      id: '/swap'
+      path: '/swap'
+      fullPath: '/swap'
+      preLoaderRoute: typeof SwapRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/tasks': {
+      id: '/tasks'
+      path: '/tasks'
+      fullPath: '/tasks'
+      preLoaderRoute: typeof TasksRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/wallet': {
+      id: '/wallet'
+      path: '/wallet'
+      fullPath: '/wallet'
+      preLoaderRoute: typeof WalletRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/whitepaper': {
+      id: '/whitepaper'
+      path: '/whitepaper'
+      fullPath: '/whitepaper'
+      preLoaderRoute: typeof WhitepaperRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/public/ads/monetag': {
+      id: '/api/public/ads/monetag'
+      path: '/api/public/ads/monetag'
+      fullPath: '/api/public/ads/monetag'
+      preLoaderRoute: typeof ApiPublicAdsMonetagRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/public/jobs/bot': {
+      id: '/api/public/jobs/bot'
+      path: '/api/public/jobs/bot'
+      fullPath: '/api/public/jobs/bot'
+      preLoaderRoute: typeof ApiPublicJobsBotRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/public/jobs/campaign': {
+      id: '/api/public/jobs/campaign'
+      path: '/api/public/jobs/campaign'
+      fullPath: '/api/public/jobs/campaign'
+      preLoaderRoute: typeof ApiPublicJobsCampaignRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/public/jobs/market': {
+      id: '/api/public/jobs/market'
+      path: '/api/public/jobs/market'
+      fullPath: '/api/public/jobs/market'
+      preLoaderRoute: typeof ApiPublicJobsMarketRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/public/jobs/payouts': {
+      id: '/api/public/jobs/payouts'
+      path: '/api/public/jobs/payouts'
+      fullPath: '/api/public/jobs/payouts'
+      preLoaderRoute: typeof ApiPublicJobsPayoutsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/public/telegram/webhook': {
+      id: '/api/public/telegram/webhook'
+      path: '/api/public/telegram/webhook'
+      fullPath: '/api/public/telegram/webhook'
+      preLoaderRoute: typeof ApiPublicTelegramWebhookRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  R101Route: R101Route,
+  AboutRoute: AboutRoute,
+  AdminRoute: AdminRoute,
+  GamesRoute: GamesRoute,
+  GuideRoute: GuideRoute,
+  NftRoute: NftRoute,
+  PowerRoute: PowerRoute,
+  PremiumRoute: PremiumRoute,
+  ProfileRoute: ProfileRoute,
+  ReferralsRoute: ReferralsRoute,
+  RoadmapRoute: RoadmapRoute,
+  SupporterRoute: SupporterRoute,
+  SwapRoute: SwapRoute,
+  TasksRoute: TasksRoute,
+  WalletRoute: WalletRoute,
+  WhitepaperRoute: WhitepaperRoute,
+  ApiPublicAdsMonetagRoute: ApiPublicAdsMonetagRoute,
+  ApiPublicJobsBotRoute: ApiPublicJobsBotRoute,
+  ApiPublicJobsCampaignRoute: ApiPublicJobsCampaignRoute,
+  ApiPublicJobsMarketRoute: ApiPublicJobsMarketRoute,
+  ApiPublicJobsPayoutsRoute: ApiPublicJobsPayoutsRoute,
+  ApiPublicTelegramWebhookRoute: ApiPublicTelegramWebhookRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

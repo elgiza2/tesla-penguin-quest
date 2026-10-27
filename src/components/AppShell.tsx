@@ -1,0 +1,81 @@
+import { useEffect } from "react";
+import { Link, Outlet, useLocation, useRouter } from "@tanstack/react-router";
+import { TonConnectUIProvider } from "@tonconnect/ui-react";
+import { House, Gift, Users, Wallet, Gamepad2 } from "lucide-react";
+import { StoreProvider, useStore } from "@/lib/store";
+import { getWebApp } from "@/lib/telegram";
+import { Toaster } from "@/components/ui/sonner";
+import logo from "@/assets/tesla-icon.png";
+
+const tabs = [
+  { to: "/", icon: House, key: "home" },
+  { to: "/tasks", icon: Gift, key: "tasks" },
+  { to: "/referrals", icon: Users, key: "referralsTab" },
+  { to: "/games", icon: Gamepad2, key: "games" },
+  { to: "/wallet", icon: Wallet, key: "wallet" },
+] as const;
+
+function BackButtonSync() {
+  const { pathname } = useLocation();
+  const router = useRouter();
+  useEffect(() => {
+    const bb = getWebApp()?.BackButton;
+    if (!bb) return;
+    const onBack = () => router.history.back();
+    if (pathname === "/") bb.hide();
+    else { bb.show(); bb.onClick(onBack); }
+    return () => bb.offClick?.(onBack);
+  }, [pathname, router]);
+  return null;
+}
+
+function Frame() {
+  const { data, error, t, x, demo } = useStore();
+  const { pathname } = useLocation();
+  const router = useRouter();
+  useEffect(() => { if (data) tabs.forEach(tab => { router.preloadRoute({ to: tab.to }).catch(() => {}); }); }, [!!data, router]);
+  if (error) {
+    return <div className="flex min-h-dvh items-center justify-center p-8 text-center text-muted-foreground">{error}</div>;
+  }
+  if (!data) {
+    return (
+      <div className="flex min-h-dvh items-center justify-center">
+        <img src={logo} alt="TSLA" className="size-20 animate-pulse rounded-full" />
+      </div>
+    );
+  }
+  return (
+    <div className="safe-top mx-auto flex min-h-dvh max-w-md flex-col px-5 pb-28">
+      <div key={pathname} className="page-motion"><Outlet /></div>
+      <nav className="safe-bottom fixed inset-x-0 bottom-0 z-40 mx-auto max-w-md px-5">
+        <div className="glass-strong flex items-center justify-between gap-1 rounded-full p-1.5">
+          {tabs.map(({ to, icon: Icon, key }) => {
+            const active = pathname === to;
+            return (
+              <Link key={to} to={to} preload="render"
+                aria-label={key === "games" ? "Games" : t(key)} aria-current={active ? "page" : undefined} data-active={active}
+                className={`nav-item flex h-11 min-w-0 items-center justify-center gap-2 rounded-full transition ${active ? "bg-primary text-primary-foreground shadow-sm" : "text-muted-foreground"}`}>
+                <Icon className="size-5 shrink-0" strokeWidth={2.2} />
+                <span className="nav-label text-xs font-semibold">{key === "games" ? "Games" : t(key)}</span>
+              </Link>
+            );
+          })}
+        </div>
+      </nav>
+    </div>
+  );
+}
+
+export default function AppShell() {
+  const manifestUrl = `${window.location.origin}/tonconnect-manifest.json`;
+  return (
+    <TonConnectUIProvider manifestUrl={manifestUrl}>
+      <StoreProvider>
+        <BackButtonSync />
+        <Frame />
+        <Toaster className="app-notifications" position="bottom-center" offset={88} mobileOffset={88} duration={3500} visibleToasts={1} closeButton
+          toastOptions={{ classNames: { toast: "glass-strong mx-auto flex w-[calc(100vw-40px)] max-w-sm items-center gap-3 rounded-2xl px-4 py-3 text-sm font-semibold text-foreground", description: "text-xs font-medium text-muted-foreground", icon: "text-primary" } }} />
+      </StoreProvider>
+    </TonConnectUIProvider>
+  );
+}
