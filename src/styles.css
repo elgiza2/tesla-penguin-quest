@@ -198,3 +198,26 @@
 @media (prefers-reduced-motion: reduce) { .ios-blob { animation: none; } }
 .stars-bg { background: radial-gradient(1px 1px at 15% 25%, var(--foreground), transparent), radial-gradient(1px 1px at 45% 70%, var(--muted-foreground), transparent), radial-gradient(1px 1px at 75% 35%, var(--foreground), transparent), linear-gradient(120deg, oklch(0.32 0.04 255), oklch(0.26 0.03 260)); }
 .rocket-pattern { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='64' height='64' viewBox='0 0 24 24' fill='none' stroke='%23ffffff' stroke-opacity='0.05' stroke-width='1.5'%3E%3Cpath d='M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z'/%3E%3Cpath d='m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z'/%3E%3C/svg%3E"); background-size: 64px 64px; }
+
+/* Gift-game presentation */
+:root {
+  --shadow-product: 0 10px 18px oklch(0 0 0 / .25);
+  --glass-nav: oklch(.22 .012 260 / .94);
+  --crash-shade: linear-gradient(to bottom, oklch(.12 .01 250 / .15), transparent 45%, oklch(.12 .01 250 / .7));
+}
+.nav-surface { background: var(--glass-nav); border: 1px solid var(--border); backdrop-filter: blur(24px); box-shadow: var(--shadow-glass); }
+.nav-item { width: 100%; }
+.nav-icon { width: 21px !important; height: 21px !important; }
+.box-product { filter: drop-shadow(var(--shadow-product)); }
+.box-card { border: 1px solid var(--border); background: linear-gradient(0deg, color-mix(in oklab, var(--glow) 18%, var(--card)), var(--card) 60%); }
+.crash-frame { padding-top: 0; padding-bottom: 0; }
+.crash-experience { position: relative; margin-inline: -20px; height: calc(100dvh - 90px - env(safe-area-inset-bottom, 0px)); min-height: 460px; display: flex; flex-direction: column; overflow: hidden; }
+.crash-wallpaper { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
+.crash-wallpaper img { width: 100%; height: 100%; object-fit: cover; animation: glass-flow 20s ease-in-out infinite alternate; }
+.crash-wallpaper-shade { position: absolute; inset: 0; background: var(--crash-shade); }
+.crash-number { font-size: 72px; line-height: 1.1; font-weight: 600; }
+.crash-flying-gift { width: 160px; height: 160px; margin-top: 22px; }
+.history-chip { flex-shrink: 0; font-size: 12px; font-weight: 500; padding: 7px 11px; border: 1px solid var(--border); background: var(--glass); border-radius: 8px; }
+.bet-sheet { top: auto; bottom: 0; transform: translateX(-50%); width: min(100%,448px); max-height: 90dvh; border-bottom-left-radius: 0; border-bottom-right-radius: 0; }
+@keyframes glass-flow { from { transform: scale(1.04) translate(-1%,0); } to { transform: scale(1.16) translate(2%,2%); } }
+@media (prefers-reduced-motion: reduce) { .crash-wallpaper img, .rocket-fly, .rocket-boom { animation: none; } }
