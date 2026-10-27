@@ -10,7 +10,6 @@ import { chancePercent, pickWeighted, rarityOf, sellCredit } from "@/lib/cases";
 import { GiftArt } from "@/components/GiftArt";
 import { CurrencyIcon } from "@/components/CurrencyIcon";
 import { Button } from "@/components/ui/button";
-import { BoxArt } from "@/components/BoxArt";
 import { commentPayload } from "@/lib/ton";
 import { useStore } from "@/lib/store";
 import { getWebApp, haptic } from "@/lib/telegram";
