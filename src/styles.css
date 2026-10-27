@@ -189,3 +189,10 @@
 .rocket-boom { animation: rocket-boom 700ms ease-out forwards; }
 @keyframes rocket-fly { from { transform: translate(-50%, -50%) rotate(-2deg); } to { transform: translate(-48%, -53%) rotate(2deg); } }
 @keyframes rocket-boom { to { transform: translate(60%, -160%) scale(0.4); opacity: 0; } }
+.ios-wall { background: linear-gradient(160deg, color-mix(in oklab, var(--primary) 35%, var(--background)), var(--background) 70%); isolation: isolate; }
+.ios-blob { position: absolute; z-index: -1; width: 70%; aspect-ratio: 1; border-radius: 9999px; filter: blur(48px); opacity: .7; animation: ios-drift 14s ease-in-out infinite alternate; }
+.ios-blob-a { background: var(--primary); left: -20%; top: -20%; }
+.ios-blob-b { background: var(--rarity-epic); right: -25%; top: 10%; animation-duration: 18s; animation-direction: alternate-reverse; }
+.ios-blob-c { background: var(--game-sky); left: 20%; bottom: -40%; animation-duration: 22s; }
+@keyframes ios-drift { 0% { transform: translate(0,0) scale(1); } 50% { transform: translate(18%,12%) scale(1.2); } 100% { transform: translate(-10%,20%) scale(.9); } }
+@media (prefers-reduced-motion: reduce) { .ios-blob { animation: none; } }

@@ -1,7 +1,9 @@
 import { useEffect, useRef, useState } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Users, Settings, Plus, Minus, Star } from "lucide-react";
-import rocket from "@/assets/rocket.png";
+import { useQuery } from "@tanstack/react-query";
+import { listCases } from "@/lib/cases.functions";
+import { GiftArt } from "@/components/GiftArt";
 import { useStore } from "@/lib/store";
 
 export const Route = createFileRoute("/crash")({
@@ -34,6 +36,8 @@ function Crash() {
   const [auto, setAuto] = useState(false);
   const [target, setTarget] = useState(2);
   const raf = useRef(0);
+  const { data: cases } = useQuery({ queryKey: ["cases"], queryFn: () => listCases(), staleTime: 60_000 });
+  const flyer = (cases ?? []).flatMap((c: any) => c.items).filter((g: any) => g.kind !== "nft").sort((a: any, b: any) => b.value_stars - a.value_stars)[0];
 
   useEffect(() => {
     let t: ReturnType<typeof setTimeout>;
@@ -68,22 +72,23 @@ function Crash() {
         <Balance value={balance} />
       </div>
 
-      <div className="crash-sky relative -mx-5 h-72 overflow-hidden">
+      <div className="ios-wall relative -mx-5 h-72 overflow-hidden"><span className="ios-blob ios-blob-a" /><span className="ios-blob ios-blob-b" /><span className="ios-blob ios-blob-c" />
         {phase === "wait" ? (
           <div className="absolute inset-0 grid place-items-center text-center">
             <div><p className="text-7xl font-black text-foreground/90 tabular-nums">{Math.max(count, 0)}</p><p className="text-sm text-muted-foreground">Next round</p></div>
           </div>
         ) : (
           <>
-            <img src={rocket} alt="" width={1024} height={1024}
-              className={`absolute left-1/2 top-1/2 size-40 -translate-x-1/2 -translate-y-1/2 ${phase === "fly" ? "rocket-fly" : "rocket-boom"}`} />
+            <div className={`absolute left-1/2 top-1/2 size-40 -translate-x-1/2 -translate-y-1/2 ${phase === "fly" ? "rocket-fly" : "rocket-boom"}`}>
+              {flyer && <GiftArt gift={flyer} className="size-full" />}
+            </div>
             <p className={`absolute inset-x-0 top-4 text-center text-5xl font-black tabular-nums ${phase === "crash" ? "text-destructive" : ""}`}>x{mult.toFixed(2)}</p>
           </>
         )}
       </div>
 
       <div className="-mx-5 flex gap-2 overflow-x-auto px-5 [scrollbar-width:none]">
-        <span className="shrink-0 rounded-full bg-primary px-4 py-1.5 text-sm font-bold text-primary-foreground tabular-nums">x{(phase === "wait" ? history[0] : mult).toFixed(2)}</span>
+        <span className="shrink-0 rounded-full bg-primary px-4 py-1.5 text-sm font-bold text-primary-foreground tabular-nums">x{(phase === "wait" ? (history[0] ?? 1) : mult).toFixed(2)}</span>
         {history.map((m, i) => <span key={i} className={`shrink-0 rounded-full border-2 px-4 py-1 text-sm font-semibold tabular-nums ${tone(m)}`}>{m.toFixed(2)}</span>)}
       </div>
 
