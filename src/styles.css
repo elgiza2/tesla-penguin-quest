@@ -172,3 +172,14 @@
 
 @layer base { * { letter-spacing: 0; } }
 @media (prefers-reduced-motion: reduce) { .mining-ring, .animate-pulse { animation: none; } }
+.penguin-tint { filter: hue-rotate(-38deg) saturate(1.15); }
+@keyframes float-y { 0%,100% { transform: translateY(0) rotate(-4deg); } 50% { transform: translateY(-8px) rotate(4deg); } }
+.float-a { animation: float-y 3.2s ease-in-out infinite; }
+.float-b { animation: float-y 3.8s ease-in-out -1.2s infinite; }
+@keyframes spin-blur { 0% { filter: blur(0); } 12% { filter: blur(2.5px); } 70% { filter: blur(1px); } 100% { filter: blur(0); } }
+.spin-strip.spinning { animation: spin-blur 5.2s ease-out both; }
+@keyframes box-shake { 0%,100% { transform: rotate(0); } 25% { transform: rotate(-3deg) scale(1.03); } 75% { transform: rotate(3deg) scale(1.03); } }
+.box-shake { animation: box-shake 0.35s ease-in-out 3; }
+@keyframes win-pop { from { transform: scale(.6); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+.win-pop { animation: win-pop .45s cubic-bezier(.2,1.4,.4,1) both; }
+@media (prefers-reduced-motion: reduce) { .float-a, .float-b, .box-shake { animation: none; } }

@@ -180,8 +180,10 @@ export type Database = {
           id: string
           opened_at: string | null
           pay_method: string
+          price_gram: number | null
           price_stars: number
           status: string
+          tx_hash: string | null
           user_id: number
         }
         Insert: {
@@ -192,8 +194,10 @@ export type Database = {
           id?: string
           opened_at?: string | null
           pay_method: string
+          price_gram?: number | null
           price_stars: number
           status?: string
+          tx_hash?: string | null
           user_id: number
         }
         Update: {
@@ -204,8 +208,10 @@ export type Database = {
           id?: string
           opened_at?: string | null
           pay_method?: string
+          price_gram?: number | null
           price_stars?: number
           status?: string
+          tx_hash?: string | null
           user_id?: number
         }
         Relationships: [
@@ -239,6 +245,7 @@ export type Database = {
           id: string
           image_url: string | null
           name: string
+          price_gram: number
           price_stars: number
           sort: number
         }
@@ -248,6 +255,7 @@ export type Database = {
           id: string
           image_url?: string | null
           name: string
+          price_gram?: number
           price_stars: number
           sort?: number
         }
@@ -257,6 +265,7 @@ export type Database = {
           id?: string
           image_url?: string | null
           name?: string
+          price_gram?: number
           price_stars?: number
           sort?: number
         }
@@ -950,6 +959,10 @@ export type Database = {
       tsla_sell_gift: {
         Args: { p_gift: string; p_percent: number; p_user: number }
         Returns: number
+      }
+      tsla_settle_gram_opening: {
+        Args: { p_opening: string; p_tx: string; p_user: number }
+        Returns: string
       }
       tsla_settle_stars_opening: {
         Args: {

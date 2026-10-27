@@ -6,7 +6,7 @@ import { toast } from "sonner";
 import { Star, Send, Coins } from "lucide-react";
 import { myInventory, sellGift, claimGift } from "@/lib/cases.functions";
 import { sellCredit } from "@/lib/cases";
-import { GiftThumb } from "@/components/GiftArt";
+import { GiftArt } from "@/components/GiftArt";
 import { useStore } from "@/lib/store";
 
 export const Route = createFileRoute("/inventory")({
@@ -44,8 +44,7 @@ function Inventory() {
   if (demo) return <p className="py-16 text-center text-muted-foreground">Open Tesla inside Telegram to see your gifts.</p>;
   return (
     <div className="space-y-5 pt-2">
-      <header className="flex items-center justify-between">
-        <h1 className="text-2xl">My Gifts</h1>
+      <header className="flex items-center justify-end">
         <span className="flex items-center gap-1.5 rounded-full bg-card px-3 py-2 text-sm"><Star className="size-4 fill-primary text-primary" />{data?.starsBalance ?? 0}</span>
       </header>
       {isLoading && <div className="h-40 animate-pulse rounded-2xl bg-card" />}
@@ -60,7 +59,7 @@ function Inventory() {
           const open = g.status === "owned" || g.status === "failed";
           return (
             <div key={g.id} className="flex items-center gap-3 rounded-2xl bg-card p-3">
-              <GiftThumb gift={g} className="size-14 shrink-0" />
+              <GiftArt gift={g} className="size-14 shrink-0" />
               <div className="min-w-0 flex-1">
                 <p className="truncate text-sm">{g.name}{g.kind === "nft" && <span className="ml-2 rounded bg-primary/15 px-1.5 py-0.5 text-[10px] text-primary">NFT</span>}</p>
                 <p className="text-xs text-muted-foreground">{statusLabel[g.status] ?? `${g.value_stars} ⭐`}</p>

@@ -30,7 +30,7 @@ export const listCases = createServerFn({ method: "GET" }).handler(async () => {
   const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
   const db = supabaseAdmin as any;
   const [{ data: cases, error: e1 }, { data: items, error: e2 }] = await Promise.all([
-    db.from("tsla_cases").select("id,name,price_stars,image_url,sort").eq("active", true).order("sort"),
+    db.from("tsla_cases").select("id,name,price_stars,price_gram,image_url,sort").eq("active", true).order("sort"),
     db.from("tsla_case_items").select("id,case_id,name,kind,telegram_gift_id,image_url,animation_url,value_stars,weight"),
   ]);
   fail(e1); fail(e2);
@@ -178,4 +178,38 @@ export const verifyGramEntry = createServerFn({ method: "POST" })
     const { error } = await db.from("tsla_event_entries").upsert({ event_id: e.id, user_id: user.id, status: "verified", tx_hash: tx.hash }, { onConflict: "event_id,user_id" });
     fail(error);
     return { ok: true };
+  });
+
+/* ---------------- GRAM (TON) payments for boxes ---------------- */
+
+export const createGramOpening = createServerFn({ method: "POST" })
+  .inputValidator(initOnly.extend({ caseId: z.string().min(1).max(40) }))
+  .handler(async ({ data }) => {
+    const { user, db } = await ctx(data.initData);
+    const { data: c } = await db.from("tsla_cases").select("*").eq("id", data.caseId).eq("active", true).maybeSingle();
+    if (!c || !(Number(c.price_gram) > 0)) throw new Error("GRAM payment is not available for this box");
+    const { data: o, error } = await db.from("tsla_case_openings")
+      .insert({ user_id: user.id, case_id: c.id, price_stars: c.price_stars, price_gram: c.price_gram, pay_method: "gram" }).select("id").single();
+    fail(error);
+    return { openingId: o.id as string, to: RECEIVE_WALLET, nano: String(Math.round(Number(c.price_gram) * 1e9)), comment: `box:${o.id}` };
+  });
+
+/** Looks for the TON transfer carrying this opening's comment; awards the gift once it is found. */
+export const verifyGramOpening = createServerFn({ method: "POST" })
+  .inputValidator(initOnly.extend({ openingId: z.string().uuid() }))
+  .handler(async ({ data }) => {
+    const { user, db } = await ctx(data.initData);
+    const { data: o } = await db.from("tsla_case_openings").select("*").eq("id", data.openingId).eq("user_id", user.id).maybeSingle();
+    if (!o || o.pay_method !== "gram") throw new Error("Not found");
+    if (o.status === "opened") return { paid: true };
+    const r = await fetch(`https://toncenter.com/api/v3/transactions?account=${RECEIVE_WALLET}&limit=100&sort=desc`);
+    if (!r.ok) return { paid: false };
+    const j: any = await r.json();
+    const need = BigInt(Math.round(Number(o.price_gram) * 1e9));
+    const tx = (j.transactions ?? []).find((t: any) =>
+      t.in_msg?.message_content?.decoded?.comment === `box:${o.id}` && BigInt(t.in_msg?.value ?? 0) >= need);
+    if (!tx) return { paid: false };
+    const { error } = await db.rpc("tsla_settle_gram_opening", { p_opening: o.id, p_user: user.id, p_tx: tx.hash });
+    fail(error);
+    return { paid: true };
   });
