@@ -3,7 +3,8 @@
 - [x] Profile: removed language/vibration and dead referral controls; Inventory opens gifts; shared black background and bright yellow controls.
 - [x] Live Telegram regular gift price catalogue descending: 11 currently available gifts, 15–100 Stars; separate from unverified NFT resale prices.
 - [ ] 50+ economically verified boxes: blocked by unverified collectible acquisition prices; current lowest sendable gift costs 15 Stars, so 7/15-Star gift-only cases cannot keep the required 25% margin.
-- [ ] NFT catalogue alongside regular gifts: use user-provided https://getgems.io/gifts-collection to verify collectible floors/listings; do not claim regular gifts are the full catalogue.
+- [x] NFT catalogue alongside regular gifts: 10 verified dated Getgems listing snapshots, descending GRAM prices, original pictures and source links; explicitly partial, not floors.
+- [ ] Full live NFT collection catalogue/floors: Getgems documented Read API requires an authorized token; public page only exposes partial listing results.
 - [ ] Community banner URL: waiting for the user's link; currently opens a coming-soon notice, not an unrelated page.
 - [x] Import app, rebrand to Tesla/TSLA, Cloud database, bot token, webhook + menu button on @Noveaibot
 - [x] Pivot: gift boxes paid with Telegram Stars, server-side spin, inventory (receive in Telegram / sell for Stars balance)
