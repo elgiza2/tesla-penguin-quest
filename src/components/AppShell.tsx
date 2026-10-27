@@ -46,7 +46,6 @@ function Frame() {
   }
   return (
     <div className={`app-frame mx-auto flex min-h-dvh max-w-md flex-col px-5 pb-28 ${pathname === "/crash" ? "crash-frame" : "safe-top"}`}>
-      {demo && pathname !== "/crash" && <div className="mb-2 text-center text-[10px] font-medium uppercase text-muted-foreground">Demo · sample data</div>}
       <div key={pathname} className={pathname === "/crash" ? "" : "page-motion"}><Outlet /></div>
       <nav aria-label="Main navigation" className="bottom-navigation safe-bottom fixed inset-x-0 bottom-0 z-40 mx-auto max-w-md px-4">
         <div className="nav-surface flex items-center justify-between gap-1 rounded-2xl p-1.5">
