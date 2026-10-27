@@ -1,6 +1,7 @@
 import { Ticket } from "lucide-react";
 import { CoinIcon, GhostButton, TSLA_ICON } from "@/components/ui-kit";
 import { fmt } from "@/lib/ton";
+import { CurrencyIcon } from "./CurrencyIcon";
 
 /** One task line: image, name, TSLA + ticket reward, and a single Go/Claim pill. */
 export function TaskRow({ image, title, reward, tickets = 2, label = "Go", disabled, onClick }: {
@@ -12,7 +13,7 @@ export function TaskRow({ image, title, reward, tickets = 2, label = "Go", disab
       <span className="min-w-0 flex-1">
         <span className="block truncate text-sm font-bold">{title}</span>
         <span className="mt-1 flex items-center gap-2 text-xs text-muted-foreground" dir="ltr">
-          <span className="flex items-center gap-1"><CoinIcon src={TSLA_ICON} className="size-3.5" />+{fmt(reward)}</span>
+          <span className="flex items-center gap-1"><CurrencyIcon currency="stars" className="size-3.5" />+{fmt(reward)}</span>
           {tickets > 0 && <span className="flex items-center gap-1"><Ticket className="size-3.5" />+{tickets}</span>}
         </span>
       </span>

@@ -22,12 +22,15 @@ const Ctx = createContext<Store | null>(null);
 
 const demoData = (lang: string): Data => ({
   me: {
-    id: 0, username: "guest", first_name: "Guest", photo_url: null, language_code: lang,
-    balance: 0, power_level: 0, mining_started_at: null, wallet_address: null, referred_by: null,
+    id: 0, username: "Gift Hunter", first_name: "Gift Hunter", photo_url: null, language_code: lang,
+    balance: 0, power_level: 3, mining_started_at: null, wallet_address: null, referred_by: null,
     subscribed_until: null, created_at: new Date().toISOString(),
   } as any,
   isAdmin: false,
-  tasks: [], done: [], referrals: [], withdrawals: [], referralCount: 0, claimedGoals: [],
+  tasks: [
+    { id: "sample-story", title: "Share a Telegram story", kind: "link", reward: 25, sort: 1, app_category: "ours", link: "https://t.me/Noveaibot" },
+    { id: "sample-gifts", title: "Explore Telegram gifts", kind: "link", reward: 15, sort: 2, app_category: "ours", link: "https://t.me/Noveaibot" },
+  ] as any, done: [], referrals: [{ id: 1, first_name: "Alex" }, { id: 2, first_name: "Mila" }, { id: 3, first_name: "Leo" }] as any, withdrawals: [], referralCount: 3, claimedGoals: [],
 });
 
 export function StoreProvider({ children }: { children: ReactNode }) {

@@ -57,30 +57,30 @@
   --game-mint: oklch(0.8 0.15 160);
   --game-ink: oklch(0.18 0.02 260);
   --radius: 1rem;
-  --background: oklch(0.2 0.012 260);
-  --foreground: oklch(0.97 0 0);
-  --card: oklch(0.245 0.014 260);
+  --background: oklch(0.12 0 0);
+  --foreground: oklch(0.96 0 0);
+  --card: oklch(0.18 0 0);
   --card-foreground: var(--foreground);
-  --popover: oklch(0.245 0.014 260);
+  --popover: oklch(0.18 0 0);
   --popover-foreground: var(--foreground);
-  --primary: oklch(0.62 0.2 255);
-  --primary-foreground: oklch(0.99 0 0);
-  --secondary: oklch(0.58 0.19 258);
+  --primary: oklch(0.94 0.21 109);
+  --primary-foreground: oklch(0.12 0 0);
+  --secondary: oklch(0.24 0 0);
   --secondary-foreground: oklch(0.99 0 0);
-  --muted: oklch(0.28 0.014 260);
-  --muted-foreground: oklch(0.66 0.01 260);
-  --accent: oklch(0.3 0.04 255);
+  --muted: oklch(0.23 0 0);
+  --muted-foreground: oklch(0.66 0 0);
+  --accent: oklch(0.26 0 0);
   --accent-foreground: var(--foreground);
   --destructive: oklch(0.65 0.2 25);
   --destructive-foreground: var(--foreground);
   --success: oklch(0.72 0.19 150);
   --border: oklch(1 0 0 / 0.09);
-  --input: oklch(0.27 0.014 260);
+  --input: oklch(0.23 0 0);
   --ring: var(--primary);
-  --glass: oklch(0.25 0.014 260 / 0.75);
-  --glass-strong: oklch(0.23 0.014 260 / 0.88);
+  --glass: oklch(0.18 0 0 / 0.75);
+  --glass-strong: oklch(0.18 0 0 / 0.92);
   --glass-edge: oklch(1 0 0 / 0.08);
-  --gradient-tesla: linear-gradient(140deg, var(--primary), var(--secondary));
+  --gradient-tesla: linear-gradient(140deg, var(--primary), var(--primary));
   --shadow-glass: 0 8px 28px oklch(0 0 0 / 0.45);
   --shadow-tesla: 0 6px 20px oklch(0.62 0.2 255 / 0.35);
   --rarity-common: oklch(0.6 0 0);
@@ -198,3 +198,29 @@
 @media (prefers-reduced-motion: reduce) { .ios-blob { animation: none; } }
 .stars-bg { background: radial-gradient(1px 1px at 15% 25%, var(--foreground), transparent), radial-gradient(1px 1px at 45% 70%, var(--muted-foreground), transparent), radial-gradient(1px 1px at 75% 35%, var(--foreground), transparent), linear-gradient(120deg, oklch(0.32 0.04 255), oklch(0.26 0.03 260)); }
 .rocket-pattern { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='64' height='64' viewBox='0 0 24 24' fill='none' stroke='%23ffffff' stroke-opacity='0.05' stroke-width='1.5'%3E%3Cpath d='M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z'/%3E%3Cpath d='m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z'/%3E%3C/svg%3E"); background-size: 64px 64px; }
+
+/* Gift-game presentation */
+:root {
+  --shadow-product: 0 10px 18px oklch(0 0 0 / .25);
+  --glass-nav: oklch(.17 0 0 / .96);
+  --crash-shade: linear-gradient(to bottom, oklch(.12 .01 250 / .15), transparent 45%, oklch(.12 .01 250 / .7));
+}
+.nav-surface { background: var(--glass-nav); border: 1px solid var(--border); backdrop-filter: blur(24px); box-shadow: var(--shadow-glass); }
+.nav-item { width: 100%; }
+.nav-icon { width: 21px !important; height: 21px !important; }
+.box-product { filter: drop-shadow(var(--shadow-product)); }
+.box-card { border: 1px solid var(--border); background: linear-gradient(0deg, color-mix(in oklab, var(--glow) 18%, var(--card)), var(--card) 60%); }
+.crash-frame { padding-top: 0; padding-bottom: 0; }
+.crash-experience { position: relative; margin-inline: -20px; height: calc(100dvh - 90px - env(safe-area-inset-bottom, 0px)); min-height: 460px; display: flex; flex-direction: column; overflow: hidden; }
+.crash-wallpaper { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
+.crash-wallpaper img { width: 100%; height: 100%; object-fit: cover; animation: glass-flow 20s ease-in-out infinite alternate; }
+.crash-wallpaper-shade { position: absolute; inset: 0; background: var(--crash-shade); }
+.crash-number { font-size: 72px; line-height: 1.1; font-weight: 600; }
+.crash-flying-gift { width: 160px; height: 160px; margin-top: 22px; }
+.history-chip { flex-shrink: 0; font-size: 12px; font-weight: 500; padding: 7px 11px; border: 1px solid var(--border); background: var(--glass); border-radius: 8px; }
+.bet-sheet { width: min(100%,448px); max-height: 90dvh; border-bottom-left-radius: 0; border-bottom-right-radius: 0; }
+.telegram-star-icon { filter: brightness(0) saturate(100%) invert(89%) sepia(90%) saturate(2000%) hue-rotate(356deg); }
+.box-card .box-product { width: 74%; height: 74%; }
+.spin-strip { transition: transform 5.2s cubic-bezier(.08,.64,.12,1); }
+@keyframes glass-flow { from { transform: scale(1.04) translate(-1%,0); } to { transform: scale(1.16) translate(2%,2%); } }
+@media (prefers-reduced-motion: reduce) { .crash-wallpaper img, .rocket-fly, .rocket-boom { animation: none; } }
