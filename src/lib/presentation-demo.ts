@@ -12,4 +12,9 @@ export function displayBalances(demo: boolean, me: { gram_balance?: number; star
 }
 export function canSubmitDemoBet(demo: boolean, amount: number, balance: number) {
   return demo && Number.isFinite(amount) && amount > 0 && amount <= balance;
-}
+}export const DEMO_BETTORS: { id: string; name: string; amount: number; currency: "gram" | "stars"; cashout: number }[] = [
+  { id: "b1", name: "Alex", amount: 2.5, currency: "gram", cashout: 1.8 },
+  { id: "b2", name: "Mila", amount: 150, currency: "stars", cashout: 2.4 },
+  { id: "b3", name: "Leo", amount: 1, currency: "gram", cashout: 3.1 },
+  { id: "b4", name: "Nova", amount: 50, currency: "stars", cashout: 1.3 },
+];
