@@ -218,6 +218,9 @@
 .crash-number { font-size: 72px; line-height: 1.1; font-weight: 600; }
 .crash-flying-gift { width: 160px; height: 160px; margin-top: 22px; }
 .history-chip { flex-shrink: 0; font-size: 12px; font-weight: 500; padding: 7px 11px; border: 1px solid var(--border); background: var(--glass); border-radius: 8px; }
-.bet-sheet { top: auto; bottom: 0; transform: translateX(-50%); width: min(100%,448px); max-height: 90dvh; border-bottom-left-radius: 0; border-bottom-right-radius: 0; }
+.bet-sheet { top: auto !important; left: 50%; bottom: 0; translate: none !important; transform: translateX(-50%) !important; width: min(100%,448px); max-height: 90dvh; border-bottom-left-radius: 0; border-bottom-right-radius: 0; }
+.telegram-star-icon { filter: brightness(0) saturate(100%) invert(89%) sepia(90%) saturate(2000%) hue-rotate(356deg); }
+.box-card .box-product { width: 74%; height: 74%; }
+.spin-strip { transition: transform 5.2s cubic-bezier(.08,.64,.12,1); }
 @keyframes glass-flow { from { transform: scale(1.04) translate(-1%,0); } to { transform: scale(1.16) translate(2%,2%); } }
 @media (prefers-reduced-motion: reduce) { .crash-wallpaper img, .rocket-fly, .rocket-boom { animation: none; } }

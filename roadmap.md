@@ -1,7 +1,9 @@
 # Roadmap — Tesla Telegram gift boxes
-- [ ] Current refresh: full-screen Crash and three-currency demo bet sheet, authentic icons and balances, navigation, Season 1, case imagery, sample profile/earn/inventory, community placeholder, browser validation.
-- [ ] New request: remove profile language/vibration and referral dead controls; replace Rewards with Inventory; unify non-Crash backgrounds; switch to bright yellow/black.
-- [ ] Research full Telegram gift catalogue and current descending prices; expand to 50+ boxes only with verified prices and transparent profitable odds; evaluate 7/15-Star boxes without misleading impossible-win claims.
+- [x] Refresh: full-screen Crash and three-currency practice bets, official icons, navigation, active Season 1, nine new case images, sample profile/earn/inventory/wallet.
+- [x] Profile: removed language/vibration and dead referral controls; Inventory opens gifts; shared black background and bright yellow controls.
+- [x] Live Telegram regular gift price catalogue descending: 11 currently available gifts, 15–100 Stars; separate from unverified NFT resale prices.
+- [ ] 50+ economically verified boxes: blocked by unverified collectible acquisition prices; current lowest sendable gift costs 15 Stars, so 7/15-Star gift-only cases cannot keep the required 25% margin.
+- [ ] Community banner URL: waiting for the user's link; currently opens a coming-soon notice, not an unrelated page.
 - [x] Import app, rebrand to Tesla/TSLA, Cloud database, bot token, webhook + menu button on @Noveaibot
 - [x] Pivot: gift boxes paid with Telegram Stars, server-side spin, inventory (receive in Telegram / sell for Stars balance)
 - [x] Earn page = tasks + friends; Events page (channel-subscribe verified, GRAM-paid verified on-chain)
