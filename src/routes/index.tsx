@@ -6,6 +6,7 @@ import { listCases } from "@/lib/cases.functions";
 import { BoxArt } from "@/components/BoxArt";
 import { GiftArt } from "@/components/GiftArt";
 import { useStore } from "@/lib/store";
+import { Balance } from "./crash";
 
 export const Route = createFileRoute("/")({
   ssr: false,
@@ -34,14 +35,10 @@ function Cases() {
   return (
     <div className="space-y-4 pt-3">
       <div className="flex items-center justify-between">
-        <Link to="/earn" className="flex items-center gap-1.5 rounded-full bg-primary/15 px-4 py-2 text-sm font-semibold text-primary">
-          <Users className="size-4" />{refs}
+        <Link to="/earn" className="flex items-center gap-1.5 rounded-full bg-success/20 px-4 py-2 text-base font-semibold text-success">
+          <Users className="size-4 fill-current" />{refs}
         </Link>
-        <Link to="/inventory" className="flex items-center gap-2 rounded-full bg-card py-1.5 pl-2 pr-1.5">
-          <span className="grid size-7 place-items-center rounded-full bg-primary"><Star className="size-4 fill-primary-foreground text-primary-foreground" /></span>
-          <span className="text-base font-semibold tabular-nums">{balance}</span>
-          <span className="grid size-7 place-items-center rounded-full bg-muted"><Plus className="size-4" /></span>
-        </Link>
+        <Balance value={balance} />
       </div>
 
       <Link to="/events" className="relative flex items-center gap-3 overflow-hidden rounded-3xl bg-card p-4">
