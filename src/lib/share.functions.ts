@@ -7,7 +7,7 @@ export const prepareShareMessage = createServerFn({ method: "POST" })
     const { verifyInitData } = await import("./tg-auth.server");
     const { telegramApi, APP_URL } = await import("./telegram-api.server");
     const { user } = await verifyInitData(data.initData);
-    const link = `https://t.me/sramaibot?start=ref_${user.id}`;
+    const link = `https://t.me/Noveaibot?start=ref_${user.id}`;
     const r = await telegramApi("savePreparedInlineMessage", {
       user_id: user.id,
       result: {

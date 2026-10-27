@@ -42,7 +42,7 @@ export const Route = createFileRoute("/api/public/jobs/bot")({ server: { handler
       ? "Tesla Staking: your mining power grows with the TSLA you hold.\n\nHold TSLA in the app or in your verified wallet and your level rises automatically. Every level pays half of its value per day in TSLA.\n\nHold $10 and earn $5 a day. Hold $50 and earn $25 a day. Hold $100 and earn $50 a day.\n\nLevels start at $0.10 and go up to $10,000. Open Tesla, connect your wallet and start staking."
       : await channelText();
     const j = await tg(token, "sendPhoto", { chat_id: CHANNEL, photo: BANNER, caption: `<b>${text}</b>`, parse_mode: "HTML",
-      reply_markup: { inline_keyboard: [[{ style: "primary", text: "Open app", url: "https://t.me/sramaibot?startapp" }]] } });
+      reply_markup: { inline_keyboard: [[{ style: "primary", text: "Open app", url: "https://t.me/Noveaibot?startapp" }]] } });
     if (!j.ok) console.error("Channel post failed", j.description);
     return Response.json({ ok: !!j.ok });
   }

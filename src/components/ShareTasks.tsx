@@ -14,7 +14,7 @@ export function ShareTasks({ onClaim }: { onClaim: (task: any) => Promise<void> 
   const { data, initData, demo } = useStore();
   const prepare = useServerFn(prepareShareMessage);
   if (!data) return null;
-  const link = `https://t.me/sramaibot?start=ref_${data.me.id}`;
+  const link = `https://t.me/Noveaibot?start=ref_${data.me.id}`;
   const wa = getWebApp();
   const find = (kind: string) => pendingTasks(data.tasks, data.done).find((t: any) => t.kind === kind);
   const storyTask = find("story"), shareTask = find("share");
