@@ -182,3 +182,10 @@
 @keyframes win-pop { from { transform: scale(.6); opacity: 0; } to { transform: scale(1); opacity: 1; } }
 .win-pop { animation: win-pop .45s cubic-bezier(.2,1.4,.4,1) both; }
 @media (prefers-reduced-motion: reduce) { .float-a, .float-b, .box-shake { animation: none; } }
+
+.pattern-btn { color: var(--primary-foreground); background: radial-gradient(circle at 12px 12px, color-mix(in oklab, var(--primary-foreground) 10%, transparent) 3px, transparent 4px) 0 0 / 22px 22px, var(--primary); }
+.crash-sky { background: radial-gradient(1px 1px at 20% 30%, var(--foreground), transparent), radial-gradient(1px 1px at 70% 60%, var(--foreground), transparent), radial-gradient(1px 1px at 40% 80%, var(--muted-foreground), transparent), radial-gradient(1px 1px at 85% 20%, var(--muted-foreground), transparent), linear-gradient(var(--background), color-mix(in oklab, var(--background) 60%, black)); }
+.rocket-fly { animation: rocket-fly 600ms ease-in-out infinite alternate; }
+.rocket-boom { animation: rocket-boom 700ms ease-out forwards; }
+@keyframes rocket-fly { from { transform: translate(-50%, -50%) rotate(-2deg); } to { transform: translate(-48%, -53%) rotate(2deg); } }
+@keyframes rocket-boom { to { transform: translate(60%, -160%) scale(0.4); opacity: 0; } }
