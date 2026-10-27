@@ -41,18 +41,12 @@ export function Inventory() {
     } catch (e: any) { toast.error(e?.message ?? "Failed"); await qc.invalidateQueries({ queryKey: ["inventory"] }); }
     finally { setBusy(null); }
   };
-  if (demo) return <p className="py-16 text-center text-muted-foreground">Open Tesla inside Telegram to see your gifts.</p>;
+  if (demo) return <p className="py-20 text-center text-lg text-muted-foreground">Inventory is empty</p>;
   return (
     <div className="space-y-5 pt-2">
-      <header className="flex items-center justify-end">
-        <span className="flex items-center gap-1.5 rounded-full bg-card px-3 py-2 text-sm"><Star className="size-4 fill-primary text-primary" />{data?.starsBalance ?? 0}</span>
-      </header>
       {isLoading && <div className="h-40 animate-pulse rounded-2xl bg-card" />}
       {data && data.gifts.length === 0 && (
-        <div className="rounded-2xl bg-card p-8 text-center">
-          <p className="text-muted-foreground">No gifts yet.</p>
-          <Link to="/" className="mt-4 inline-block rounded-xl bg-primary px-5 py-3 text-sm text-primary-foreground">Open a box</Link>
-        </div>
+        <p className="py-20 text-center text-lg text-muted-foreground">Inventory is empty</p>
       )}
       <div className="space-y-2">
         {data?.gifts.map((g: any) => {
