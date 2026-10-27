@@ -251,3 +251,4 @@
 .prize-row { background: linear-gradient(90deg, color-mix(in oklab, var(--tone) 22%, var(--card)), var(--card) 70%); border: 1px solid color-mix(in oklab, var(--tone) 22%, transparent); }
 .tile-art { background: radial-gradient(90% 80% at 70% 40%, color-mix(in oklab, var(--tone) 30%, transparent), transparent 70%), var(--card); border: 1px solid var(--border); }
 @media (prefers-reduced-motion: reduce) { .mascot-ready, .mascot-flight, .mascot-crashed { animation: none; } }
+.on-primary .telegram-star-icon { filter: brightness(0); }

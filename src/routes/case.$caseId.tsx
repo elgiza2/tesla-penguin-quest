@@ -158,7 +158,7 @@ function CaseView() {
       ) : (
         <div className="space-y-2">
           <div className="grid grid-cols-2 gap-2">
-            <Button disabled={spinning} onClick={payStars} className="h-14 rounded-2xl text-base font-semibold">
+            <Button disabled={spinning} onClick={payStars} className="on-primary h-14 rounded-2xl text-base font-semibold">
               Spin<CurrencyIcon currency="stars" className="size-5" />{c.price_stars}
             </Button>
             <Button variant="secondary" disabled={spinning || !(Number(c.price_gram) > 0)} onClick={payGram} className="h-14 rounded-2xl text-base font-semibold">
