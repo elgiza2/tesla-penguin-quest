@@ -146,7 +146,7 @@ function CaseView() {
       </div>
 
       {won ? (
-        <div className="win-pop flex flex-col items-center rounded-3xl bg-card p-5 text-center">
+        <div className="win-pop surface flex flex-col items-center rounded-3xl p-5 text-center">
           <GiftArt gift={won} className="size-32" />
           <p className="mt-2 text-xl font-semibold">{won.name}</p>
           <p className="mt-1 flex items-center gap-1 text-sm text-muted-foreground"><CurrencyIcon currency="stars" className="size-4" />{won.value_stars} · sell for {sellCredit(won.value_stars)}</p>
