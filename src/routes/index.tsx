@@ -3,7 +3,8 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
 import { Star, Plus, Megaphone, Users } from "lucide-react";
 import { listCases } from "@/lib/cases.functions";
-import { BoxArt } from "@/components/BoxArt";
+import { BoxArt, BOX_GLOW } from "@/components/BoxArt";
+import crystal from "@/assets/crystal.png";
 import { GiftArt } from "@/components/GiftArt";
 import { useStore } from "@/lib/store";
 import { Balance } from "./crash";
@@ -31,7 +32,7 @@ function Cases() {
   const { data: cases, isLoading, error } = useQuery({ queryKey: ["cases"], queryFn: () => listCases(), staleTime: 60_000 });
   const balance = Number((data?.me as any)?.stars_balance ?? 0);
   const refs = Number((data as any)?.referrals?.length ?? (data?.me as any)?.referrals_count ?? 0);
-  const ribbon = (cases ?? []).flatMap((c: any) => c.items).sort((a: any, b: any) => b.value_stars - a.value_stars).slice(0, 10);
+  const ribbon = (cases ?? []).flatMap((c: any) => c.items).filter((g: any) => g.kind !== "nft").sort((a: any, b: any) => b.value_stars - a.value_stars).slice(0, 10);
   return (
     <div className="space-y-4 pt-3">
       <div className="flex items-center justify-between">
@@ -41,28 +42,27 @@ function Cases() {
         <Balance value={balance} />
       </div>
 
-      <Link to="/events" className="relative flex items-center gap-3 overflow-hidden rounded-3xl bg-card p-4">
-        <Megaphone className="size-5 shrink-0 text-primary" />
-        <div className="min-w-0 pr-16">
-          <p className="font-bold">Join our channel</p>
-          <p className="text-xs text-muted-foreground">News, gift drops and promo codes for free boxes.</p>
+      <Link to="/earn" className="relative flex min-h-[88px] items-center overflow-hidden rounded-[28px] bg-card py-3.5 pl-5 pr-28">
+        <div>
+          <p className="flex items-center gap-2 text-[17px] font-bold"><Megaphone className="size-4 text-muted-foreground" />Join our channel</p>
+          <p className="text-[14px] font-normal leading-snug text-foreground/80">News, gift drops and promo codes for free boxes in our channel</p>
         </div>
-        {ribbon[0] && <GiftArt gift={ribbon[0]} className="absolute -right-2 top-1/2 size-20 -translate-y-1/2" />}
+        <img src={crystal} alt="" width={1024} height={1024} className="absolute -right-4 top-1/2 size-32 -translate-y-1/2 object-contain" />
       </Link>
 
       {ribbon.length > 0 && (
         <div className="-mx-5 flex gap-2 overflow-x-auto px-5 pb-1 [scrollbar-width:none]">
-          <div className="flex h-16 w-12 shrink-0 flex-col items-center justify-center gap-1 rounded-2xl bg-card">
+          <div className="flex h-[60px] w-12 shrink-0 flex-col items-center justify-center gap-1 rounded-[20px] bg-card">
             <span className="size-2 animate-pulse rounded-full bg-success" />
             <span className="text-[10px] font-bold text-success [writing-mode:vertical-rl] rotate-180">Live</span>
           </div>
           {ribbon.map((g: any, i: number) => (
-            <div key={g.id + i} className="grid size-16 shrink-0 place-items-center rounded-2xl bg-card"><GiftArt gift={g} className="size-11" /></div>
+            <div key={g.id + i} className="grid size-[60px] shrink-0 place-items-center rounded-[20px] bg-card"><GiftArt gift={g} className="size-11" /></div>
           ))}
         </div>
       )}
 
-      <div className="flex gap-5 text-2xl font-bold">
+      <div className="flex gap-4 pt-1 text-[28px] font-bold">
         <button onClick={() => setTab("paid")} className={tab === "paid" ? "" : "text-muted-foreground"}>Paid</button>
         <button onClick={() => setTab("free")} className={tab === "free" ? "" : "text-muted-foreground"}>Free</button>
       </div>
@@ -78,18 +78,19 @@ function Cases() {
           <div className="grid grid-cols-2 gap-3">
             {cases?.map((c: any, i: number) => (
               <Link key={c.id} to="/case/$caseId" params={{ caseId: c.id }}
-                style={{ ["--glow" as any]: GLOWS[i % GLOWS.length] }}
-                className="box-card relative aspect-square overflow-hidden rounded-3xl transition active:scale-[0.97]">
-                <div className="absolute inset-0"><BoxArt caseId={c.id} items={c.items} bare className="size-full" /></div>
-                <div className="absolute left-2.5 top-2.5 flex gap-1.5">
-                  <span className="flex items-center gap-1 rounded-full bg-background/70 px-2 py-1 text-xs font-semibold backdrop-blur">
-                    <Star className="size-3.5 fill-primary text-primary" />{c.price_stars}
-                  </span>
+                style={{ ["--glow" as any]: BOX_GLOW[c.id] ?? GLOWS[i % GLOWS.length] }}
+                className="box-card relative aspect-square overflow-hidden rounded-[30px] transition active:scale-[0.97]">
+                <div className="absolute inset-0 pt-6"><BoxArt caseId={c.id} className="size-full" /></div>
+                <div className="absolute left-2.5 top-2.5 flex gap-1">
                   {c.price_gram != null && (
-                    <span className="rounded-full bg-background/70 px-2 py-1 text-xs font-semibold backdrop-blur">{Number(c.price_gram)} GRAM</span>
+                    <span className="flex items-center gap-1 rounded-full bg-background/60 py-0.5 pl-0.5 pr-2.5 text-[15px] font-medium backdrop-blur">
+                      <span className="grid size-6 place-items-center rounded-full bg-primary text-[10px] font-black text-primary-foreground">G</span>{Number(c.price_gram)}
+                    </span>
                   )}
+                  <span className="flex items-center gap-1 rounded-full bg-background/60 py-0.5 pl-1 pr-2.5 text-[15px] font-medium backdrop-blur">
+                    <Star className="size-5 fill-[oklch(0.85_0.17_85)] text-[oklch(0.85_0.17_85)]" />{c.price_stars}
+                  </span>
                 </div>
-                <span className="absolute inset-x-0 bottom-2 text-center text-xs font-semibold">{c.name}</span>
               </Link>
             ))}
           </div>
