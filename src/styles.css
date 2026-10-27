@@ -43,6 +43,8 @@
   --color-game-coral: var(--game-coral);
   --color-game-mint: var(--game-mint);
   --color-game-ink: var(--game-ink);
+  --color-box-blue: var(--box-blue);
+  --color-box-red: var(--box-red);
   --color-wallet-art-foreground: var(--wallet-art-foreground);
 }
 
@@ -56,6 +58,8 @@
   --game-coral: oklch(0.72 0.19 25);
   --game-mint: oklch(0.8 0.15 160);
   --game-ink: oklch(0.18 0.02 260);
+  --box-blue: oklch(0.58 0.2 260);
+  --box-red: oklch(0.6 0.22 25);
   --radius: 1rem;
   --background: oklch(0.12 0 0);
   --foreground: oklch(0.96 0 0);
