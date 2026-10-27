@@ -13,6 +13,8 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as R101RouteImport } from './routes/101'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as AdminRouteImport } from './routes/admin'
+import { Route as EarnRouteImport } from './routes/earn'
+import { Route as EventsRouteImport } from './routes/events'
 import { Route as GamesRouteImport } from './routes/games'
 import { Route as GuideRouteImport } from './routes/guide'
 import { Route as InventoryRouteImport } from './routes/inventory'
@@ -54,6 +56,16 @@ const AboutRoute = AboutRouteImport.update({
 const AdminRoute = AdminRouteImport.update({
   id: '/admin',
   path: '/admin',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EarnRoute = EarnRouteImport.update({
+  id: '/earn',
+  path: '/earn',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EventsRoute = EventsRouteImport.update({
+  id: '/events',
+  path: '/events',
   getParentRoute: () => rootRouteImport,
 } as any)
 const GamesRoute = GamesRouteImport.update({
@@ -174,6 +186,8 @@ export interface FileRoutesByFullPath {
   '/101': typeof R101Route
   '/about': typeof AboutRoute
   '/admin': typeof AdminRoute
+  '/earn': typeof EarnRoute
+  '/events': typeof EventsRoute
   '/games': typeof GamesRoute
   '/guide': typeof GuideRoute
   '/inventory': typeof InventoryRoute
@@ -202,6 +216,8 @@ export interface FileRoutesByTo {
   '/101': typeof R101Route
   '/about': typeof AboutRoute
   '/admin': typeof AdminRoute
+  '/earn': typeof EarnRoute
+  '/events': typeof EventsRoute
   '/games': typeof GamesRoute
   '/guide': typeof GuideRoute
   '/inventory': typeof InventoryRoute
@@ -231,6 +247,8 @@ export interface FileRoutesById {
   '/101': typeof R101Route
   '/about': typeof AboutRoute
   '/admin': typeof AdminRoute
+  '/earn': typeof EarnRoute
+  '/events': typeof EventsRoute
   '/games': typeof GamesRoute
   '/guide': typeof GuideRoute
   '/inventory': typeof InventoryRoute
@@ -261,6 +279,8 @@ export interface FileRouteTypes {
     | '/101'
     | '/about'
     | '/admin'
+    | '/earn'
+    | '/events'
     | '/games'
     | '/guide'
     | '/inventory'
@@ -289,6 +309,8 @@ export interface FileRouteTypes {
     | '/101'
     | '/about'
     | '/admin'
+    | '/earn'
+    | '/events'
     | '/games'
     | '/guide'
     | '/inventory'
@@ -317,6 +339,8 @@ export interface FileRouteTypes {
     | '/101'
     | '/about'
     | '/admin'
+    | '/earn'
+    | '/events'
     | '/games'
     | '/guide'
     | '/inventory'
@@ -346,6 +370,8 @@ export interface RootRouteChildren {
   R101Route: typeof R101Route
   AboutRoute: typeof AboutRoute
   AdminRoute: typeof AdminRoute
+  EarnRoute: typeof EarnRoute
+  EventsRoute: typeof EventsRoute
   GamesRoute: typeof GamesRoute
   GuideRoute: typeof GuideRoute
   InventoryRoute: typeof InventoryRoute
@@ -398,6 +424,20 @@ declare module '@tanstack/react-router' {
       path: '/admin'
       fullPath: '/admin'
       preLoaderRoute: typeof AdminRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/earn': {
+      id: '/earn'
+      path: '/earn'
+      fullPath: '/earn'
+      preLoaderRoute: typeof EarnRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/events': {
+      id: '/events'
+      path: '/events'
+      fullPath: '/events'
+      preLoaderRoute: typeof EventsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/games': {
@@ -562,6 +602,8 @@ const rootRouteChildren: RootRouteChildren = {
   R101Route: R101Route,
   AboutRoute: AboutRoute,
   AdminRoute: AdminRoute,
+  EarnRoute: EarnRoute,
+  EventsRoute: EventsRoute,
   GamesRoute: GamesRoute,
   GuideRoute: GuideRoute,
   InventoryRoute: InventoryRoute,
