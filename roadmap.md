@@ -1,4 +1,5 @@
 # Roadmap — Tesla Telegram gift boxes
+- [ ] Current refresh: full-screen Crash and three-currency demo bet sheet, authentic icons and balances, navigation, Season 1, case imagery, sample profile/earn/inventory, community placeholder, browser validation.
 - [x] Import app, rebrand to Tesla/TSLA, Cloud database, bot token, webhook + menu button on @Noveaibot
 - [x] Pivot: gift boxes paid with Telegram Stars, server-side spin, inventory (receive in Telegram / sell for Stars balance)
 - [x] Earn page = tasks + friends; Events page (channel-subscribe verified, GRAM-paid verified on-chain)
