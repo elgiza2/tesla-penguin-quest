@@ -5,7 +5,7 @@ import { listCases } from "@/lib/cases.functions";
 import { GiftThumb } from "@/components/GiftArt";
 import { useStore } from "@/lib/store";
 
-export const casesQuery = { queryKey: ["cases"], queryFn: () => listCases(), staleTime: 60_000 };
+const casesQuery = { queryKey: ["cases"], queryFn: () => listCases(), staleTime: 60_000 };
 
 export const Route = createFileRoute("/")({
   ssr: false,

@@ -15,6 +15,7 @@ import { Route as AboutRouteImport } from './routes/about'
 import { Route as AdminRouteImport } from './routes/admin'
 import { Route as GamesRouteImport } from './routes/games'
 import { Route as GuideRouteImport } from './routes/guide'
+import { Route as InventoryRouteImport } from './routes/inventory'
 import { Route as NftRouteImport } from './routes/nft'
 import { Route as PowerRouteImport } from './routes/power'
 import { Route as PremiumRouteImport } from './routes/premium'
@@ -26,6 +27,7 @@ import { Route as SwapRouteImport } from './routes/swap'
 import { Route as TasksRouteImport } from './routes/tasks'
 import { Route as WalletRouteImport } from './routes/wallet'
 import { Route as WhitepaperRouteImport } from './routes/whitepaper'
+import { Route as CaseCaseIdRouteImport } from './routes/case.$caseId'
 import { Route as ApiPublicAdsMonetagRouteImport } from './routes/api/public/ads/monetag'
 import { Route as ApiPublicGiftStickerGiftIdRouteImport } from './routes/api/public/gift-sticker.$giftId'
 import { Route as ApiPublicJobsBotRouteImport } from './routes/api/public/jobs/bot'
@@ -62,6 +64,11 @@ const GamesRoute = GamesRouteImport.update({
 const GuideRoute = GuideRouteImport.update({
   id: '/guide',
   path: '/guide',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const InventoryRoute = InventoryRouteImport.update({
+  id: '/inventory',
+  path: '/inventory',
   getParentRoute: () => rootRouteImport,
 } as any)
 const NftRoute = NftRouteImport.update({
@@ -119,6 +126,11 @@ const WhitepaperRoute = WhitepaperRouteImport.update({
   path: '/whitepaper',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CaseCaseIdRoute = CaseCaseIdRouteImport.update({
+  id: '/case/$caseId',
+  path: '/case/$caseId',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ApiPublicAdsMonetagRoute = ApiPublicAdsMonetagRouteImport.update({
   id: '/api/public/ads/monetag',
   path: '/api/public/ads/monetag',
@@ -164,6 +176,7 @@ export interface FileRoutesByFullPath {
   '/admin': typeof AdminRoute
   '/games': typeof GamesRoute
   '/guide': typeof GuideRoute
+  '/inventory': typeof InventoryRoute
   '/nft': typeof NftRoute
   '/power': typeof PowerRoute
   '/premium': typeof PremiumRoute
@@ -175,6 +188,7 @@ export interface FileRoutesByFullPath {
   '/tasks': typeof TasksRoute
   '/wallet': typeof WalletRoute
   '/whitepaper': typeof WhitepaperRoute
+  '/case/$caseId': typeof CaseCaseIdRoute
   '/api/public/ads/monetag': typeof ApiPublicAdsMonetagRoute
   '/api/public/gift-sticker/$giftId': typeof ApiPublicGiftStickerGiftIdRoute
   '/api/public/jobs/bot': typeof ApiPublicJobsBotRoute
@@ -190,6 +204,7 @@ export interface FileRoutesByTo {
   '/admin': typeof AdminRoute
   '/games': typeof GamesRoute
   '/guide': typeof GuideRoute
+  '/inventory': typeof InventoryRoute
   '/nft': typeof NftRoute
   '/power': typeof PowerRoute
   '/premium': typeof PremiumRoute
@@ -201,6 +216,7 @@ export interface FileRoutesByTo {
   '/tasks': typeof TasksRoute
   '/wallet': typeof WalletRoute
   '/whitepaper': typeof WhitepaperRoute
+  '/case/$caseId': typeof CaseCaseIdRoute
   '/api/public/ads/monetag': typeof ApiPublicAdsMonetagRoute
   '/api/public/gift-sticker/$giftId': typeof ApiPublicGiftStickerGiftIdRoute
   '/api/public/jobs/bot': typeof ApiPublicJobsBotRoute
@@ -217,6 +233,7 @@ export interface FileRoutesById {
   '/admin': typeof AdminRoute
   '/games': typeof GamesRoute
   '/guide': typeof GuideRoute
+  '/inventory': typeof InventoryRoute
   '/nft': typeof NftRoute
   '/power': typeof PowerRoute
   '/premium': typeof PremiumRoute
@@ -228,6 +245,7 @@ export interface FileRoutesById {
   '/tasks': typeof TasksRoute
   '/wallet': typeof WalletRoute
   '/whitepaper': typeof WhitepaperRoute
+  '/case/$caseId': typeof CaseCaseIdRoute
   '/api/public/ads/monetag': typeof ApiPublicAdsMonetagRoute
   '/api/public/gift-sticker/$giftId': typeof ApiPublicGiftStickerGiftIdRoute
   '/api/public/jobs/bot': typeof ApiPublicJobsBotRoute
@@ -245,6 +263,7 @@ export interface FileRouteTypes {
     | '/admin'
     | '/games'
     | '/guide'
+    | '/inventory'
     | '/nft'
     | '/power'
     | '/premium'
@@ -256,6 +275,7 @@ export interface FileRouteTypes {
     | '/tasks'
     | '/wallet'
     | '/whitepaper'
+    | '/case/$caseId'
     | '/api/public/ads/monetag'
     | '/api/public/gift-sticker/$giftId'
     | '/api/public/jobs/bot'
@@ -271,6 +291,7 @@ export interface FileRouteTypes {
     | '/admin'
     | '/games'
     | '/guide'
+    | '/inventory'
     | '/nft'
     | '/power'
     | '/premium'
@@ -282,6 +303,7 @@ export interface FileRouteTypes {
     | '/tasks'
     | '/wallet'
     | '/whitepaper'
+    | '/case/$caseId'
     | '/api/public/ads/monetag'
     | '/api/public/gift-sticker/$giftId'
     | '/api/public/jobs/bot'
@@ -297,6 +319,7 @@ export interface FileRouteTypes {
     | '/admin'
     | '/games'
     | '/guide'
+    | '/inventory'
     | '/nft'
     | '/power'
     | '/premium'
@@ -308,6 +331,7 @@ export interface FileRouteTypes {
     | '/tasks'
     | '/wallet'
     | '/whitepaper'
+    | '/case/$caseId'
     | '/api/public/ads/monetag'
     | '/api/public/gift-sticker/$giftId'
     | '/api/public/jobs/bot'
@@ -324,6 +348,7 @@ export interface RootRouteChildren {
   AdminRoute: typeof AdminRoute
   GamesRoute: typeof GamesRoute
   GuideRoute: typeof GuideRoute
+  InventoryRoute: typeof InventoryRoute
   NftRoute: typeof NftRoute
   PowerRoute: typeof PowerRoute
   PremiumRoute: typeof PremiumRoute
@@ -335,6 +360,7 @@ export interface RootRouteChildren {
   TasksRoute: typeof TasksRoute
   WalletRoute: typeof WalletRoute
   WhitepaperRoute: typeof WhitepaperRoute
+  CaseCaseIdRoute: typeof CaseCaseIdRoute
   ApiPublicAdsMonetagRoute: typeof ApiPublicAdsMonetagRoute
   ApiPublicGiftStickerGiftIdRoute: typeof ApiPublicGiftStickerGiftIdRoute
   ApiPublicJobsBotRoute: typeof ApiPublicJobsBotRoute
@@ -386,6 +412,13 @@ declare module '@tanstack/react-router' {
       path: '/guide'
       fullPath: '/guide'
       preLoaderRoute: typeof GuideRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/inventory': {
+      id: '/inventory'
+      path: '/inventory'
+      fullPath: '/inventory'
+      preLoaderRoute: typeof InventoryRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/nft': {
@@ -465,6 +498,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof WhitepaperRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/case/$caseId': {
+      id: '/case/$caseId'
+      path: '/case/$caseId'
+      fullPath: '/case/$caseId'
+      preLoaderRoute: typeof CaseCaseIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/public/ads/monetag': {
       id: '/api/public/ads/monetag'
       path: '/api/public/ads/monetag'
@@ -524,6 +564,7 @@ const rootRouteChildren: RootRouteChildren = {
   AdminRoute: AdminRoute,
   GamesRoute: GamesRoute,
   GuideRoute: GuideRoute,
+  InventoryRoute: InventoryRoute,
   NftRoute: NftRoute,
   PowerRoute: PowerRoute,
   PremiumRoute: PremiumRoute,
@@ -535,6 +576,7 @@ const rootRouteChildren: RootRouteChildren = {
   TasksRoute: TasksRoute,
   WalletRoute: WalletRoute,
   WhitepaperRoute: WhitepaperRoute,
+  CaseCaseIdRoute: CaseCaseIdRoute,
   ApiPublicAdsMonetagRoute: ApiPublicAdsMonetagRoute,
   ApiPublicGiftStickerGiftIdRoute: ApiPublicGiftStickerGiftIdRoute,
   ApiPublicJobsBotRoute: ApiPublicJobsBotRoute,
