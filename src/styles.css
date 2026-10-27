@@ -196,3 +196,5 @@
 .ios-blob-c { background: var(--game-sky); left: 20%; bottom: -40%; animation-duration: 22s; }
 @keyframes ios-drift { 0% { transform: translate(0,0) scale(1); } 50% { transform: translate(18%,12%) scale(1.2); } 100% { transform: translate(-10%,20%) scale(.9); } }
 @media (prefers-reduced-motion: reduce) { .ios-blob { animation: none; } }
+.stars-bg { background: radial-gradient(1px 1px at 15% 25%, var(--foreground), transparent), radial-gradient(1px 1px at 45% 70%, var(--muted-foreground), transparent), radial-gradient(1px 1px at 75% 35%, var(--foreground), transparent), linear-gradient(120deg, oklch(0.32 0.04 255), oklch(0.26 0.03 260)); }
+.rocket-pattern { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='64' height='64' viewBox='0 0 24 24' fill='none' stroke='%23ffffff' stroke-opacity='0.05' stroke-width='1.5'%3E%3Cpath d='M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z'/%3E%3Cpath d='m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z'/%3E%3C/svg%3E"); background-size: 64px 64px; }
