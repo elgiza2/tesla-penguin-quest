@@ -1,17 +1,17 @@
 import { useEffect } from "react";
 import { Link, Outlet, useLocation, useRouter } from "@tanstack/react-router";
 import { TonConnectUIProvider } from "@tonconnect/ui-react";
-import { Package, ListChecks, Trophy, Gift } from "lucide-react";
+import { Gift, ListChecks, Trophy, UserRound } from "lucide-react";
 import { StoreProvider, useStore } from "@/lib/store";
 import { getWebApp } from "@/lib/telegram";
 import { Toaster } from "@/components/ui/sonner";
 import logo from "@/assets/tesla-icon.png";
 
 const tabs = [
-  { to: "/", icon: Package, label: "Boxes" },
+  { to: "/", icon: Gift, label: "Cases" },
   { to: "/earn", icon: ListChecks, label: "Earn" },
-  { to: "/events", icon: Trophy, label: "Events" },
-  { to: "/inventory", icon: Gift, label: "Gifts" },
+  { to: "/events", icon: Trophy, label: "Season" },
+  { to: "/profile", icon: UserRound, label: "Profile" },
 ] as const;
 
 function BackButtonSync() {
@@ -54,8 +54,8 @@ function Frame() {
               <Link key={to} to={to} preload="render"
                 aria-label={label} aria-current={active ? "page" : undefined} data-active={active}
                 className={`nav-item flex h-14 min-w-0 flex-col items-center justify-center gap-0.5 rounded-full ${active ? "" : "text-muted-foreground"}`}>
-                <Icon className="size-5 shrink-0" strokeWidth={2.2} />
-                <span className="text-[11px] font-semibold">{label}</span>
+                <Icon className="size-6 shrink-0" strokeWidth={2.4} fill={active ? "currentColor" : "none"} />
+                <span className="text-[12px] font-medium">{label}</span>
               </Link>
             );
           })}
