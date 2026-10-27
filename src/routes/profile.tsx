@@ -5,7 +5,7 @@ import { SWAP_URL } from "@/lib/config";
 import { openLink } from "@/lib/telegram";
 import { fmt } from "@/lib/ton";
 import { CoinIcon, TSLA_ICON } from "@/components/ui-kit";
-import mascot from "@/assets/tsla-mascot.jpg";
+import mascot from "@/assets/tesla-mascot.jpg";
 
 export const Route = createFileRoute("/profile")({ ssr: false, head: () => ({ meta: [ { title: "Tesla — Your profile" }, { name: "description", content: "Your Telegram profile, TSLA holdings, Premium and project information." }, { property: "og:title", content: "Tesla Profile" }, { property: "og:description", content: "Your Telegram profile, TSLA holdings, Premium and project information." }, { property: "og:type", content: "website" }, { name: "twitter:card", content: "summary_large_image" } ]}), component: Profile });
 
