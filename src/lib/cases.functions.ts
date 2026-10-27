@@ -213,3 +213,12 @@ export const verifyGramOpening = createServerFn({ method: "POST" })
     fail(error);
     return { paid: true };
   });
+
+/** Public season leaderboard: top players by balance. */
+export const seasonLeaderboard = createServerFn({ method: "GET" }).handler(async () => {
+  const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
+  const db = supabaseAdmin as any;
+  const { data, error } = await db.from("tsla_tg_users").select("id,username,first_name,photo_url,stars_balance,power_level").order("stars_balance", { ascending: false }).limit(20);
+  fail(error);
+  return (data ?? []).map((u: any) => ({ id: u.id, name: u.first_name || u.username || "Player", photo: u.photo_url, score: Number(u.stars_balance ?? 0), level: Number(u.power_level ?? 1) }));
+});

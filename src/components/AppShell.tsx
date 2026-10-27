@@ -1,15 +1,15 @@
 import { useEffect } from "react";
 import { Link, Outlet, useLocation, useRouter } from "@tanstack/react-router";
 import { TonConnectUIProvider } from "@tonconnect/ui-react";
-import { Gift, ListChecks, Trophy, UserRound } from "lucide-react";
+import { Gift, Rocket, Trophy, UserRound } from "lucide-react";
 import { StoreProvider, useStore } from "@/lib/store";
 import { getWebApp } from "@/lib/telegram";
 import { Toaster } from "@/components/ui/sonner";
 import logo from "@/assets/tesla-icon.png";
 
 const tabs = [
+  { to: "/crash", icon: Rocket, label: "Crash" },
   { to: "/", icon: Gift, label: "Cases" },
-  { to: "/earn", icon: ListChecks, label: "Earn" },
   { to: "/events", icon: Trophy, label: "Season" },
   { to: "/profile", icon: UserRound, label: "Profile" },
 ] as const;
