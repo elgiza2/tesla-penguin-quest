@@ -6,6 +6,7 @@ import { StoreProvider, useStore } from "@/lib/store";
 import { getWebApp } from "@/lib/telegram";
 import { Toaster } from "@/components/ui/sonner";
 import logo from "@/assets/tesla-icon.png";
+import { Button } from "@/components/ui/button";
 
 const tabs = [
   { to: "/crash", icon: Rocket, label: "Crash" },
@@ -44,19 +45,20 @@ function Frame() {
     );
   }
   return (
-    <div className="safe-top mx-auto flex min-h-dvh max-w-md flex-col px-5 pb-28">
-      <div key={pathname} className="page-motion"><Outlet /></div>
-      <nav className="safe-bottom fixed inset-x-0 bottom-0 z-40 mx-auto max-w-md px-5">
-        <div className="glass-strong flex items-center justify-between gap-1 rounded-full p-1.5">
+    <div className={`app-frame mx-auto flex min-h-dvh max-w-md flex-col px-5 pb-28 ${pathname === "/crash" ? "crash-frame" : "safe-top"}`}>
+      {demo && pathname !== "/crash" && <div className="mb-2 text-center text-[10px] font-medium uppercase text-muted-foreground">Demo · sample data</div>}
+      <div key={pathname} className={pathname === "/crash" ? "" : "page-motion"}><Outlet /></div>
+      <nav aria-label="Main navigation" className="bottom-navigation safe-bottom fixed inset-x-0 bottom-0 z-40 mx-auto max-w-md px-4">
+        <div className="nav-surface flex items-center justify-between gap-1 rounded-2xl p-1.5">
           {tabs.map(({ to, icon: Icon, label }) => {
             const active = to === "/" ? pathname === "/" || pathname.startsWith("/case/") : pathname === to;
             return (
-              <Link key={to} to={to} preload="render"
+              <Button key={to} asChild variant="ghost" className="h-auto flex-1 p-0 hover:bg-transparent"><Link to={to} preload="render"
                 aria-label={label} aria-current={active ? "page" : undefined} data-active={active}
-                className={`nav-item flex h-14 min-w-0 flex-col items-center justify-center gap-0.5 rounded-full ${active ? "" : "text-muted-foreground"}`}>
-                <Icon className="size-6 shrink-0" strokeWidth={2.4} fill={active ? "currentColor" : "none"} />
-                <span className="text-[12px] font-medium">{label}</span>
-              </Link>
+                className={`nav-item flex h-14 min-w-0 flex-col items-center justify-center gap-1 rounded-xl ${active ? "" : "text-muted-foreground"}`}>
+                <Icon className="nav-icon size-5 shrink-0" strokeWidth={active ? 2.2 : 1.7} />
+                <span className="text-[11px] font-medium">{label}</span>
+              </Link></Button>
             );
           })}
         </div>

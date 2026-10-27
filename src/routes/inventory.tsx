@@ -8,6 +8,7 @@ import { myInventory, sellGift, claimGift } from "@/lib/cases.functions";
 import { sellCredit } from "@/lib/cases";
 import { GiftArt } from "@/components/GiftArt";
 import { useStore } from "@/lib/store";
+import { SampleGifts } from "@/components/SampleGifts";
 
 export const Route = createFileRoute("/inventory")({
   ssr: false,
@@ -41,7 +42,7 @@ export function Inventory() {
     } catch (e: any) { toast.error(e?.message ?? "Failed"); await qc.invalidateQueries({ queryKey: ["inventory"] }); }
     finally { setBusy(null); }
   };
-  if (demo) return <p className="py-20 text-center text-lg text-muted-foreground">Inventory is empty</p>;
+  if (demo) return <SampleGifts />;
   return (
     <div className="space-y-5 pt-2">
       {isLoading && <div className="h-40 animate-pulse rounded-2xl bg-card" />}
