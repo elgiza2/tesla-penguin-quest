@@ -15,6 +15,13 @@
       "when": 1793126645971,
       "tag": "0001_gift_cases",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1793127759098,
+      "tag": "0002_more_boxes_and_gram",
+      "breakpoints": true
     }
   ]
 }
