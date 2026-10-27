@@ -1,4 +1,8 @@
 # Roadmap — Tesla Telegram gift boxes
+- [ ] Whole-app iOS glass redesign: white base, animated blurred blue/red gradients, unified pages
+- [ ] Bottom navigation redesign with a Tasks tab
+- [ ] Crash: real animated Telegram gifts/NFTs (not animated still images) for ready/flight/crash
+- [ ] Box pictures: on hold at user's request (keep current ones)
 - [x] Animated multicolour Crash, three mascot rocket states, two bet actions, coloured history above actions, bettors list, refined balance.
 - [x] Original Tesla fluffy mascot (not copied); Crash/Profile/Season/community art uses it.
 - [x] Removed demo/practice text, counters, Paid/Free and price link; blue/red boxes, backdrop-free NFT animations, simplified spin/Season, mascot Profile tiles.
