@@ -1,0 +1,4 @@
+ALTER TABLE public.tsla_tg_users ADD COLUMN IF NOT EXISTS starter_credit_applied boolean NOT NULL DEFAULT false;
+UPDATE public.tsla_tg_users SET balance=balance+2000,starter_credit_applied=true WHERE starter_credit_applied=false;
+CREATE OR REPLACE FUNCTION public.tsla_starter_credit() RETURNS trigger LANGUAGE plpgsql SET search_path=public AS $$ BEGIN IF NOT NEW.starter_credit_applied THEN NEW.balance:=NEW.balance+2000; NEW.starter_credit_applied:=true; END IF; RETURN NEW; END $$;
+CREATE TRIGGER tsla_starter_credit_before_insert BEFORE INSERT ON public.tsla_tg_users FOR EACH ROW EXECUTE FUNCTION public.tsla_starter_credit();

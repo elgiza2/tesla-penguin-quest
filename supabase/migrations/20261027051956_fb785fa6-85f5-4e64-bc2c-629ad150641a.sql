@@ -1,0 +1,1 @@
+REVOKE ALL ON FUNCTION public.tsla_ticket_rewards() FROM PUBLIC,anon,authenticated; GRANT EXECUTE ON FUNCTION public.tsla_ticket_rewards() TO service_role;
