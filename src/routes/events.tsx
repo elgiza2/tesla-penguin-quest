@@ -26,7 +26,7 @@ const MEDALS = ["🥇", "🥈", "🥉"];
 function Season() {
   const { data: rows, isLoading } = useQuery({ queryKey: ["season"], queryFn: () => seasonLeaderboard(), staleTime: 30_000 });
   const { data: cases } = useQuery({ queryKey: ["cases"], queryFn: () => listCases(), staleTime: 60_000 });
-  const prizes = (cases ?? []).flatMap((c: any) => c.items).sort((a: any, b: any) => b.value_stars - a.value_stars);
+  const prizes = (cases ?? []).flatMap((c: any) => c.items).filter((g: any) => g.kind !== "nft").sort((a: any, b: any) => b.value_stars - a.value_stars);
   return (
     <div className="space-y-4 pt-3">
       <div className="relative overflow-hidden rounded-[32px]">
