@@ -22,6 +22,18 @@ export function giftAnimationUrl(g: Gift) {
   return null;
 }
 
+export function giftImageUrl(g: Gift) {
+  if (g.image_url) return g.image_url;
+  if (g.telegram_gift_id) return `/api/public/gift-sticker/${g.telegram_gift_id}?thumb=1`;
+  return null;
+}
+
+/** Static gift picture, cheap enough for long spin strips. */
+export function GiftThumb({ gift, className = "" }: { gift: Gift; className?: string }) {
+  const src = giftImageUrl(gift);
+  return src ? <img src={src} alt={gift.name} className={`object-contain ${className}`} loading="lazy" draggable={false} /> : <div className={className}>🎁</div>;
+}
+
 /** Animated Telegram gift (Lottie) with a static image fallback. */
 export function GiftArt({ gift, className = "", play = true }: { gift: Gift; className?: string; play?: boolean }) {
   const ref = useRef<HTMLDivElement>(null);
@@ -37,7 +49,6 @@ export function GiftArt({ gift, className = "", play = true }: { gift: Gift; cla
     }).catch(() => setFailed(true));
     return () => { cancelled = true; anim?.destroy(); };
   }, [url, play]);
-  if ((!url || failed) && gift.image_url) return <img src={gift.image_url} alt={gift.name} className={`object-contain ${className}`} loading="lazy" />;
-  if (!url || failed) return <div className={`flex items-center justify-center text-3xl ${className}`}>🎁</div>;
+  if (!url || failed) return <GiftThumb gift={gift} className={className} />;
   return <div ref={ref} aria-label={gift.name} role="img" className={className} />;
 }

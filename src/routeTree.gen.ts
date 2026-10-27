@@ -27,6 +27,7 @@ import { Route as TasksRouteImport } from './routes/tasks'
 import { Route as WalletRouteImport } from './routes/wallet'
 import { Route as WhitepaperRouteImport } from './routes/whitepaper'
 import { Route as ApiPublicAdsMonetagRouteImport } from './routes/api/public/ads/monetag'
+import { Route as ApiPublicGiftStickerGiftIdRouteImport } from './routes/api/public/gift-sticker.$giftId'
 import { Route as ApiPublicJobsBotRouteImport } from './routes/api/public/jobs/bot'
 import { Route as ApiPublicJobsCampaignRouteImport } from './routes/api/public/jobs/campaign'
 import { Route as ApiPublicJobsMarketRouteImport } from './routes/api/public/jobs/market'
@@ -123,6 +124,12 @@ const ApiPublicAdsMonetagRoute = ApiPublicAdsMonetagRouteImport.update({
   path: '/api/public/ads/monetag',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiPublicGiftStickerGiftIdRoute =
+  ApiPublicGiftStickerGiftIdRouteImport.update({
+    id: '/api/public/gift-sticker/$giftId',
+    path: '/api/public/gift-sticker/$giftId',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const ApiPublicJobsBotRoute = ApiPublicJobsBotRouteImport.update({
   id: '/api/public/jobs/bot',
   path: '/api/public/jobs/bot',
@@ -169,6 +176,7 @@ export interface FileRoutesByFullPath {
   '/wallet': typeof WalletRoute
   '/whitepaper': typeof WhitepaperRoute
   '/api/public/ads/monetag': typeof ApiPublicAdsMonetagRoute
+  '/api/public/gift-sticker/$giftId': typeof ApiPublicGiftStickerGiftIdRoute
   '/api/public/jobs/bot': typeof ApiPublicJobsBotRoute
   '/api/public/jobs/campaign': typeof ApiPublicJobsCampaignRoute
   '/api/public/jobs/market': typeof ApiPublicJobsMarketRoute
@@ -194,6 +202,7 @@ export interface FileRoutesByTo {
   '/wallet': typeof WalletRoute
   '/whitepaper': typeof WhitepaperRoute
   '/api/public/ads/monetag': typeof ApiPublicAdsMonetagRoute
+  '/api/public/gift-sticker/$giftId': typeof ApiPublicGiftStickerGiftIdRoute
   '/api/public/jobs/bot': typeof ApiPublicJobsBotRoute
   '/api/public/jobs/campaign': typeof ApiPublicJobsCampaignRoute
   '/api/public/jobs/market': typeof ApiPublicJobsMarketRoute
@@ -220,6 +229,7 @@ export interface FileRoutesById {
   '/wallet': typeof WalletRoute
   '/whitepaper': typeof WhitepaperRoute
   '/api/public/ads/monetag': typeof ApiPublicAdsMonetagRoute
+  '/api/public/gift-sticker/$giftId': typeof ApiPublicGiftStickerGiftIdRoute
   '/api/public/jobs/bot': typeof ApiPublicJobsBotRoute
   '/api/public/jobs/campaign': typeof ApiPublicJobsCampaignRoute
   '/api/public/jobs/market': typeof ApiPublicJobsMarketRoute
@@ -247,6 +257,7 @@ export interface FileRouteTypes {
     | '/wallet'
     | '/whitepaper'
     | '/api/public/ads/monetag'
+    | '/api/public/gift-sticker/$giftId'
     | '/api/public/jobs/bot'
     | '/api/public/jobs/campaign'
     | '/api/public/jobs/market'
@@ -272,6 +283,7 @@ export interface FileRouteTypes {
     | '/wallet'
     | '/whitepaper'
     | '/api/public/ads/monetag'
+    | '/api/public/gift-sticker/$giftId'
     | '/api/public/jobs/bot'
     | '/api/public/jobs/campaign'
     | '/api/public/jobs/market'
@@ -297,6 +309,7 @@ export interface FileRouteTypes {
     | '/wallet'
     | '/whitepaper'
     | '/api/public/ads/monetag'
+    | '/api/public/gift-sticker/$giftId'
     | '/api/public/jobs/bot'
     | '/api/public/jobs/campaign'
     | '/api/public/jobs/market'
@@ -323,6 +336,7 @@ export interface RootRouteChildren {
   WalletRoute: typeof WalletRoute
   WhitepaperRoute: typeof WhitepaperRoute
   ApiPublicAdsMonetagRoute: typeof ApiPublicAdsMonetagRoute
+  ApiPublicGiftStickerGiftIdRoute: typeof ApiPublicGiftStickerGiftIdRoute
   ApiPublicJobsBotRoute: typeof ApiPublicJobsBotRoute
   ApiPublicJobsCampaignRoute: typeof ApiPublicJobsCampaignRoute
   ApiPublicJobsMarketRoute: typeof ApiPublicJobsMarketRoute
@@ -458,6 +472,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiPublicAdsMonetagRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/public/gift-sticker/$giftId': {
+      id: '/api/public/gift-sticker/$giftId'
+      path: '/api/public/gift-sticker/$giftId'
+      fullPath: '/api/public/gift-sticker/$giftId'
+      preLoaderRoute: typeof ApiPublicGiftStickerGiftIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/public/jobs/bot': {
       id: '/api/public/jobs/bot'
       path: '/api/public/jobs/bot'
@@ -515,6 +536,7 @@ const rootRouteChildren: RootRouteChildren = {
   WalletRoute: WalletRoute,
   WhitepaperRoute: WhitepaperRoute,
   ApiPublicAdsMonetagRoute: ApiPublicAdsMonetagRoute,
+  ApiPublicGiftStickerGiftIdRoute: ApiPublicGiftStickerGiftIdRoute,
   ApiPublicJobsBotRoute: ApiPublicJobsBotRoute,
   ApiPublicJobsCampaignRoute: ApiPublicJobsCampaignRoute,
   ApiPublicJobsMarketRoute: ApiPublicJobsMarketRoute,
