@@ -1,4 +1,13 @@
 # Roadmap — Tesla Telegram gift boxes
+- [ ] Crash: bet buttons merged into the bottom navigation; one Cash out button while a bet is active
+- [ ] Cases: always-running horizontal LIVE strip of gifts/NFTs, new price display, invite-3-friends free box banner instead of community
+- [ ] Spin page: 2x2 prize grid without backgrounds/borders
+- [ ] All boxes: low/high-odds GRAM prizes and an X (loss) outcome, keeping the house margin
+- [ ] Free boxes: every 24h; daily after 2 tasks + 3 ads; free box for 3 joined friends
+- [ ] Tasks: delete current tasks; main tasks = referral + ads; each task pays 2 Stars
+- [ ] Win screen: sell for Stars or GRAM, or keep in inventory
+- [ ] Inventory: sell or withdraw each gift
+- [ ] New bottom navigation icons
 - [x] Whole-app iOS glass redesign: white base, animated blurred blue/red gradients, unified pages
 - [x] Bottom navigation redesign with a Tasks tab
 - [x] Crash: real animated Telegram gifts/NFTs (not animated still images) for ready/flight/crash
