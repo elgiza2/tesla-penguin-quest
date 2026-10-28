@@ -129,6 +129,7 @@ export type Database = {
           animation_url: string | null
           case_id: string
           created_at: string
+          gram_amount: number
           id: string
           image_url: string | null
           kind: string
@@ -141,6 +142,7 @@ export type Database = {
           animation_url?: string | null
           case_id: string
           created_at?: string
+          gram_amount?: number
           id?: string
           image_url?: string | null
           kind: string
@@ -153,6 +155,7 @@ export type Database = {
           animation_url?: string | null
           case_id?: string
           created_at?: string
+          gram_amount?: number
           id?: string
           image_url?: string | null
           kind?: string
@@ -242,6 +245,7 @@ export type Database = {
         Row: {
           active: boolean
           created_at: string
+          free_kind: string | null
           id: string
           image_url: string | null
           name: string
@@ -252,6 +256,7 @@ export type Database = {
         Insert: {
           active?: boolean
           created_at?: string
+          free_kind?: string | null
           id: string
           image_url?: string | null
           name: string
@@ -262,6 +267,7 @@ export type Database = {
         Update: {
           active?: boolean
           created_at?: string
+          free_kind?: string | null
           id?: string
           image_url?: string | null
           name?: string
@@ -355,6 +361,30 @@ export type Database = {
           prize?: string
           title?: string
           winner_user_id?: number | null
+        }
+        Relationships: []
+      }
+      tsla_free_claims: {
+        Row: {
+          created_at: string
+          kind: string
+          opening_id: string | null
+          period: string
+          user_id: number
+        }
+        Insert: {
+          created_at?: string
+          kind: string
+          opening_id?: string | null
+          period: string
+          user_id: number
+        }
+        Update: {
+          created_at?: string
+          kind?: string
+          opening_id?: string | null
+          period?: string
+          user_id?: number
         }
         Relationships: []
       }
@@ -483,6 +513,30 @@ export type Database = {
           },
         ]
       }
+      tsla_star_rewards: {
+        Row: {
+          amount: number
+          created_at: string
+          source: string
+          source_key: string
+          user_id: number
+        }
+        Insert: {
+          amount: number
+          created_at?: string
+          source: string
+          source_key: string
+          user_id: number
+        }
+        Update: {
+          amount?: number
+          created_at?: string
+          source?: string
+          source_key?: string
+          user_id?: number
+        }
+        Relationships: []
+      }
       tsla_task_apps: {
         Row: {
           category: string
@@ -600,6 +654,7 @@ export type Database = {
           balance: number
           created_at: string
           first_name: string | null
+          gram_balance: number
           id: number
           language_code: string | null
           mining_claim_count: number
@@ -629,6 +684,7 @@ export type Database = {
           balance?: number
           created_at?: string
           first_name?: string | null
+          gram_balance?: number
           id: number
           language_code?: string | null
           mining_claim_count?: number
@@ -658,6 +714,7 @@ export type Database = {
           balance?: number
           created_at?: string
           first_name?: string | null
+          gram_balance?: number
           id?: number
           language_code?: string | null
           mining_claim_count?: number
@@ -725,6 +782,7 @@ export type Database = {
           animation_url: string | null
           created_at: string
           error: string | null
+          gram_amount: number
           id: string
           image_url: string | null
           item_id: string | null
@@ -740,6 +798,7 @@ export type Database = {
           animation_url?: string | null
           created_at?: string
           error?: string | null
+          gram_amount?: number
           id?: string
           image_url?: string | null
           item_id?: string | null
@@ -755,6 +814,7 @@ export type Database = {
           animation_url?: string | null
           created_at?: string
           error?: string | null
+          gram_amount?: number
           id?: string
           image_url?: string | null
           item_id?: string | null
@@ -918,7 +978,17 @@ export type Database = {
         Args: { p_goal: number; p_user_id: number }
         Returns: number
       }
+      tsla_claim_star_reward: {
+        Args: { p_source: string; p_user: number }
+        Returns: number
+      }
+      tsla_credit_stars: {
+        Args: { p_amount: number; p_user: number }
+        Returns: number
+      }
       tsla_daily_tickets: { Args: { p_user: number }; Returns: number }
+      tsla_day_start: { Args: never; Returns: string }
+      tsla_free_status: { Args: { p_user: number }; Returns: Json }
       tsla_grant_tickets: {
         Args: {
           p_amount: number
@@ -928,7 +998,15 @@ export type Database = {
         }
         Returns: undefined
       }
+      tsla_open_free: {
+        Args: { p_case: string; p_user: number }
+        Returns: string
+      }
       tsla_open_with_balance: {
+        Args: { p_case: string; p_user: number }
+        Returns: string
+      }
+      tsla_open_with_gram_balance: {
         Args: { p_case: string; p_user: number }
         Returns: string
       }
@@ -938,6 +1016,7 @@ export type Database = {
           animation_url: string | null
           created_at: string
           error: string | null
+          gram_amount: number
           id: string
           image_url: string | null
           item_id: string | null
@@ -958,6 +1037,15 @@ export type Database = {
       }
       tsla_sell_gift: {
         Args: { p_gift: string; p_percent: number; p_user: number }
+        Returns: number
+      }
+      tsla_sell_gift_to: {
+        Args: {
+          p_currency: string
+          p_gift: string
+          p_percent: number
+          p_user: number
+        }
         Returns: number
       }
       tsla_settle_gram_opening: {
