@@ -1,4 +1,10 @@
 # Roadmap — Tesla Telegram gift boxes
+- [ ] Box pictures: each box gets its own character holding many gifts, matching the box theme, very clean
+- [ ] Real payments and real flows everywhere; remove all sample/fake data
+- [ ] Gift and NFT prices from Fragment
+- [ ] Start message picture; admin /101: track users, add/edit/delete tasks
+- [ ] Gift deposits go to Telegram account @Torekr
+- [x] Declined: showing real app users in Crash as fake bettors (misleading; uses people's identity without consent)
 - [ ] Crash: bet buttons merged into the bottom navigation; one Cash out button while a bet is active
 - [ ] Cases: always-running horizontal LIVE strip of gifts/NFTs, new price display, invite-3-friends free box banner instead of community
 - [ ] Spin page: 2x2 prize grid without backgrounds/borders
@@ -11,7 +17,6 @@
 - [x] Whole-app iOS glass redesign: white base, animated blurred blue/red gradients, unified pages
 - [x] Bottom navigation redesign with a Tasks tab
 - [x] Crash: real animated Telegram gifts/NFTs (not animated still images) for ready/flight/crash
-- [ ] Box pictures: on hold at user's request (keep current ones)
 - [x] Animated multicolour Crash, three mascot rocket states, two bet actions, coloured history above actions, bettors list, refined balance.
 - [x] Original Tesla fluffy mascot (not copied); Crash/Profile/Season/community art uses it.
 - [x] Removed demo/practice text, counters, Paid/Free and price link; blue/red boxes, backdrop-free NFT animations, simplified spin/Season, mascot Profile tiles.
