@@ -10,7 +10,7 @@ import { REFERRAL_GOALS } from "@/lib/config";
 import { pendingTasks } from "@/lib/task-visibility";
 import { openLink, haptic } from "@/lib/telegram";
 import { fmt } from "@/lib/ton";
-import team from "@/assets/tesla-team.jpg";
+import team from "@/assets/mascot-invite.png";
 import { CoinIcon, GhostButton, TSLA_ICON, Segmented } from "@/components/ui-kit";
 
 
@@ -85,11 +85,11 @@ export function TasksPanel() {
         {cat === "others" && <AdTask />}
         {cat === "others" && goals.map((g) => {
           const ready = refCount >= g.goal;
-          return <TaskRow key={g.goal} image={team} title={`Invite ${g.goal} friends (${Math.min(refCount, g.goal)}/${g.goal})`} reward={g.reward} tickets={0}
+          return <TaskRow key={g.goal} art={team} title={`Invite ${g.goal} friends (${Math.min(refCount, g.goal)}/${g.goal})`} reward={g.reward} tickets={0}
             label={busyGoal === g.goal ? "…" : ready ? "Claim" : "Go"} disabled={busyGoal === g.goal}
             onClick={() => ready ? void claimGoal(g.goal) : toast(`Invite ${g.goal - refCount} more friends from the Friends page`)} />;
         })}
-        {cat === "ours" && <TaskRow image={team} title={`Invite friends · ${refCount} joined`} reward={25} tickets={6} label="Invite"
+        {cat === "ours" && <TaskRow art={team} title={`Invite friends · ${refCount} joined`} reward={25} tickets={6} label="Invite"
           onClick={() => { const link = `https://t.me/Noveaibot?start=ref_${data.me.id}`; openLink(`https://t.me/share/url?url=${encodeURIComponent(link)}&text=${encodeURIComponent("Open gift boxes and win Telegram gifts with me on Tesla 🎁")}`); }} />}
         {pinned.map((task: any) => <TaskRow key={task.id} image={task.image_url} title={title(task)} reward={Number(task.reward)}
           label={opened[task.id] ? t("claim") : "Go"} onClick={() => onTask(task)} />)}
@@ -115,7 +115,7 @@ export function TasksPanel() {
         ))}
         {shown.map((task: any) => <TaskRow key={task.id} image={task.image_url} title={title(task)} reward={Number(task.reward)}
           label={opened[task.id] ? t("claim") : "Go"} onClick={() => onTask(task)} />)}
-        {empty && <div className="rounded-2xl bg-card py-12 text-center text-sm font-bold text-muted-foreground">{x("allDone")}</div>}
+        {empty && <div className="surface rounded-3xl py-12 text-center text-sm font-bold text-muted-foreground">{x("allDone")}</div>}
       </div>
     </div>
   );

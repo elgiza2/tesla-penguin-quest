@@ -25,11 +25,11 @@ function Season() {
       <p className="mt-1 text-sm text-muted-foreground">Open boxes, climb the board.</p>
       <img src={art} alt="Mascot holding the season trophy" width={816} height={816} className="absolute -bottom-3 -right-2 size-44 object-contain" />
     </section>
-    <section>
-      <h2 className="mb-1 text-sm font-medium text-muted-foreground">Leaderboard</h2>
+    <section className="surface rounded-3xl px-4 py-2">
+      <h2 className="px-1 pb-1 pt-2 text-sm font-medium text-muted-foreground">Leaderboard</h2>
       {rows.map((r, i) => <div key={r.id} className="flex items-center gap-3 border-b border-border py-3 last:border-0">
         <span className={`w-5 text-center text-sm font-semibold ${i < 3 ? "text-primary" : "text-muted-foreground"}`}>{i + 1}</span>
-        {r.photo ? <img src={r.photo} alt="" width={40} height={40} className="size-10 rounded-full object-cover" /> : <span className="grid size-10 place-items-center rounded-full bg-muted text-sm font-semibold">{String(r.name)[0]}</span>}
+        {r.photo ? <img src={r.photo} alt="" width={40} height={40} className="size-10 rounded-full object-cover" /> : <span className={`grid size-10 place-items-center rounded-full text-sm font-semibold ${i < 3 ? "brand-fill" : "bg-muted"}`}>{String(r.name)[0]}</span>}
         <p className="min-w-0 flex-1 truncate text-sm font-medium">{r.name}</p>
         <span className="flex items-center gap-1 text-sm tabular-nums"><CurrencyIcon currency="stars" className="size-4" />{Number(r.score).toLocaleString()}</span>
       </div>)}

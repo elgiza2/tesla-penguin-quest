@@ -75,7 +75,7 @@ function Crash() {
 
     <div className="relative z-10 flex flex-1 flex-col items-center justify-center">
       <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">{phase === "wait" ? "Launch in" : phase === "crash" ? "Crashed at" : "Flying"}</p>
-      <p className={`crash-number tabular-nums ${phase === "crash" ? "text-destructive" : "brand-text"}`}>{phase === "wait" ? `${Math.max(0, count)}s` : `${mult.toFixed(2)}×`}</p>
+      <p className={`crash-number tabular-nums ${phase === "crash" ? "text-destructive" : "text-foreground"}`}>{phase === "wait" ? `${Math.max(0, count)}s` : `${mult.toFixed(2)}×`}</p>
       <div className="crash-stage mt-2">
         <span className="crash-halo" />
         {STAGE.map(s => <div key={s.phase} data-on={s.phase === phase} className={s.phase === "fly" && phase === "fly" ? "crash-rise" : ""}>
