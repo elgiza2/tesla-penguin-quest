@@ -1,7 +1,7 @@
 # Roadmap — Tesla Telegram gift boxes
-- [ ] Whole-app iOS glass redesign: white base, animated blurred blue/red gradients, unified pages
-- [ ] Bottom navigation redesign with a Tasks tab
-- [ ] Crash: real animated Telegram gifts/NFTs (not animated still images) for ready/flight/crash
+- [x] Whole-app iOS glass redesign: white base, animated blurred blue/red gradients, unified pages
+- [x] Bottom navigation redesign with a Tasks tab
+- [x] Crash: real animated Telegram gifts/NFTs (not animated still images) for ready/flight/crash
 - [ ] Box pictures: on hold at user's request (keep current ones)
 - [x] Animated multicolour Crash, three mascot rocket states, two bet actions, coloured history above actions, bettors list, refined balance.
 - [x] Original Tesla fluffy mascot (not copied); Crash/Profile/Season/community art uses it.
@@ -17,7 +17,6 @@
 - [x] Import app, rebrand to Tesla/TSLA, Cloud database, bot token, webhook + menu button on @Noveaibot
 - [x] Pivot: gift boxes paid with Telegram Stars, server-side spin, inventory (receive in Telegram / sell for Stars balance)
 - [x] Earn page = tasks + friends; Events page (channel-subscribe verified, GRAM-paid verified on-chain)
-- [x] Black & yellow design; bottom menu Boxes / Earn / Events / Gifts
 - [ ] Admin tools to create events, edit boxes/odds and pick winners (events currently empty)
 - [ ] Bot needs Star balance to auto-send regular gifts; NFT gifts are queued for admins (needs a Telegram Business account holding NFTs for full automation)
 - [ ] Rename bot from "Orange Ai" in @BotFather; replace start banner image
