@@ -30,8 +30,8 @@ export const listCases = createServerFn({ method: "GET" }).handler(async () => {
   const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
   const db = supabaseAdmin as any;
   const [{ data: cases, error: e1 }, { data: items, error: e2 }] = await Promise.all([
-    db.from("tsla_cases").select("id,name,price_stars,price_gram,image_url,sort").eq("active", true).order("sort"),
-    db.from("tsla_case_items").select("id,case_id,name,kind,telegram_gift_id,image_url,animation_url,value_stars,weight"),
+    db.from("tsla_cases").select("id,name,price_stars,price_gram,image_url,sort,free_kind").eq("active", true).order("sort"),
+    db.from("tsla_case_items").select("id,case_id,name,kind,telegram_gift_id,image_url,animation_url,value_stars,weight,gram_amount"),
   ]);
   fail(e1); fail(e2);
   return (cases ?? []).map((c: any) => ({ ...c, items: (items ?? []).filter((i: any) => i.case_id === c.id) }));
@@ -42,7 +42,7 @@ export const createStarsInvoice = createServerFn({ method: "POST" })
   .handler(async ({ data }) => {
     const { user, db } = await ctx(data.initData);
     const { data: c } = await db.from("tsla_cases").select("*").eq("id", data.caseId).eq("active", true).maybeSingle();
-    if (!c) throw new Error("Case not available");
+    if (!c || c.free_kind || !(c.price_stars > 0)) throw new Error("Case not available");
     const { data: o, error } = await db.from("tsla_case_openings")
       .insert({ user_id: user.id, case_id: c.id, price_stars: c.price_stars, pay_method: "stars" }).select("id").single();
     fail(error);
@@ -56,10 +56,11 @@ export const createStarsInvoice = createServerFn({ method: "POST" })
   });
 
 export const openWithBalance = createServerFn({ method: "POST" })
-  .inputValidator(initOnly.extend({ caseId: z.string().min(1).max(40) }))
+  .inputValidator(initOnly.extend({ caseId: z.string().min(1).max(40), currency: z.enum(["stars", "gram"]).default("stars") }))
   .handler(async ({ data }) => {
     const { user, db } = await ctx(data.initData);
-    const { data: id, error } = await db.rpc("tsla_open_with_balance", { p_user: user.id, p_case: data.caseId });
+    const fn = data.currency === "gram" ? "tsla_open_with_gram_balance" : "tsla_open_with_balance";
+    const { data: id, error } = await db.rpc(fn, { p_user: user.id, p_case: data.caseId });
     fail(error);
     return { openingId: id as string };
   });
@@ -80,19 +81,19 @@ export const myInventory = createServerFn({ method: "POST" })
   .handler(async ({ data }) => {
     const { user, db } = await ctx(data.initData);
     const [{ data: me }, { data: gifts }] = await Promise.all([
-      db.from("tsla_tg_users").select("stars_balance").eq("id", user.id).single(),
-      db.from("tsla_user_gifts").select("*").eq("user_id", user.id).neq("status", "sold").order("created_at", { ascending: false }).limit(100),
+      db.from("tsla_tg_users").select("stars_balance,gram_balance").eq("id", user.id).single(),
+      db.from("tsla_user_gifts").select("*").eq("user_id", user.id).in("status", ["owned", "sending", "sent", "pending_manual", "failed"]).order("created_at", { ascending: false }).limit(100),
     ]);
     return { starsBalance: Number(me?.stars_balance ?? 0), gifts: gifts ?? [], sellPercent: SELL_PERCENT };
   });
 
 export const sellGift = createServerFn({ method: "POST" })
-  .inputValidator(initOnly.extend({ giftId: z.string().uuid() }))
+  .inputValidator(initOnly.extend({ giftId: z.string().uuid(), currency: z.enum(["stars", "gram"]).default("stars") }))
   .handler(async ({ data }) => {
     const { user, db } = await ctx(data.initData);
-    const { data: bal, error } = await db.rpc("tsla_sell_gift", { p_user: user.id, p_gift: data.giftId, p_percent: SELL_PERCENT });
+    const { data: bal, error } = await db.rpc("tsla_sell_gift_to", { p_user: user.id, p_gift: data.giftId, p_percent: SELL_PERCENT, p_currency: data.currency });
     fail(error);
-    return { starsBalance: Number(bal) };
+    return { currency: data.currency, balance: Number(bal) };
   });
 
 /** Sends a regular gift automatically from the bot's Star balance; NFT gifts are queued for the admins. */
@@ -221,4 +222,43 @@ export const seasonLeaderboard = createServerFn({ method: "GET" }).handler(async
   const { data, error } = await db.from("tsla_tg_users").select("id,username,first_name,photo_url,stars_balance,power_level").order("stars_balance", { ascending: false }).limit(20);
   fail(error);
   return (data ?? []).map((u: any) => ({ id: u.id, name: u.first_name || u.username || "Player", photo: u.photo_url, score: Number(u.stars_balance ?? 0), level: Number(u.power_level ?? 1) }));
+});
+
+/* ---------------- Free boxes, built-in tasks, live drops ---------------- */
+
+export const freeStatus = createServerFn({ method: "POST" })
+  .inputValidator(initOnly)
+  .handler(async ({ data }) => {
+    const { user, db } = await ctx(data.initData);
+    const { data: s, error } = await db.rpc("tsla_free_status", { p_user: user.id });
+    fail(error);
+    return s as { daily_next: string | null; tasks_today: number; ads_today: number; tasks_claimed: boolean; refs: number; friends_available: number; invite_unclaimed: number; ads_claimed: boolean; tomorrow: string };
+  });
+
+export const openFreeBox = createServerFn({ method: "POST" })
+  .inputValidator(initOnly.extend({ caseId: z.string().min(1).max(40) }))
+  .handler(async ({ data }) => {
+    const { user, db } = await ctx(data.initData);
+    const { data: id, error } = await db.rpc("tsla_open_free", { p_user: user.id, p_case: data.caseId });
+    fail(error);
+    return { openingId: id as string };
+  });
+
+export const claimStarReward = createServerFn({ method: "POST" })
+  .inputValidator(initOnly.extend({ source: z.enum(["invite", "ads"]) }))
+  .handler(async ({ data }) => {
+    const { user, db } = await ctx(data.initData);
+    const { data: bal, error } = await db.rpc("tsla_claim_star_reward", { p_user: user.id, p_source: data.source });
+    fail(error);
+    return { starsBalance: Number(bal) };
+  });
+
+/** Public feed of the latest real wins (gift artwork only, no player data). */
+export const recentDrops = createServerFn({ method: "GET" }).handler(async () => {
+  const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
+  const { data, error } = await (supabaseAdmin as any).from("tsla_user_gifts")
+    .select("id,name,kind,telegram_gift_id,image_url,animation_url,value_stars")
+    .in("kind", ["regular", "nft"]).order("created_at", { ascending: false }).limit(20);
+  fail(error);
+  return data ?? [];
 });
