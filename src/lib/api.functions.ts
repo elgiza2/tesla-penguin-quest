@@ -125,11 +125,11 @@ export const completeTask = createServerFn({ method: "POST" })
     }
     const { error } = await db.from("tsla_task_completions").insert({ user_id: user.id, task_id: task.id });
     if (error) throw new Error("Already completed");
+    const { data: stars } = await db.rpc("tsla_credit_stars", { p_user: user.id, p_amount: 2 });
     const me = await loadUser(db, user.id);
-    const { data: owned } = await db.from("tsla_nfts").select("tier").eq("user_id", user.id);
-    const balance = Number(me.balance) + Number(task.reward) * nftBenefits((owned ?? []).map((n: any) => n.tier)).tasks;
-    await db.from("tsla_tg_users").update({ balance }).eq("id", user.id);
+    const balance = Number(me.balance);
     const synced = await syncPower(db, user.id);
+    void stars;
     return { balance, power_level: synced.power_level, previewVerified: false };
   });
 
