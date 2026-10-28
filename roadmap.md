@@ -1,4 +1,7 @@
 # Roadmap — Tesla Telegram gift boxes
+- [ ] Ads: Monetag zone 12137490 rewarded interstitial, only inside tasks and only after user consent
+- [ ] GRAM wallet connect visible (TON Connect)
+- [x] Declined: telling users to click ads (breaks Monetag rules, risks the account)
 - [ ] Box pictures: each box gets its own character holding many gifts, matching the box theme, very clean
 - [ ] Real payments and real flows everywhere; remove all sample/fake data
 - [ ] Gift and NFT prices from Fragment
