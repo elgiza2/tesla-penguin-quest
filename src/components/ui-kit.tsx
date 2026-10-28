@@ -48,10 +48,10 @@ export function InfoPage({ title, sections, children }: { title: string; section
 
 export function Segmented<T extends string>({ value, options, onChange }: { value: T; options: { key: T; label: ReactNode }[]; onChange: (k: T) => void }) {
   return (
-    <div className="mb-5 grid gap-1 rounded-2xl bg-muted p-1" style={{ gridTemplateColumns: `repeat(${options.length}, minmax(0, 1fr))` }}>
+    <div className="glass mb-5 grid gap-1 rounded-full p-1" style={{ gridTemplateColumns: `repeat(${options.length}, minmax(0, 1fr))` }}>
       {options.map((o) => (
         <button key={o.key} onClick={() => onChange(o.key)}
-          className={`h-10 rounded-xl text-sm font-bold transition ${value === o.key ? "bg-primary text-primary-foreground shadow-sm" : "text-muted-foreground"}`}>
+          className={`h-10 rounded-full text-sm font-semibold transition ${value === o.key ? "bg-background text-foreground shadow-sm" : "text-muted-foreground"}`}>
           {o.label}
         </button>
       ))}

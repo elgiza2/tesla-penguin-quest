@@ -1,5 +1,6 @@
 import { Ticket } from "lucide-react";
-import { CoinIcon, GhostButton, TSLA_ICON } from "@/components/ui-kit";
+import { GhostButton } from "@/components/ui-kit";
+import tasksArt from "@/assets/mascot-tasks.png";
 import { fmt } from "@/lib/ton";
 import { CurrencyIcon } from "./CurrencyIcon";
 
@@ -9,7 +10,7 @@ export function TaskRow({ image, title, reward, tickets = 2, label = "Go", disab
 }) {
   return (
     <GhostButton onClick={onClick} disabled={disabled} className="flex h-auto w-full items-center gap-3 p-3 text-start">
-      <img src={image || TSLA_ICON} alt="" loading="lazy" className="size-12 shrink-0 rounded-2xl object-cover" />
+      <img src={image || tasksArt} alt="" loading="lazy" className={`size-12 shrink-0 rounded-2xl ${image ? "object-cover" : "bg-background/70 object-contain p-0.5"}`} />
       <span className="min-w-0 flex-1">
         <span className="block truncate text-sm font-bold">{title}</span>
         <span className="mt-1 flex items-center gap-2 text-xs text-muted-foreground" dir="ltr">
@@ -17,7 +18,7 @@ export function TaskRow({ image, title, reward, tickets = 2, label = "Go", disab
           {tickets > 0 && <span className="flex items-center gap-1"><Ticket className="size-3.5" />+{tickets}</span>}
         </span>
       </span>
-      <span className="shrink-0 rounded-full bg-primary px-3 py-1 text-xs text-primary-foreground">{label}</span>
+      <span className="shrink-0 brand-fill rounded-full px-3.5 py-1.5 text-xs font-semibold">{label}</span>
     </GhostButton>
   );
 }

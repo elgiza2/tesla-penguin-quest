@@ -168,6 +168,8 @@
 .ambient-e { background: var(--ambient-violet); left: 10vmax; top: 20vmax; width: 50vmax; opacity: 0.32; animation: drift-b 31s ease-in-out -4s infinite alternate, breathe 6s ease-in-out infinite; }
 .ambient[data-vivid=true] .ambient-blob { opacity: 0.82; filter: blur(60px) saturate(1.2); }
 .ambient[data-vivid=true] .ambient-e { opacity: 0.6; }
+.ambient[data-vivid=true] .ambient-b, .ambient[data-vivid=true] .ambient-d { opacity: 0.62; }
+.ambient[data-vivid=true] .ambient-a, .ambient[data-vivid=true] .ambient-c { opacity: 0.95; }
 .ambient[data-vivid=true]::after { background: linear-gradient(180deg, oklch(1 0 0 / 0.15), transparent 45%, oklch(1 0 0 / 0.55)); }
 @keyframes drift-a { 0% { translate: 0 0; } 50% { translate: 22vw 14vh; } 100% { translate: 8vw 30vh; } }
 @keyframes drift-b { 0% { translate: 0 0; } 50% { translate: -24vw 18vh; } 100% { translate: -6vw 34vh; } }
