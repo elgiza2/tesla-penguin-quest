@@ -131,7 +131,7 @@ function CaseView() {
         <p className="mt-0.5 text-xs text-muted-foreground">{c.items.length} gifts inside</p>
       </div>
 
-      <div ref={viewport} className="relative -mx-5 overflow-hidden py-2">
+      <div ref={viewport} className="relative -mx-5 overflow-hidden py-2 [mask-image:linear-gradient(90deg,transparent,black_16%,black_84%,transparent)]">
         <div className="spin-marker absolute inset-y-0 left-1/2 z-10 w-0.5 -translate-x-1/2 rounded-full bg-primary" />
         <div className={`flex gap-2 px-5 ${strip.length ? "spin-strip" : ""} ${rolling ? "spinning" : ""}`} style={{ transform: `translateX(${offset}px)` }}>
           {shown.map((g, i) => (
@@ -141,8 +141,6 @@ function CaseView() {
             </div>
           ))}
         </div>
-        <div className="pointer-events-none absolute inset-y-0 left-0 w-16 bg-gradient-to-r from-background to-transparent" />
-        <div className="pointer-events-none absolute inset-y-0 right-0 w-16 bg-gradient-to-l from-background to-transparent" />
       </div>
 
       {won ? (

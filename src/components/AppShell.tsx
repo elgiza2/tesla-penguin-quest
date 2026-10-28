@@ -46,7 +46,7 @@ function Frame() {
     );
   }
   const isActive = (to: string) => to === "/" ? pathname === "/" || pathname.startsWith("/case/") : pathname === to;
-  const current = Math.max(0, tabs.findIndex(tab => isActive(tab.to)));
+  const current = tabs.findIndex(tab => isActive(tab.to));
   return (
     <>
       <AmbientBackdrop vivid={pathname === "/crash"} />
@@ -54,7 +54,7 @@ function Frame() {
         <div key={pathname} className={pathname === "/crash" ? "" : "page-motion"}><Outlet /></div>
         <nav aria-label="Main navigation" className="safe-bottom fixed inset-x-0 bottom-0 z-40 mx-auto max-w-md px-4">
           <div className="tabbar" style={{ ["--tab" as any]: current }}>
-            <span className="tabbar-indicator" aria-hidden="true" />
+            {current >= 0 && <span className="tabbar-indicator" aria-hidden="true" />}
             {tabs.map(({ to, icon: Icon, label }) => {
               const active = isActive(to);
               return (
